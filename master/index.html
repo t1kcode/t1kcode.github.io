@@ -1,583 +1,116 @@
 <!DOCTYPE html>
-<html lang=zh-CN>
-  <head>
-    <!-- so meta -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta property="og:type" content="website">
-<meta property="og:title" content="t1kcode">
-<meta property="og:url" content="http://example.com/master/index.html">
-<meta property="og:site_name" content="t1kcode">
-<meta property="og:locale" content="zh_CN">
-<meta property="article:author" content="t1k">
-<meta name="twitter:card" content="summary">
-    
-    
-      
-        
-          <link rel="shortcut icon" href="/images/Rolan.ico">
-        
-      
-      
-        
-          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
-        
-      
-      
-        
-          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
-        
-      
-    
-    <!-- title -->
-    
-      <title>t1kcode</title>
-    
-    
-    <!-- styles -->
+<html lang="en">
 
-    <!-- 默认CSS引入方法 -->
-    
-<link rel="stylesheet" href="/css/layout.css">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <title>t1k的个人主页</title>
+    <meta name="description"
+        content="这里是网站介绍">
+    <meta name="keywords" content="这里是网站关键词">
+    <link rel="stylesheet" type="text/css" href="./css/FiraCode.css">
+    <link rel="stylesheet" type="text/css" href="./css/nutssss.css">
+    <link rel="icon" href="./favicon.ico">
+</head>
 
-    <!-- persian styles -->
-    
-    <!-- rss -->
-    
-    
-	<!-- mathjax -->
-	
+<body>
+    <div id="box">
+        <!-- 个人资料卡片 -->
+        <div class="meBox">
+            <!-- 头像 -->
+            <div class="headPhoto"></div>
+            <!-- 介绍 -->
+            <div class="meBox-title">
+                <p>I'm t1k</p>
+                <div class="fg"></div>
+            </div>
+            <div class="meBox-text">
+                <p>一个JAVA开发者</p>
+                <p>爱好C++</p>
+                <p>喜欢浪费时间</p>
+                <!-- <p>最爱<img src="./img/002.png" alt="冰激凌" style="width: 15px; vertical-align: middle;"></p> -->
+            </div>
+            <!-- 两个按钮 -->
+            <!-- <div class="meBox-Button">
+                <a href="#">关于</a>
+                <a href="#">联系</a>
+            </div> -->
+        </div>
 
-
-  
-  <!-- L2Dwidget -->
-  
-<script src="/lib/live2d/L2Dwidget.min.js"></script>
-
-
-  <script>
-  // 猫
-  L2Dwidget.init({
-    model: {
-      jsonPath: "/lib/live2d/tororo/assets/tororo.model.json",
-    },
-    display: {
-      superSample: 2,
-      width: 60,
-      height: 80,
-      position: 'right',
-      hOffset: 0,
-      vOffset: 20,
-    },
-    mobile: {
-      show: true,
-      scale: 1,
-      motion: true,
-    },
-    react: {
-      opacityDefault: 1,
-      opacityOnHover: 1,
-    }
-  })
-  //百度搜索爬虫
-
-
-
-var _hmt = _hmt || [];
-(function () {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?7e9a19e5e700f1a2607b47c7bd6b35e8";
-  var s = document.getElementsByTagName("script")[0];
-  s.parentNode.insertBefore(hm, s);
-})();
-
-  </script>
-  <meta name="baidu-site-verification" content="code-dIan6MAmy5" />
-  
-
-  <!-- styles -->
-
-
- 
-  <link
-    rel="preload"
-    href="/lib/font-awesome/css/all.min.css"
-    as="style"
-    onload="this.onload=null;this.rel='stylesheet'"
-  />
-  <noscript
-    ><link
-      rel="stylesheet"
-      href="/lib/font-awesome/css/all.min.css"
-  /></noscript>
-
-
-
-<meta name="generator" content="Hexo 6.3.0"></head>
-
-
-    <body class="max-width mx-auto">
-     <div class="home">
-        <!-- //actions_desktop 右上角导航栏 -->
-      <aside id="#aside" class="hubzy_left">
-        
-      </aside>
-      <div id="header-post" class="hubzy_right">
-        
-      </div>
-       
-      <div class="content  hubzy_center">
-        
-          <header id="header" class="hubzy_center_title">
-  <!-- <a href="/"> -->
-
-    <a href="/">
-      
-        
-                  <div id="logo" style="background-image: url(/images/logo.jpg);"></div>
-                  
-                    
-    </a>
-    <div class="nav_right">
-      <div id="title">
-        <a href="/">
-          <h1>
-            t1kcode
-          </h1>
-        </a>
-      </div>
-  
-      <div id="nav">
-        <ul>
-          <li class="icon">
-            <a href="#" aria-label="Menu"><i class="fas fa-bars fa-2x"></i></a>
-          </li>
-          
-            <li><a href="/">
-                首页
-              </a></li>
-            
-            <li><a href="/categories/">
-                项目
-              </a></li>
-            
-            <li><a href="/archives/">
-                归档
-              </a></li>
-            
-            <li><a href="/about/">
-                关于
-              </a></li>
-            
-        </ul>
-      </div>
-    </div>    
-</header>
-        
-          <!-- //body 引入首页和md编译后的页面 -->
-          <!-- 首页  -->
-<section id="about">
-  
-  
-  <!-- icon列表 -->
-    <p class="iconlist">
-      <!-- # > index.find_me_on -->
-      
-      
-      
-      
-        
-          <a class="icon" target="_blank" rel="noopener" href="https://github.com/t1kcode" aria-label="github">
-            <i class="fab fa-github"></i></a>
-            
-       
-        
-      
-        
-          <a class="icon" target="_blank" rel="noopener" href="https://gitee.com/t1kcode">
-            <i><svg class='diyIcon'  viewBox="0 0 1024 1024" ><path d="M512 1024C229.248 1024 0 794.752 0 512S229.248 0 512 0s512 229.248 512 512-229.248 512-512 512z m259.168-568.896h-290.752a25.28 25.28 0 0 0-25.28 25.28l-0.032 63.232c0 13.952 11.296 25.28 25.28 25.28h177.024a25.28 25.28 0 0 1 25.28 25.28v12.64a75.84 75.84 0 0 1-75.84 75.84h-240.224a25.28 25.28 0 0 1-25.28-25.28v-240.192a75.84 75.84 0 0 1 75.84-75.84h353.92a25.28 25.28 0 0 0 25.28-25.28l0.064-63.2a25.312 25.312 0 0 0-25.28-25.312H417.184a189.632 189.632 0 0 0-189.632 189.6v353.952c0 13.952 11.328 25.28 25.28 25.28h372.928a170.656 170.656 0 0 0 170.656-170.656v-145.376a25.28 25.28 0 0 0-25.28-25.28z"></path></svg></i>
-          </a>
-        
-    
-        
-      
-    </p>
-  
-</section>
-<!-- 文章列表 -->
-<section id="writing">
-    <span class="h1"><a href="/archives/">文章</a></span>
-    
-    <ul class="post-list">
-      
-      
-      
-      
-        
-        
-        
-        
-          <li class="post-year"><h2>2023</h2></li>
-        
-        <li class="post-item">
-          <span class="title">
-            
-    
-        <a class="" href="/2023/02/16/2023-02-16-Mall%E5%95%86%E5%9F%8E/"> <span> Mall商城 </span></a>
-    
-
-
-
-          <span class="slug"></span>
-        </span>
-         <!-- 文章时间和首页时间 -->
-
-    <div class="meta">
-      
-        
-          <time datetime="2023-02-16T08:07:10.000Z" itemprop="datePublished">2023-02-16</time>
-        
-      
+        <!-- 伪终端介绍 -->
+        <div id="cmdBox">
+            <!-- 第一个终端 -->
+            <div class="cmd">
+                <!-- 三个按钮 -->
+                <div class="click">
+                    <div class="red"></div>
+                    <div class="yellow"></div>
+                    <div class="green"></div>
+                </div>
+                <!-- 顶部标题 -->
+                <div class="title">
+                    <span>t1kcode - bash</span>
+                </div>
+                <!-- 终端内文字 -->
+                <div class="cmdText">
+                    <span style="color: rgb(0, 190, 0);">root@t1k</span>
+                    <span style="color: blue;">~</span>
+                    <span style="color: rgb(39, 39, 39);">./weather.sh</span>
+                    <br />
+                    <iframe scrolling="no" src="https://tianqiapi.com/api.php?style=tb&skin=pitaya" frameborder="0"
+                        width="350" height="24" allowtransparency="true"></iframe>
+                    <br />
+                    <span style="color: rgb(0, 190, 0);">root@t1k</span>
+                    <span style="color: blue;">~</span>
+                    <span style="color: rgb(39, 39, 39);">cat /me.txt</span>
+                    <p>空泛不知几时</p>
+                    <p>冷月清寂，天星长齐</p>
+                    <p>一厢梦转，人如是</p>
+                    <p>朝无所适夜难止</p>
+                    <p>十二年依稀去也</p>
+                    <span style="color: rgb(0, 190, 0);">root@t1k</span>
+                    <span style="color: blue;">~</span>
+                    <span style="color: rgb(39, 39, 39);">sudo rm -rf /*</span>
+                </div>
+            </div>
+            <!-- 第二个终端 -->
+            <div class="cmd cmd2">
+                <!-- 三个按钮 -->
+                <div class="click">
+                    <div class="red"></div>
+                    <div class="yellow"></div>
+                    <div class="green"></div>
+                </div>
+                <!-- 顶部标题 -->
+                <div class="title">
+                    <span>t1kcode - bash</span>
+                </div>
+                <!-- 终端内文字 -->
+                <div class="cmdText">
+                    <span style="color: rgb(0, 190, 0);">root@t1k</span>
+                    <span style="color: blue;">~</span>
+                    <span style="color: rgb(39, 39, 39);">./links.sh</span>
+                    <p>我的其他站点：</p>
+                    <ul class="ul">
+                        <li><a href="https://blog.nutssss.cn/">Blog</a></li>
+                        <li><a href="#">Love</a></li>
+                        <li><a href="#">Note</a></li>
+                        <li><a href="#">Mc</a></li>
+                        <li><a href="#">McBlog</a></li>
+                    </ul>
+                    <span style="color: rgb(0, 190, 0);">root@t1k</span>
+                    <span style="color: blue;">~</span>
+                </div>
+            </div>
+        </div>
     </div>
 
-
-          </li>
-      
-        
-        
-        
-        
-          <li class="post-year"><h2>2022</h2></li>
-        
-        <li class="post-item">
-          <span class="title">
-            
-    
-        <a class="" href="/2022/12/03/2022-12-03-%E7%94%B5%E8%84%91%E5%95%86%E5%9F%8E%E9%A1%B9%E7%9B%AE/"> <span> 电脑商城 </span></a>
-    
-
-
-
-          <span class="slug"></span>
-        </span>
-         <!-- 文章时间和首页时间 -->
-
-    <div class="meta">
-      
-        
-          <time datetime="2022-12-03T10:57:10.000Z" itemprop="datePublished">2022-12-03</time>
-        
-      
+    <!-- 页脚 -->
+    <div id="footer">
+        <!-- <p>© 2020 NUTSSSS | <a href="http://beian.miit.gov.cn">湘ICP备18015792号</a></p> -->
+        <p>@2019-2023 t1k</p>
     </div>
+</body>
 
-
-          </li>
-      
-        
-        
-        
-        
-        <li class="post-item">
-          <span class="title">
-            
-    
-        <a class="" href="/2022/10/01/2022-10-01-JAVA%E5%9F%BA%E7%A1%80/"> <span> JAVA基础 </span></a>
-    
-
-
-
-          <span class="slug"></span>
-        </span>
-         <!-- 文章时间和首页时间 -->
-
-    <div class="meta">
-      
-        
-          <time datetime="2022-10-01T09:57:10.000Z" itemprop="datePublished">2022-10-01</time>
-        
-      
-    </div>
-
-
-          </li>
-      
-        
-        
-        
-        
-          <li class="post-year"><h2>2021</h2></li>
-        
-        <li class="post-item">
-          <span class="title">
-            
-    
-        <a class="" href="/2021/05/01/2021-05-01-%E6%A0%91/"> <span> 树 </span></a>
-    
-
-
-
-          <span class="slug"></span>
-        </span>
-         <!-- 文章时间和首页时间 -->
-
-    <div class="meta">
-      
-        
-          <time datetime="2021-05-01T11:57:10.000Z" itemprop="datePublished">2021-05-01</time>
-        
-      
-    </div>
-
-
-          </li>
-      
-        
-        
-        
-        
-        <li class="post-item">
-          <span class="title">
-            
-    
-        <a class="" href="/2021/04/22/2021-4-22-%E6%9F%A5%E6%89%BE/"> <span> 查找结构 </span></a>
-    
-
-
-
-          <span class="slug"></span>
-        </span>
-         <!-- 文章时间和首页时间 -->
-
-    <div class="meta">
-      
-        
-          <time datetime="2021-04-22T10:39:10.000Z" itemprop="datePublished">2021-04-22</time>
-        
-      
-    </div>
-
-
-          </li>
-      
-        
-        
-        
-        
-        <li class="post-item">
-          <span class="title">
-            
-    
-        <a class="" href="/2021/04/10/2021-04-010-%E5%9F%BA%E6%95%B0%E6%8E%92%E5%BA%8F/"> <span> 基数排序 </span></a>
-    
-
-
-
-          <span class="slug"></span>
-        </span>
-         <!-- 文章时间和首页时间 -->
-
-    <div class="meta">
-      
-        
-          <time datetime="2021-04-10T06:39:10.000Z" itemprop="datePublished">2021-04-10</time>
-        
-      
-    </div>
-
-
-          </li>
-      
-        
-        
-        
-        
-        <li class="post-item">
-          <span class="title">
-            
-    
-        <a class="" href="/2021/04/03/2021-04-03-%E9%98%9F%E5%88%97/"> <span> 队列 </span></a>
-    
-
-
-
-          <span class="slug"></span>
-        </span>
-         <!-- 文章时间和首页时间 -->
-
-    <div class="meta">
-      
-        
-          <time datetime="2021-04-03T06:39:10.000Z" itemprop="datePublished">2021-04-03</time>
-        
-      
-    </div>
-
-
-          </li>
-      
-        
-        
-        
-        
-        <li class="post-item">
-          <span class="title">
-            
-    
-        <a class="" href="/2021/04/02/2021-04-02-%E6%A0%88%E7%9A%84%E5%BA%94%E7%94%A8/"> <span> 栈的应用 </span></a>
-    
-
-
-
-          <span class="slug"></span>
-        </span>
-         <!-- 文章时间和首页时间 -->
-
-    <div class="meta">
-      
-        
-          <time datetime="2021-04-02T11:00:10.000Z" itemprop="datePublished">2021-04-02</time>
-        
-      
-    </div>
-
-
-          </li>
-      
-        
-        
-        
-        
-        <li class="post-item">
-          <span class="title">
-            
-    
-        <a class="" href="/2021/04/01/2021-04-01-%E6%A0%88/"> <span> 栈 </span></a>
-    
-
-
-
-          <span class="slug"></span>
-        </span>
-         <!-- 文章时间和首页时间 -->
-
-    <div class="meta">
-      
-        
-          <time datetime="2021-04-01T12:39:10.000Z" itemprop="datePublished">2021-04-01</time>
-        
-      
-    </div>
-
-
-          </li>
-      
-        
-        
-        
-        
-        <li class="post-item">
-          <span class="title">
-            
-    
-        <a class="" href="/2021/03/28/2021-03-28-%E5%8F%8C%E5%90%91%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8/"> <span> 双向循环链表 </span></a>
-    
-
-
-
-          <span class="slug"></span>
-        </span>
-         <!-- 文章时间和首页时间 -->
-
-    <div class="meta">
-      
-        
-          <time datetime="2021-03-28T08:18:10.000Z" itemprop="datePublished">2021-03-28</time>
-        
-      
-    </div>
-
-
-          </li>
-      
-    </ul>
-    
-      
-    <div class="pagination">
-        
-        <span class="page-number">第 1 页，共 2 页</span>
-        
-            <a href="/master/page/2/"><i class="fas fa-angle-right"></i>
-            </a>
-        
-    </div>
-
-
-    
-  </section>
-
-
-
-
-          
-
-          <footer id="footer">
-  <div class="footer-left">
-    Copyright &copy;
-    
-    
-    2019-2023
-    t1k
-  </div>
-  <div class="footer-right">
-    <nav>
-      <ul>
-         
-          <li><a href="/">首页</a></li>
-         
-          <li><a href="/categories/">项目</a></li>
-         
-          <li><a href="/archives/">归档</a></li>
-         
-          <li><a href="/about/">关于</a></li>
-        
-      </ul>
-    </nav>
-  </div>
-</footer>
-
-          <!-- jquery -->
- 
-  
-<script src="/lib/jquery/jquery.min.js"></script>
-
-
-
-<script src="/lib/jquery/jquery.pjax.js"></script>
-
-
-
-<!-- clipboard -->
-
-
-
-<!-- Google Analytics -->
-
-<!-- Baidu Analytics -->
-
-<!-- Cloudflare Analytics -->
-
-<!-- Umami Analytics -->
-
-<!-- Disqus Comments -->
-
-     
-      </div>   
-    </div>
-      
-    
-<script src="/js/main.js"></script>
-
-    </body>
-    </html>
+</html>
