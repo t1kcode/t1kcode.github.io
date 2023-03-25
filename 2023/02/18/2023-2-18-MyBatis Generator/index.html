@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang=zh-CN>
+  <head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="MyBatis Generator MyBatis Generator（简称MBG）是MyBatis官方提供的代码生成工具，可以通过数据库表直接生成实体类、单表CRUD代码、mapper.xml文件  SpringBoot继承MBG 在pom.xml中添加如下依赖  123456789101112131415161718192021222324252627282930313233343536373">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MyBatis Generator">
+<meta property="og:url" content="https://www.t1kcode.top/2023/02/18/2023-2-18-MyBatis%20Generator/index.html">
+<meta property="og:site_name" content="t1kcode">
+<meta property="og:description" content="MyBatis Generator MyBatis Generator（简称MBG）是MyBatis官方提供的代码生成工具，可以通过数据库表直接生成实体类、单表CRUD代码、mapper.xml文件  SpringBoot继承MBG 在pom.xml中添加如下依赖  123456789101112131415161718192021222324252627282930313233343536373">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="c:/Users/TAK/AppData/Roaming/Typora/typora-user-images/image-20230217105703906.png">
+<meta property="og:image" content="c:/Users/TAK/AppData/Roaming/Typora/typora-user-images/image-20230218092234320.png">
+<meta property="article:published_time" content="2023-02-18T00:07:10.000Z">
+<meta property="article:modified_time" content="2023-03-25T15:50:53.598Z">
+<meta property="article:author" content="t1k">
+<meta property="article:tag" content="工具">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="c:/Users/TAK/AppData/Roaming/Typora/typora-user-images/image-20230217105703906.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/Rolan.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    
+      <title>t1kcode·MyBatis Generator</title>
+    
+    
+    <!-- styles -->
+
+    <!-- 默认CSS引入方法 -->
+    
+<link rel="stylesheet" href="/css/layout.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+
+
+  
+  <!-- L2Dwidget -->
+  
+<script src="/lib/live2d/L2Dwidget.min.js"></script>
+
+
+  <script>
+  // 猫
+  L2Dwidget.init({
+    model: {
+      jsonPath: "/lib/live2d/tororo/assets/tororo.model.json",
+    },
+    display: {
+      superSample: 2,
+      width: 60,
+      height: 80,
+      position: 'right',
+      hOffset: 0,
+      vOffset: 20,
+    },
+    mobile: {
+      show: true,
+      scale: 1,
+      motion: true,
+    },
+    react: {
+      opacityDefault: 1,
+      opacityOnHover: 1,
+    }
+  })
+  //百度搜索爬虫
+
+
+
+var _hmt = _hmt || [];
+(function () {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?7e9a19e5e700f1a2607b47c7bd6b35e8";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+
+  </script>
+  <meta name="baidu-site-verification" content="code-dIan6MAmy5" />
+  
+
+  <!-- styles -->
+
+
+ 
+  <link
+    rel="preload"
+    href="/lib/font-awesome/css/all.min.css"
+    as="style"
+    onload="this.onload=null;this.rel='stylesheet'"
+  />
+  <noscript
+    ><link
+      rel="stylesheet"
+      href="/lib/font-awesome/css/all.min.css"
+  /></noscript>
+
+
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+    <body class="max-width mx-auto">
+     <div class="home">
+        <!-- //actions_desktop 右上角导航栏 -->
+      <aside id="#aside" class="hubzy_left">
+        
+          <div class="hubzy_logo">
+	<a href="/">
+		
+		  
+					<div id="logo" style="background-image: url(/images/logo.jpg);"></div>
+					
+					  
+	  </a>
+	  <div id="title">
+		<a href="/">
+		  <h1>
+			t1k
+		  </h1>
+		</a>
+		
+			<!-- icon列表 -->
+			  <p class="iconlist">
+				<!-- # > index.find_me_on -->
+				
+				
+				
+				
+				  
+					<a class="icon" target="_blank" rel="noopener" href="https://github.com/t1kcode" aria-label="github">
+					  <i class="fab fa-github"></i></a>
+					  
+			     
+				  
+				
+				  
+					<a class="icon" target="_blank" rel="noopener" href="https://gitee.com/t1kcode">
+					  <i><svg class='diyIcon'  viewBox="0 0 1024 1024" ><path d="M512 1024C229.248 1024 0 794.752 0 512S229.248 0 512 0s512 229.248 512 512-229.248 512-512 512z m259.168-568.896h-290.752a25.28 25.28 0 0 0-25.28 25.28l-0.032 63.232c0 13.952 11.296 25.28 25.28 25.28h177.024a25.28 25.28 0 0 1 25.28 25.28v12.64a75.84 75.84 0 0 1-75.84 75.84h-240.224a25.28 25.28 0 0 1-25.28-25.28v-240.192a75.84 75.84 0 0 1 75.84-75.84h353.92a25.28 25.28 0 0 0 25.28-25.28l0.064-63.2a25.312 25.312 0 0 0-25.28-25.312H417.184a189.632 189.632 0 0 0-189.632 189.6v353.952c0 13.952 11.328 25.28 25.28 25.28h372.928a170.656 170.656 0 0 0 170.656-170.656v-145.376a25.28 25.28 0 0 0-25.28-25.28z"></path></svg></i>
+					</a>
+				  
+			  
+				  
+				
+			  </p>
+			
+	  </div>
+</div>
+<!-- 搜索栏 -->
+<div id="search">
+	<input class="search-input" type="text" placeholder="search">
+	<span id="search-icon" class="fa fa-bars" title="展开目录"></span>
+</div>
+
+<!-- 侧边目录栏 -->
+<div id="tree">
+	
+
+	
+					<ul>
+						<li class="file">
+							<a href="/2019/12/07/2019-12-07-个人博客搭建流程及一些问题/">
+								<i class="fa fa-file"></i>
+								2019-12-07-个人博客搭建流程及一些问题
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/2021/03/08/2021-03-12-单链表/">
+								<i class="fa fa-file"></i>
+								2021-03-12-单链表
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/2021/03/05/2021-03-13-顺序表/">
+								<i class="fa fa-file"></i>
+								2021-03-13-顺序表
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/2021/03/14/2021-03-14-C++那些事/">
+								<i class="fa fa-file"></i>
+								2021-03-14-C++那些事
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/2021/03/23/2021-03-23-循环链表/">
+								<i class="fa fa-file"></i>
+								2021-03-23-循环链表
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/2021/03/28/2021-03-28-双向循环链表/">
+								<i class="fa fa-file"></i>
+								2021-03-28-双向循环链表
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/2021/04/01/2021-04-01-栈/">
+								<i class="fa fa-file"></i>
+								2021-04-01-栈
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/2021/04/10/2021-04-010-基数排序/">
+								<i class="fa fa-file"></i>
+								2021-04-010-基数排序
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/2021/04/02/2021-04-02-栈的应用/">
+								<i class="fa fa-file"></i>
+								2021-04-02-栈的应用
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/2021/04/03/2021-04-03-队列/">
+								<i class="fa fa-file"></i>
+								2021-04-03-队列
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/2021/05/01/2021-05-01-树/">
+								<i class="fa fa-file"></i>
+								2021-05-01-树
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/2021/04/22/2021-4-22-查找/">
+								<i class="fa fa-file"></i>
+								2021-4-22-查找
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/2022/10/01/2022-10-01-JAVA基础/">
+								<i class="fa fa-file"></i>
+								2022-10-01-JAVA基础
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/2022/12/03/2022-12-03-电脑商城项目/">
+								<i class="fa fa-file"></i>
+								2022-12-03-电脑商城项目
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/2023/02/16/2023-2-16-MyBatis/">
+								<i class="fa fa-file"></i>
+								2023-2-16-MyBatis
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file active">
+							<a href="/2023/02/18/2023-2-18-MyBatis Generator/">
+								<i class="fa fa-file"></i>
+								2023-2-18-MyBatis Generator
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/2023/02/27/2023-2-27-SpringSecurityJWT/">
+								<i class="fa fa-file"></i>
+								2023-2-27-SpringSecurityJWT
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/2023/03/11/2023-3-11-Mall整合SpringTask/">
+								<i class="fa fa-file"></i>
+								2023-3-11-Mall整合SpringTask
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/2023/03/11/2023-3-11-MongoDB/">
+								<i class="fa fa-file"></i>
+								2023-3-11-MongoDB
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/2023/03/14/2023-3-14-RabbitMQ_JAVA/">
+								<i class="fa fa-file"></i>
+								2023-3-14-RabbitMQ_JAVA
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/2023/03/15/2023-3-15-Mall整合RabbitMQ/">
+								<i class="fa fa-file"></i>
+								2023-3-15-Mall整合RabbitMQ
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/2023/03/17/2023-3-17-SpringBoot中使用AOP记录接口访问日志/">
+								<i class="fa fa-file"></i>
+								2023-3-17-SpringBoot中使用AOP记录接口访问日志
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/2023/03/02/2023-3-2-Spring Data Redis/">
+								<i class="fa fa-file"></i>
+								2023-3-2-Spring Data Redis
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/2023/03/20/2023-3-20-Mall商城/">
+								<i class="fa fa-file"></i>
+								2023-3-20-Mall商城
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/2023/03/23/2023-3-23-Mall整合Elasticsearch/">
+								<i class="fa fa-file"></i>
+								2023-3-23-Mall整合Elasticsearch
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/2023/03/02/2023-3-3-Mall-SpringSecurity-JWT/">
+								<i class="fa fa-file"></i>
+								2023-3-3-Mall-SpringSecurity-JWT
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/2023/03/03/2023-3-3-Swagger-UI/">
+								<i class="fa fa-file"></i>
+								2023-3-3-Swagger-UI
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/2023/03/05/2023-3-5-ElasticSearch/">
+								<i class="fa fa-file"></i>
+								2023-3-5-ElasticSearch
+							</a>
+						</li>
+					</ul>
+	
+</div>
+
+        
+      </aside>
+      <div id="header-post" class="hubzy_right">
+        
+          
+  <!-- <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a> -->
+  <!-- <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a> -->
+  <!-- <a id="top-icon-tablet" href="#" "Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"
+    style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a> -->
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        
+          <li><a href="/blog/">
+              首页
+            </a></li>
+          
+          <li><a href="/archives/">
+              归档
+            </a></li>
+          
+          <li><a href="/">
+              关于
+            </a></li>
+          
+      </ul>
+    </span>
+    <br />
+    <div id="toc">
+      
+    </div>
+    <br />
+    <span id="actions">
+      <ul>
+        <!--// 
+          <li><a class="icon" aria-label="上一篇 " href="/2023/02/27/2023-2-27-SpringSecurityJWT/"><i
+                class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();"
+                onmouseout="$('#i-prev').toggle();"></i></a></li>
+          
+            
+              <li><a class="icon" aria-label="下一篇 " href="/2023/02/16/2023-2-16-MyBatis/"><i
+                    class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();"
+                    onmouseout="$('#i-next').toggle();"></i></a></li>
+              // -->
+                <li><a class="icon" aria-label="返回顶部 " href="#"
+                    onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up"
+                      aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a>
+                </li>
+                <li><a class="icon" aria-label="分享文章 " href="#"><i class="fas fa-share-alt"
+                      aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();"
+                      onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">
+        上一篇
+      </span>
+      <span id="i-next" class="info" style="display:none;">
+        下一篇
+      </span>
+      <span id="i-top" class="info" style="display:none;">
+        返回顶部
+      </span>
+      <span id="i-share" class="info" style="display:none;">
+        分享文章
+      </span>
+    </span>
+    <br />
+    <div id="share" style="display: none">
+      <ul>
+  <li> 开发中. </li>
+  <!-- <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://www.t1kcode.top/2023/02/18/2023-2-18-MyBatis%20Generator/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://www.t1kcode.top/2023/02/18/2023-2-18-MyBatis%20Generator/&text=MyBatis Generator"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://www.t1kcode.top/2023/02/18/2023-2-18-MyBatis%20Generator/&title=MyBatis Generator"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://www.t1kcode.top/2023/02/18/2023-2-18-MyBatis%20Generator/&is_video=false&description=MyBatis Generator"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=MyBatis Generator&body=Check out this article: https://www.t1kcode.top/2023/02/18/2023-2-18-MyBatis%20Generator/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://www.t1kcode.top/2023/02/18/2023-2-18-MyBatis%20Generator/&title=MyBatis Generator"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://www.t1kcode.top/2023/02/18/2023-2-18-MyBatis%20Generator/&title=MyBatis Generator"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://www.t1kcode.top/2023/02/18/2023-2-18-MyBatis%20Generator/&title=MyBatis Generator"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://www.t1kcode.top/2023/02/18/2023-2-18-MyBatis%20Generator/&title=MyBatis Generator"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://www.t1kcode.top/2023/02/18/2023-2-18-MyBatis%20Generator/&name=MyBatis Generator&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://www.t1kcode.top/2023/02/18/2023-2-18-MyBatis%20Generator/&t=MyBatis Generator"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li> -->
+
+</ul>
+
+    </div>
+
+  </span>
+
+        
+      </div>
+       
+      <div class="content  hubzy_center">
+        
+          <!-- //body 引入首页和md编译后的页面 -->
+          <!-- md 编译成 html 后的文件模板 -->
+
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="hubzy_center_title">
+    
+    <h1 class="posttitle" itemprop="name headline">
+        MyBatis Generator
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">t1k</span>
+      </span>
+      <!-- 文章时间和首页时间 -->
+
+    <div class="postdate">
+      
+        <time datetime="2023-02-18T00:07:10.000Z" itemprop="datePublished">2023-02-18</time>
+        
+        <!-- (Updated: <time datetime="2023-03-25T15:50:53.598Z" itemprop="dateModified">2023-03-25</time>) -->
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content conterDiy"  id="article" itemprop="articleBody">
+    <em class="nubScript">
+        ·本篇:3.4k字 大约需要: 16分钟
+    </em>
+    <h1 id="MyBatis-Generator"><a href="#MyBatis-Generator" class="headerlink" title="MyBatis Generator"></a>MyBatis Generator</h1><blockquote>
+<p><strong>MyBatis Generator（简称MBG）是MyBatis官方提供的代码生成工具，可以通过数据库表直接生成实体类、单表CRUD代码、mapper.xml文件</strong></p>
+</blockquote>
+<h2 id="SpringBoot继承MBG"><a href="#SpringBoot继承MBG" class="headerlink" title="SpringBoot继承MBG"></a>SpringBoot继承MBG</h2><ul>
+<li><strong>在<code>pom.xml</code>中添加如下依赖</strong></li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--SpringBoot整合MyBatis--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.mybatis.spring.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.1.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--MyBatis分页插件--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.github.pagehelper<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>pagehelper-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.4.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--集成druid连接池--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>druid-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.1.10<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- MyBatis生成器 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.mybatis.generator<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis-generator-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.4.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--Mysql数据库驱动--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>mysql<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mysql-connector-java<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>8.0.15<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--Swagger-UI API文档生产工具--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.springfox<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>springfox-swagger2<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.7.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.springfox<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>springfox-swagger-ui<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.7.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>在<code>application.yml</code>中对数据源和<code>MyBatis</code>的<code>mapper.xml</code>文件路径进行配置，这里进行约定，MBG生成的<code>xml</code>文件放在<code>resources/com/**/mapper</code>目录下，自定义的<code>xml</code>文件放在<code>resources/mapper</code>目录下</strong></li>
+</ul>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># MyBatis mapper.xml路径配置</span></span><br><span class="line"><span class="attr">mybatis:</span></span><br><span class="line">  <span class="attr">mapper-locations:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">classpath:mapper/*.xml</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">classpath*:com/**/mapper/*.xml</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>添加<code>Java</code>配置，用于扫描<code>Mapper</code>接口路径，这里进行约定，MBG生成的放在<code>com.**.mbg.mapper</code>包下，自定义的放在<code>com.**.mapper</code>包下</strong></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@MapperScan(&#123;&quot;com.t1k.mall.mbg.mapper&quot;, &quot;com.t1k.mall.mapper&quot;&#125;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyBatisConfig</span> &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="使用代码生成器"><a href="#使用代码生成器" class="headerlink" title="使用代码生成器"></a>使用代码生成器</h2><ul>
+<li><strong>在使用MBG生成代码前，还需要对其进行一些配置，首先在<code>generator.properties</code>文件中配置好数据库连接信息</strong></li>
+</ul>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">jdbc.driverClass</span>=<span class="string">com.mysql.cj.jdbc.Driver</span></span><br><span class="line"><span class="attr">jdbc.connectionURL</span>=<span class="string">jdbc:mysql://localhost:3306/mall-test-1?useUnicode=true&amp;characterEncoding=utf-8&amp;serverTimezone=Asia/Shanghai</span></span><br><span class="line"><span class="attr">jdbc.userId</span>=<span class="string">root</span></span><br><span class="line"><span class="attr">jdbc.password</span>=<span class="string">123</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>然后在<code>generatorConfig.xml</code>文件中对MBG进行配置，配置属性说明直接参考注释即可</strong></li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">generatorConfiguration</span></span></span><br><span class="line"><span class="meta">        <span class="keyword">PUBLIC</span> <span class="string">&quot;-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN&quot;</span></span></span><br><span class="line"><span class="meta">        <span class="string">&quot;http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">generatorConfiguration</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">properties</span> <span class="attr">resource</span>=<span class="string">&quot;generator.properties&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">context</span> <span class="attr">id</span>=<span class="string">&quot;MySqlContext&quot;</span> <span class="attr">targetRuntime</span>=<span class="string">&quot;MyBatis3&quot;</span> <span class="attr">defaultModelType</span>=<span class="string">&quot;flat&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;beginningDelimiter&quot;</span> <span class="attr">value</span>=<span class="string">&quot;`&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;endingDelimiter&quot;</span> <span class="attr">value</span>=<span class="string">&quot;`&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;javaFileEncoding&quot;</span> <span class="attr">value</span>=<span class="string">&quot;UTF-8&quot;</span>/&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--生成mapper.xml时覆盖原文件--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">plugin</span> <span class="attr">type</span>=<span class="string">&quot;org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin&quot;</span> /&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--为模型生成序列化方法--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">plugin</span> <span class="attr">type</span>=<span class="string">&quot;org.mybatis.generator.plugins.SerializablePlugin&quot;</span>/&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--为生成的Java模型创建一个toString方法 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">plugin</span> <span class="attr">type</span>=<span class="string">&quot;org.mybatis.generator.plugins.ToStringPlugin&quot;</span>/&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--可以自定义生成model的代码注释--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">commentGenerator</span> <span class="attr">type</span>=<span class="string">&quot;com.t1k.mall.mbg.CommentGenerator&quot;</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- 是否去除自动生成的注释 true：是 ： false:否 --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;suppressAllComments&quot;</span> <span class="attr">value</span>=<span class="string">&quot;true&quot;</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;suppressDate&quot;</span> <span class="attr">value</span>=<span class="string">&quot;true&quot;</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;addRemarkComments&quot;</span> <span class="attr">value</span>=<span class="string">&quot;true&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">commentGenerator</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--配置数据库连接--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">jdbcConnection</span> <span class="attr">driverClass</span>=<span class="string">&quot;$&#123;jdbc.driverClass&#125;&quot;</span></span></span><br><span class="line"><span class="tag">                        <span class="attr">connectionURL</span>=<span class="string">&quot;$&#123;jdbc.connectionURL&#125;&quot;</span></span></span><br><span class="line"><span class="tag">                        <span class="attr">userId</span>=<span class="string">&quot;$&#123;jdbc.userId&#125;&quot;</span></span></span><br><span class="line"><span class="tag">                        <span class="attr">password</span>=<span class="string">&quot;$&#123;jdbc.password&#125;&quot;</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--解决mysql驱动升级到8.0后不生成指定数据库代码的问题--&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;nullCatalogMeansCurrent&quot;</span> <span class="attr">value</span>=<span class="string">&quot;true&quot;</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">jdbcConnection</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--指定生成model的路径--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">javaModelGenerator</span> <span class="attr">targetPackage</span>=<span class="string">&quot;com.t1k.mall.mbg.model&quot;</span> <span class="attr">targetProject</span>=<span class="string">&quot;mall-test-mbg\src\main\java&quot;</span>/&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--指定生成mapper.xml的路径--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">sqlMapGenerator</span> <span class="attr">targetPackage</span>=<span class="string">&quot;com.t1k.mall.mbg.mapper&quot;</span> <span class="attr">targetProject</span>=<span class="string">&quot;mall-test-mbg\src\main\resources&quot;</span>/&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--指定生成mapper接口的的路径--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">javaClientGenerator</span> <span class="attr">type</span>=<span class="string">&quot;XMLMAPPER&quot;</span> <span class="attr">targetPackage</span>=<span class="string">&quot;com.t1k.mall.mbg.mapper&quot;</span></span></span><br><span class="line"><span class="tag">                             <span class="attr">targetProject</span>=<span class="string">&quot;mall-test-mbg\src\main\java&quot;</span>/&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--生成全部表tableName设为%--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">table</span> <span class="attr">tableName</span>=<span class="string">&quot;ums_admin&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">generatedKey</span> <span class="attr">column</span>=<span class="string">&quot;id&quot;</span> <span class="attr">sqlStatement</span>=<span class="string">&quot;MySql&quot;</span> <span class="attr">identity</span>=<span class="string">&quot;true&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">table</span> <span class="attr">tableName</span>=<span class="string">&quot;ums_role&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">generatedKey</span> <span class="attr">column</span>=<span class="string">&quot;id&quot;</span> <span class="attr">sqlStatement</span>=<span class="string">&quot;MySql&quot;</span> <span class="attr">identity</span>=<span class="string">&quot;true&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">table</span> <span class="attr">tableName</span>=<span class="string">&quot;ums_admin_role_relation&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">generatedKey</span> <span class="attr">column</span>=<span class="string">&quot;id&quot;</span> <span class="attr">sqlStatement</span>=<span class="string">&quot;MySql&quot;</span> <span class="attr">identity</span>=<span class="string">&quot;true&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">table</span> <span class="attr">tableName</span>=<span class="string">&quot;ums_resource&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">generatedKey</span> <span class="attr">column</span>=<span class="string">&quot;id&quot;</span> <span class="attr">sqlStatement</span>=<span class="string">&quot;MySql&quot;</span> <span class="attr">identity</span>=<span class="string">&quot;true&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">table</span> <span class="attr">tableName</span>=<span class="string">&quot;ums_resource_category&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">generatedKey</span> <span class="attr">column</span>=<span class="string">&quot;id&quot;</span> <span class="attr">sqlStatement</span>=<span class="string">&quot;MySql&quot;</span> <span class="attr">identity</span>=<span class="string">&quot;true&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">context</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">generatorConfiguration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><strong>值得一提的是<code>targetRuntime</code>属性，设置不同的属性生成的代码和生成代码的使用方式会有所不同，常用的有<code>MyBatis3</code>和<code>MyBatis3DynamicSql</code>两种，这里使用的是<code>Mybatis3</code></strong></p>
+</li>
+<li><p><strong>如果想自定义MBG生成的代码，可以自己写一个<code>CommentGenerator</code>来继承<code>DefaultCommentGenerator</code>，这里我自定义了实体类代码的生成，添加了<code>Swagger</code>注解的支持</strong></p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.t1k.mall.mbg;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.mybatis.generator.api.IntrospectedColumn;</span><br><span class="line"><span class="keyword">import</span> org.mybatis.generator.api.IntrospectedTable;</span><br><span class="line"><span class="keyword">import</span> org.mybatis.generator.api.dom.java.CompilationUnit;</span><br><span class="line"><span class="keyword">import</span> org.mybatis.generator.api.dom.java.Field;</span><br><span class="line"><span class="keyword">import</span> org.mybatis.generator.api.dom.java.FullyQualifiedJavaType;</span><br><span class="line"><span class="keyword">import</span> org.mybatis.generator.internal.DefaultCommentGenerator;</span><br><span class="line"><span class="keyword">import</span> org.mybatis.generator.internal.util.StringUtility;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Properties;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 自定义注释生成器</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CommentGenerator</span> <span class="keyword">extends</span> <span class="title class_">DefaultCommentGenerator</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">boolean</span> <span class="variable">addRemarkComments</span> <span class="operator">=</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">EXAMPLE_SUFFIX</span> <span class="operator">=</span> <span class="string">&quot;Example&quot;</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">MAPPER_SUFFIX</span> <span class="operator">=</span> <span class="string">&quot;Mapper&quot;</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">API_MODEL_PROPERTY_FULL_CLASS_NAME</span> <span class="operator">=</span> <span class="string">&quot;io.swagger.annotations.ApiModelProperty&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 设置用户配置的参数</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">addConfigurationProperties</span><span class="params">(Properties properties)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">super</span>.addConfigurationProperties(properties);</span><br><span class="line">        <span class="built_in">this</span>.addRemarkComments = StringUtility.isTrue(properties.getProperty(<span class="string">&quot;addRemarkComments&quot;</span>));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 给字段添加注释</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">addFieldComment</span><span class="params">(Field field, IntrospectedTable introspectedTable, IntrospectedColumn introspectedColumn)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">remarks</span> <span class="operator">=</span> introspectedColumn.getRemarks();</span><br><span class="line">        <span class="comment">//根据参数和备注信息判断是否添加备注信息</span></span><br><span class="line">        <span class="keyword">if</span>(addRemarkComments &amp;&amp; StringUtility.stringHasValue(remarks))</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">//数据库中特殊字符需要转义</span></span><br><span class="line">            <span class="keyword">if</span>(remarks.contains(<span class="string">&quot;\&quot;&quot;</span>))</span><br><span class="line">            &#123;</span><br><span class="line">                remarks = remarks.replace(<span class="string">&quot;\&quot;&quot;</span>, <span class="string">&quot;&#x27;&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//给model的字段添加swagger注解</span></span><br><span class="line">            field.addJavaDocLine(<span class="string">&quot;@ApiModelProperty(value = \&quot;&quot;</span> + remarks + <span class="string">&quot;\&quot;)&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">addJavaFileComment</span><span class="params">(CompilationUnit compilationUnit)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">super</span>.addJavaFileComment(compilationUnit);</span><br><span class="line">        <span class="comment">//只在model中添加swagger注解类的导入</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">fullyQualifiedName</span> <span class="operator">=</span> compilationUnit.getType().getFullyQualifiedName();</span><br><span class="line">        <span class="keyword">if</span>(!fullyQualifiedName.contains(MAPPER_SUFFIX) &amp;&amp; !fullyQualifiedName.contains(EXAMPLE_SUFFIX))</span><br><span class="line">        &#123;</span><br><span class="line">            compilationUnit.addImportedType(<span class="keyword">new</span> <span class="title class_">FullyQualifiedJavaType</span>(API_MODEL_PROPERTY_FULL_CLASS_NAME));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>最后编写一个<code>Generator</code>类用于生成代码，直接运行<code>main</code>方法即可生成所有代码</strong></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.t1k.mall.mbg;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.mybatis.generator.api.MyBatisGenerator;</span><br><span class="line"><span class="keyword">import</span> org.mybatis.generator.config.Configuration;</span><br><span class="line"><span class="keyword">import</span> org.mybatis.generator.config.xml.ConfigurationParser;</span><br><span class="line"><span class="keyword">import</span> org.mybatis.generator.internal.DefaultShellCallback;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.InputStream;</span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 用于生产MBG的代码</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Generator</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//MBG 执行过程中的警告信息</span></span><br><span class="line">        List&lt;String&gt; warnings = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">        <span class="comment">//当生成的代码重复时，覆盖原代码</span></span><br><span class="line">        <span class="type">boolean</span> <span class="variable">overwrite</span> <span class="operator">=</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="comment">//读取我们的 MBG 配置文件</span></span><br><span class="line">        <span class="type">InputStream</span> <span class="variable">is</span> <span class="operator">=</span> Generator.class.getResourceAsStream(<span class="string">&quot;/generatorConfig.xml&quot;</span>);</span><br><span class="line">        <span class="type">ConfigurationParser</span> <span class="variable">cp</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ConfigurationParser</span>(warnings);</span><br><span class="line">        <span class="type">Configuration</span> <span class="variable">config</span> <span class="operator">=</span> cp.parseConfiguration(is);</span><br><span class="line">        is.close();</span><br><span class="line"></span><br><span class="line">        <span class="type">DefaultShellCallback</span> <span class="variable">callback</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">DefaultShellCallback</span>(overwrite);</span><br><span class="line">        <span class="comment">//创建 MBG</span></span><br><span class="line">        <span class="type">MyBatisGenerator</span> <span class="variable">myBatisGenerator</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">MyBatisGenerator</span>(config, callback, warnings);</span><br><span class="line">        <span class="comment">//执行生成代码</span></span><br><span class="line">        myBatisGenerator.generate(<span class="literal">null</span>);</span><br><span class="line">        <span class="comment">//输出警告信息</span></span><br><span class="line">        <span class="keyword">for</span>(String warning : warnings)</span><br><span class="line">        &#123;</span><br><span class="line">            System.out.println(warning);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>一切准备就绪，执行<code>main</code>方法，生成代码结构信息如下</strong></li>
+</ul>
+<p><img src="C:/Users/TAK/AppData/Roaming/Typora/typora-user-images/image-20230217105703906.png" alt="image-20230217105703906"></p>
+<h2 id="基本CRUD操作"><a href="#基本CRUD操作" class="headerlink" title="基本CRUD操作"></a>基本CRUD操作</h2><ul>
+<li><strong>查看MBG生成的<code>Mapper</code>接口，发现已经包含了基本的CRUD方法，具体SQL实现也已经在<code>mapper.xml</code>中生成了，单表CRUD直接调用对应方法即可</strong></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">UmsAdminMapper</span> &#123;</span><br><span class="line">    <span class="type">long</span> <span class="title function_">countByExample</span><span class="params">(UmsAdminExample example)</span>;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> <span class="title function_">deleteByExample</span><span class="params">(UmsAdminExample example)</span>;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> <span class="title function_">deleteByPrimaryKey</span><span class="params">(Long id)</span>;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> <span class="title function_">insert</span><span class="params">(UmsAdmin record)</span>;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> <span class="title function_">insertSelective</span><span class="params">(UmsAdmin record)</span>;</span><br><span class="line"></span><br><span class="line">    List&lt;UmsAdmin&gt; <span class="title function_">selectByExample</span><span class="params">(UmsAdminExample example)</span>;</span><br><span class="line"></span><br><span class="line">    UmsAdmin <span class="title function_">selectByPrimaryKey</span><span class="params">(Long id)</span>;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> <span class="title function_">updateByExampleSelective</span><span class="params">(<span class="meta">@Param(&quot;record&quot;)</span> UmsAdmin record, <span class="meta">@Param(&quot;example&quot;)</span> UmsAdminExample example)</span>;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> <span class="title function_">updateByExample</span><span class="params">(<span class="meta">@Param(&quot;record&quot;)</span> UmsAdmin record, <span class="meta">@Param(&quot;example&quot;)</span> UmsAdminExample example)</span>;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> <span class="title function_">updateByPrimaryKeySelective</span><span class="params">(UmsAdmin record)</span>;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> <span class="title function_">updateByPrimaryKey</span><span class="params">(UmsAdmin record)</span>;</span><br><span class="line">&#125;<span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">UmsAdminMapper</span> &#123;</span><br><span class="line">    <span class="type">long</span> <span class="title function_">countByExample</span><span class="params">(UmsAdminExample example)</span>;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> <span class="title function_">deleteByExample</span><span class="params">(UmsAdminExample example)</span>;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> <span class="title function_">deleteByPrimaryKey</span><span class="params">(Long id)</span>;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> <span class="title function_">insert</span><span class="params">(UmsAdmin record)</span>;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> <span class="title function_">insertSelective</span><span class="params">(UmsAdmin record)</span>;</span><br><span class="line"></span><br><span class="line">    List&lt;UmsAdmin&gt; <span class="title function_">selectByExample</span><span class="params">(UmsAdminExample example)</span>;</span><br><span class="line"></span><br><span class="line">    UmsAdmin <span class="title function_">selectByPrimaryKey</span><span class="params">(Long id)</span>;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> <span class="title function_">updateByExampleSelective</span><span class="params">(<span class="meta">@Param(&quot;record&quot;)</span> UmsAdmin record, <span class="meta">@Param(&quot;example&quot;)</span> UmsAdminExample example)</span>;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> <span class="title function_">updateByExample</span><span class="params">(<span class="meta">@Param(&quot;record&quot;)</span> UmsAdmin record, <span class="meta">@Param(&quot;example&quot;)</span> UmsAdminExample example)</span>;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> <span class="title function_">updateByPrimaryKeySelective</span><span class="params">(UmsAdmin record)</span>;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> <span class="title function_">updateByPrimaryKey</span><span class="params">(UmsAdmin record)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>生成代码中有一些Example类，如<code>UmsAdminExample</code>，可以把它理解为一个条件构造器，用于构建SQL语句中的各种条件</strong></li>
+</ul>
+<p><img src="C:/Users/TAK/AppData/Roaming/Typora/typora-user-images/image-20230218092234320.png" alt="image-20230218092234320"></p>
+<ul>
+<li><strong>利用好MBG生成的代码即可完成单表的CRUD操作，如下</strong></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@title</span> UmsAdminServiceImpl</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@description</span> 后台用户管理Service实现类</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> T1k</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@create</span> 2023/2/18 10:18</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UmsAdminServiceImpl</span> <span class="keyword">implements</span> <span class="title class_">UmsAdminService</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="meta">@Resource</span></span><br><span class="line">    <span class="keyword">private</span> UmsAdminMapper mbgUmsAdminMapper;</span><br><span class="line">    <span class="meta">@Resource</span></span><br><span class="line">    <span class="keyword">private</span> MyUmsAdminMapper myUmsAdminMapper;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">create</span><span class="params">(UmsAdmin entity)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// TODO 对参数进行校验</span></span><br><span class="line">        mbgUmsAdminMapper.insert(entity);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">update</span><span class="params">(UmsAdmin entity)</span></span><br><span class="line">    &#123;</span><br><span class="line">        mbgUmsAdminMapper.updateByPrimaryKeySelective(entity);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">delete</span><span class="params">(Long id)</span></span><br><span class="line">    &#123;</span><br><span class="line">        mbgUmsAdminMapper.deleteByPrimaryKey(id);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> UmsAdmin <span class="title function_">select</span><span class="params">(Long id)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> mbgUmsAdminMapper.selectByPrimaryKey(id);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> List&lt;UmsAdmin&gt; <span class="title function_">listAll</span><span class="params">(Integer pageNum, Integer pageSize)</span></span><br><span class="line">    &#123;</span><br><span class="line">        PageHelper.startPage(pageNum, pageSize);</span><br><span class="line">        <span class="keyword">return</span> mbgUmsAdminMapper.selectByExample(<span class="keyword">new</span> <span class="title class_">UmsAdminExample</span>());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="进阶使用"><a href="#进阶使用" class="headerlink" title="进阶使用"></a>进阶使用</h2><h3 id="条件查询"><a href="#条件查询" class="headerlink" title="条件查询"></a>条件查询</h3><blockquote>
+<p><strong>使用Example类构建查询条件可以很方便地实现条件查询</strong></p>
+</blockquote>
+<ul>
+<li><strong>这里以用户名和状态查询后台用户并按创建时间降序排序为例，SQL实现如下</strong></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">SELECT</span><br><span class="line">	id,</span><br><span class="line">	username,</span><br><span class="line">	PASSWORD,</span><br><span class="line">	icon,</span><br><span class="line">	email,</span><br><span class="line">	nick_name,</span><br><span class="line">	note,</span><br><span class="line">	create_time,</span><br><span class="line">	login_time,</span><br><span class="line">STATUS </span><br><span class="line">FROM</span><br><span class="line">	ums_admin </span><br><span class="line">WHERE</span><br><span class="line">	( username = &#x27;macro&#x27; AND STATUS IN ( 0, 1 ) ) </span><br><span class="line">ORDER BY</span><br><span class="line">	create_time DESC;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>对应的Java代码实现如下</strong></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> List&lt;UmsAdmin&gt; <span class="title function_">list</span><span class="params">(Integer pageNum, Integer pageSize, String username, List&lt;Integer&gt; statusList)</span></span><br><span class="line">&#123;</span><br><span class="line">    PageHelper.startPage(pageNum, pageSize);</span><br><span class="line">    <span class="type">UmsAdminExample</span> <span class="variable">umsAdminExample</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">UmsAdminExample</span>();</span><br><span class="line">    UmsAdminExample.<span class="type">Criteria</span> <span class="variable">criteria</span> <span class="operator">=</span> umsAdminExample.createCriteria();</span><br><span class="line">    <span class="keyword">if</span>(StrUtil.isNotEmpty(username))&#123;</span><br><span class="line">        <span class="comment">// where username = #&#123;username&#125;</span></span><br><span class="line">        criteria.andUsernameEqualTo(username);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// where status in statusList</span></span><br><span class="line">    criteria.andStatusIn(statusList);</span><br><span class="line">    <span class="comment">// order by create_time desc</span></span><br><span class="line">    umsAdminExample.setOrderByClause(<span class="string">&quot;create_time desc&quot;</span>);</span><br><span class="line">    <span class="comment">// select * from ums_admin where username = #&#123;username&#125;</span></span><br><span class="line">    <span class="comment">// and status in statusList order by create_time desc</span></span><br><span class="line">    <span class="keyword">return</span> mbgUmsAdminMapper.selectByExample(umsAdminExample);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="子查询"><a href="#子查询" class="headerlink" title="子查询"></a>子查询</h3><blockquote>
+<p><strong>使用MBG生成的代码并不能实现子查询，需要自己手写SQL实现</strong></p>
+</blockquote>
+<ul>
+<li><strong>这里以按角色id查询后台用户为例，首先定义一个<code>MyUmsAdminMapper</code>接口，这里约定<code>com.**.dao</code>包下存放的都是自定义SQL实现的<code>Mapper</code>文件，首先在<code>MyUmsAdminMapper</code>接口中添加<code>subList</code>方法</strong></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">MyUmsAdminMapper</span></span><br><span class="line">&#123;</span><br><span class="line">    List&lt;UmsAdmin&gt; <span class="title function_">subList</span><span class="params">(<span class="meta">@Param(&quot;roleId&quot;)</span> Long roleId)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>然后创建一个<code>MyUmsAdminMapper.xml</code>文件，对应<code>MyUmsAdminMapper</code>接口的SQL实现，注意使用的<code>BaseResultMap</code>MBG已经帮我们生成好了，无需自己手写</strong></li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;subList&quot;</span> <span class="attr">resultMap</span>=<span class="string">&quot;com.t1k.mall.mbg.mapper.UmsAdminMapper.BaseResultMap&quot;</span>&gt;</span></span><br><span class="line">    select * from ums_admin where id in</span><br><span class="line">            (select admin_id from ums_admin_role_relation where role_id = #&#123;roleId&#125;)</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Group和Join查询"><a href="#Group和Join查询" class="headerlink" title="Group和Join查询"></a>Group和Join查询</h3><blockquote>
+<p><strong>Group和Join查询也不能使用MBG生成的代码实现</strong></p>
+</blockquote>
+<ul>
+<li><strong>这里以按角色统计后台用户数量为例，首先在<code>Mapper</code>接口中添加<code>groupList</code>方法</strong></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">MyUmsAdminMapper</span></span><br><span class="line">&#123;</span><br><span class="line">    List&lt;RoleStatDto&gt; <span class="title function_">groupList</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>然后在<code>mapper.xml</code>中添加对应的SQL实现，可以通过给查询出来的列起别名，直接把列映射到<code>resultType</code>所定义的对象中去</strong></li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;groupList&quot;</span> <span class="attr">resultType</span>=<span class="string">&quot;com.t1k.mall.domain.RoleStatDto&quot;</span>&gt;</span></span><br><span class="line">    select</span><br><span class="line">    		ur.id as roleId,</span><br><span class="line">            ur.name as roleName,</span><br><span class="line">            count(ua.id) as count</span><br><span class="line">    from</span><br><span class="line">            ums_role ur</span><br><span class="line">                left join ums_admin_role_relation uarr on ur.id = uarr.role_id</span><br><span class="line">                left join ums_admin ua on uarr.admin_id = ua.id</span><br><span class="line">    group by</span><br><span class="line">            ur.id</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="条件删除"><a href="#条件删除" class="headerlink" title="条件删除"></a>条件删除</h3><blockquote>
+<p><strong>条件删除直接使用Example类构造删除条件即可</strong></p>
+</blockquote>
+<ul>
+<li><strong>这里以按用户名删除后台用户为例，SQL实现如下</strong></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">delete from ums_admin where username = &#x27;test&#x27;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>对应的Java实现为</strong></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">deleteByUsername</span><span class="params">(String username)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">UmsAdminExample</span> <span class="variable">umsAdminExample</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">UmsAdminExample</span>();</span><br><span class="line">    <span class="keyword">if</span>(StrUtil.isNotEmpty(username))&#123;</span><br><span class="line">        umsAdminExample.createCriteria().andUsernameEqualTo(username);</span><br><span class="line">    &#125;</span><br><span class="line">    mbgUmsAdminMapper.deleteByExample(umsAdminExample);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="条件修改"><a href="#条件修改" class="headerlink" title="条件修改"></a>条件修改</h3><blockquote>
+<p><strong>条件修改和条件删除类似，直接使用Example类构造修改条件，然后传入修改参数即可</strong></p>
+</blockquote>
+<ul>
+<li><strong>这里以按指定id修改后台用户的状态为例，SQL实现如下</strong></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">update ums_admin set status = 1 where id in (1, 2)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>对应Java实现为</strong></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">updateByIds</span><span class="params">(List&lt;Long&gt; ids, Integer status)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">UmsAdminExample</span> <span class="variable">umsAdminExample</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">UmsAdminExample</span>();</span><br><span class="line">    UmsAdminExample.<span class="type">Criteria</span> <span class="variable">criteria</span> <span class="operator">=</span> umsAdminExample.createCriteria();</span><br><span class="line">    criteria.andIdIn(ids);</span><br><span class="line">    <span class="type">UmsAdmin</span> <span class="variable">umsAdmin</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">UmsAdmin</span>()&#123;&#123;</span><br><span class="line">        setStatus(status);</span><br><span class="line">    &#125;&#125;;</span><br><span class="line">    mbgUmsAdminMapper.updateByExample(umsAdmin, umsAdminExample);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="一对多查询"><a href="#一对多查询" class="headerlink" title="一对多查询"></a>一对多查询</h3><blockquote>
+<p><strong>一对多查询无法直接使用MBG生成的代码实现，需要手写SQL实现，并使用<code>resultMap</code>来进行结果集映射</strong></p>
+</blockquote>
+<ul>
+<li><strong>这里以按id查询后台用户信息（包含对应角色列表）为例，先在<code>mapper</code>接口中添加<code>selectWithRoleList</code>方法</strong></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">MyUmsAdminMapper</span></span><br><span class="line">&#123;</span><br><span class="line">    AdminRoleDto <span class="title function_">selectWithRoleList</span><span class="params">(<span class="meta">@Param(&quot;id&quot;)</span> Long id)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>然后在<code>mapper.xml</code>中添加对应的SQL实现，这里有个小技巧，可以给角色表查询出来的列取个别名，如添加一个<code>role_</code>前缀</strong></li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;selectWithRoleList&quot;</span> <span class="attr">resultMap</span>=<span class="string">&quot;AdminWithRoleResult&quot;</span>&gt;</span></span><br><span class="line">    select</span><br><span class="line">            ua.*,</span><br><span class="line">            ur.name as role_name,</span><br><span class="line">            ur.description as role_description,</span><br><span class="line">            ur.admin_count as role_adminCount,</span><br><span class="line">            ur.create_time as role_createTime,</span><br><span class="line">            ur.sort as role_sort,</span><br><span class="line">            ur.status as role_status</span><br><span class="line">    from</span><br><span class="line">            ums_admin ua</span><br><span class="line">                left join ums_admin_role_relation uarr on ua.id = uarr.admin_id</span><br><span class="line">                left join ums_role ur on uarr.role_id = ur.id</span><br><span class="line">    where</span><br><span class="line">            ua.id = #&#123;id&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>然后定义一个叫<code>AdminRoleResult</code>的<code>resultMap</code>，通过<code>collection</code>标签直接将以<code>role_</code>开头的列映射到<code>UmsRole</code>对象中去即可</strong></li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">id</span>=<span class="string">&quot;AdminWithRoleResult&quot;</span> <span class="attr">type</span>=<span class="string">&quot;com.t1k.mall.domain.AdminRoleDto&quot;</span></span></span><br><span class="line"><span class="tag">           <span class="attr">extends</span>=<span class="string">&quot;com.t1k.mall.mbg.mapper.UmsAdminMapper.BaseResultMap&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">collection</span> <span class="attr">property</span>=<span class="string">&quot;roleList&quot;</span> <span class="attr">resultMap</span>=<span class="string">&quot;com.t1k.mall.mbg.mapper.UmsRoleMapper.BaseResultMap&quot;</span></span></span><br><span class="line"><span class="tag">                <span class="attr">columnPrefix</span>=<span class="string">&quot;role_&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">collection</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="一对一查询"><a href="#一对一查询" class="headerlink" title="一对一查询"></a>一对一查询</h3><blockquote>
+<p><strong>一对一查询无法直接使用MBG生成的代码实现，需要手写SQL实现，并使用<code>resultMap</code>来进行结果集映射</strong></p>
+</blockquote>
+<ul>
+<li><strong>这里以按id查询资源信息（包括分类信息）为例，现在<code>mapper</code>接口中添加<code>selectResourceWithCate</code>方法</strong></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">MyUmsAdminMapper</span></span><br><span class="line">&#123;</span><br><span class="line">    ResourceWithCateDto <span class="title function_">selectResourceWithCate</span><span class="params">(<span class="meta">@Param(&quot;id&quot;)</span>Long id)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>然后在<code>mapper.xml</code>中添加对应SQL实现，可以给分类表查询出来的列取个别名，如添加一个<code>cate_</code>前缀</strong></li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;selectResourceWithCate&quot;</span> <span class="attr">resultMap</span>=<span class="string">&quot;ResourceWithCateResult&quot;</span>&gt;</span></span><br><span class="line">    select</span><br><span class="line">            ur.*,</span><br><span class="line">            urc.id as cate_id,</span><br><span class="line">            urc.create_time as cate_createTime,</span><br><span class="line">            urc.name as cate_name,</span><br><span class="line">            urc.sort as cate_sort</span><br><span class="line">    from</span><br><span class="line">            ums_resource ur</span><br><span class="line">                left join ums_resource_category urc on ur.category_id = urc.id</span><br><span class="line">    where</span><br><span class="line">            ur.id = #&#123;id&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>然后定义一个叫做<code>ResourceWithCateResult</code>的<code>resultMap</code>，通过<code>association</code>标签直接将以<code>cate_</code>开头的列映射到<code>UmsResourceCategory</code>对象中去即可</strong></li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">id</span>=<span class="string">&quot;ResourceWithCateResult&quot;</span> <span class="attr">type</span>=<span class="string">&quot;com.t1k.mall.domain.ResourceWithCateDto&quot;</span></span></span><br><span class="line"><span class="tag">           <span class="attr">extends</span>=<span class="string">&quot;com.t1k.mall.mbg.mapper.UmsResourceMapper.BaseResultMap&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">association</span> <span class="attr">property</span>=<span class="string">&quot;resourceCategory&quot;</span></span></span><br><span class="line"><span class="tag">                 <span class="attr">resultMap</span>=<span class="string">&quot;com.t1k.mall.mbg.mapper.UmsResourceCategoryMapper.BaseResultMap&quot;</span></span></span><br><span class="line"><span class="tag">                 <span class="attr">columnPrefix</span>=<span class="string">&quot;cate_&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">association</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+  </div>
+</article>
+
+
+
+
+          
+          <!-- //actions_mobile 移动端导航栏 -->
+            <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" class="Popup" style="display: none">
+      <ul>
+         
+          <li><a href="/blog/">首页</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/">关于</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer"  class="Popup" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#MyBatis-Generator"><span class="toc-number">1.</span> <span class="toc-text">MyBatis Generator</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#SpringBoot%E7%BB%A7%E6%89%BFMBG"><span class="toc-number">1.1.</span> <span class="toc-text">SpringBoot继承MBG</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90%E5%99%A8"><span class="toc-number">1.2.</span> <span class="toc-text">使用代码生成器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%ACCRUD%E6%93%8D%E4%BD%9C"><span class="toc-number">1.3.</span> <span class="toc-text">基本CRUD操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9B%E9%98%B6%E4%BD%BF%E7%94%A8"><span class="toc-number">1.4.</span> <span class="toc-text">进阶使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9D%A1%E4%BB%B6%E6%9F%A5%E8%AF%A2"><span class="toc-number">1.4.1.</span> <span class="toc-text">条件查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%90%E6%9F%A5%E8%AF%A2"><span class="toc-number">1.4.2.</span> <span class="toc-text">子查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Group%E5%92%8CJoin%E6%9F%A5%E8%AF%A2"><span class="toc-number">1.4.3.</span> <span class="toc-text">Group和Join查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9D%A1%E4%BB%B6%E5%88%A0%E9%99%A4"><span class="toc-number">1.4.4.</span> <span class="toc-text">条件删除</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9D%A1%E4%BB%B6%E4%BF%AE%E6%94%B9"><span class="toc-number">1.4.5.</span> <span class="toc-text">条件修改</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E5%AF%B9%E5%A4%9A%E6%9F%A5%E8%AF%A2"><span class="toc-number">1.4.6.</span> <span class="toc-text">一对多查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E5%AF%B9%E4%B8%80%E6%9F%A5%E8%AF%A2"><span class="toc-number">1.4.7.</span> <span class="toc-text">一对一查询</span></a></li></ol></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer"  class="Popup" style="display: none">
+      <ul>
+  <li> 开发中. </li>
+  <!-- <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://www.t1kcode.top/2023/02/18/2023-2-18-MyBatis%20Generator/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://www.t1kcode.top/2023/02/18/2023-2-18-MyBatis%20Generator/&text=MyBatis Generator"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://www.t1kcode.top/2023/02/18/2023-2-18-MyBatis%20Generator/&title=MyBatis Generator"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://www.t1kcode.top/2023/02/18/2023-2-18-MyBatis%20Generator/&is_video=false&description=MyBatis Generator"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=MyBatis Generator&body=Check out this article: https://www.t1kcode.top/2023/02/18/2023-2-18-MyBatis%20Generator/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://www.t1kcode.top/2023/02/18/2023-2-18-MyBatis%20Generator/&title=MyBatis Generator"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://www.t1kcode.top/2023/02/18/2023-2-18-MyBatis%20Generator/&title=MyBatis Generator"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://www.t1kcode.top/2023/02/18/2023-2-18-MyBatis%20Generator/&title=MyBatis Generator"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://www.t1kcode.top/2023/02/18/2023-2-18-MyBatis%20Generator/&title=MyBatis Generator"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://www.t1kcode.top/2023/02/18/2023-2-18-MyBatis%20Generator/&name=MyBatis Generator&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://www.t1kcode.top/2023/02/18/2023-2-18-MyBatis%20Generator/&t=MyBatis Generator"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li> -->
+
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <span id="menu" Popup="#nav-footer" class="icon"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</span>
+        <span id="toc" Popup="#toc-footer" class="icon"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</span>
+        <span id="share" Popup="#share-footer" class="icon"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</span>
+        <span id="top" Popup="" style="display:none" class="icon" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</span>
+    </div>
+
+  </div>
+</div>
+
+            <!-- 图片弹窗 -->
+            <div class="img-pup" style="display: none;">
+              <img>
+            </div>
+          
+
+          <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2019-2023
+    t1k
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/blog/">首页</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/">关于</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+          <!-- jquery -->
+ 
+  
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+
+<script src="/lib/jquery/jquery.pjax.js"></script>
+
+
+
+<!-- clipboard -->
+
+   
+    
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功!");
+      e.clearSelection();
+      setTimeout(()=>{
+        e.trigger.setAttribute('aria-label', "复制到粘贴板!");
+      },1500)
+    })
+  })
+  </script>
+
+
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+     
+      </div>   
+    </div>
+      
+    
+<script src="/js/main.js"></script>
+
+    </body>
+    </html>

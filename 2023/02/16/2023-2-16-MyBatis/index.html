@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang=zh-CN>
+  <head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="MyBatis MyBatis是一款非常流行的ORM框架，之前一直使用MyBatis-Plus，使用多了之后对MyBatis的一些常规操作不太熟悉，所以在此总结MyBatis的一些常用方法  MyBatis简介 MyBatis是一款优秀的开源持久层框架，支持自定义SQL查询、存储过程和高级映射。在MyBatis中，我们可以在XML中编写SQL语句，然后绑定到Java方法中，通过参数和结果集的自动映">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MyBatis">
+<meta property="og:url" content="https://www.t1kcode.top/2023/02/16/2023-2-16-MyBatis/index.html">
+<meta property="og:site_name" content="t1kcode">
+<meta property="og:description" content="MyBatis MyBatis是一款非常流行的ORM框架，之前一直使用MyBatis-Plus，使用多了之后对MyBatis的一些常规操作不太熟悉，所以在此总结MyBatis的一些常用方法  MyBatis简介 MyBatis是一款优秀的开源持久层框架，支持自定义SQL查询、存储过程和高级映射。在MyBatis中，我们可以在XML中编写SQL语句，然后绑定到Java方法中，通过参数和结果集的自动映">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-02-16T02:07:10.000Z">
+<meta property="article:modified_time" content="2023-03-25T15:50:48.529Z">
+<meta property="article:author" content="t1k">
+<meta property="article:tag" content="工具">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/Rolan.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    
+      <title>t1kcode·MyBatis</title>
+    
+    
+    <!-- styles -->
+
+    <!-- 默认CSS引入方法 -->
+    
+<link rel="stylesheet" href="/css/layout.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+
+
+  
+  <!-- L2Dwidget -->
+  
+<script src="/lib/live2d/L2Dwidget.min.js"></script>
+
+
+  <script>
+  // 猫
+  L2Dwidget.init({
+    model: {
+      jsonPath: "/lib/live2d/tororo/assets/tororo.model.json",
+    },
+    display: {
+      superSample: 2,
+      width: 60,
+      height: 80,
+      position: 'right',
+      hOffset: 0,
+      vOffset: 20,
+    },
+    mobile: {
+      show: true,
+      scale: 1,
+      motion: true,
+    },
+    react: {
+      opacityDefault: 1,
+      opacityOnHover: 1,
+    }
+  })
+  //百度搜索爬虫
+
+
+
+var _hmt = _hmt || [];
+(function () {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?7e9a19e5e700f1a2607b47c7bd6b35e8";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+
+  </script>
+  <meta name="baidu-site-verification" content="code-dIan6MAmy5" />
+  
+
+  <!-- styles -->
+
+
+ 
+  <link
+    rel="preload"
+    href="/lib/font-awesome/css/all.min.css"
+    as="style"
+    onload="this.onload=null;this.rel='stylesheet'"
+  />
+  <noscript
+    ><link
+      rel="stylesheet"
+      href="/lib/font-awesome/css/all.min.css"
+  /></noscript>
+
+
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+    <body class="max-width mx-auto">
+     <div class="home">
+        <!-- //actions_desktop 右上角导航栏 -->
+      <aside id="#aside" class="hubzy_left">
+        
+          <div class="hubzy_logo">
+	<a href="/">
+		
+		  
+					<div id="logo" style="background-image: url(/images/logo.jpg);"></div>
+					
+					  
+	  </a>
+	  <div id="title">
+		<a href="/">
+		  <h1>
+			t1k
+		  </h1>
+		</a>
+		
+			<!-- icon列表 -->
+			  <p class="iconlist">
+				<!-- # > index.find_me_on -->
+				
+				
+				
+				
+				  
+					<a class="icon" target="_blank" rel="noopener" href="https://github.com/t1kcode" aria-label="github">
+					  <i class="fab fa-github"></i></a>
+					  
+			     
+				  
+				
+				  
+					<a class="icon" target="_blank" rel="noopener" href="https://gitee.com/t1kcode">
+					  <i><svg class='diyIcon'  viewBox="0 0 1024 1024" ><path d="M512 1024C229.248 1024 0 794.752 0 512S229.248 0 512 0s512 229.248 512 512-229.248 512-512 512z m259.168-568.896h-290.752a25.28 25.28 0 0 0-25.28 25.28l-0.032 63.232c0 13.952 11.296 25.28 25.28 25.28h177.024a25.28 25.28 0 0 1 25.28 25.28v12.64a75.84 75.84 0 0 1-75.84 75.84h-240.224a25.28 25.28 0 0 1-25.28-25.28v-240.192a75.84 75.84 0 0 1 75.84-75.84h353.92a25.28 25.28 0 0 0 25.28-25.28l0.064-63.2a25.312 25.312 0 0 0-25.28-25.312H417.184a189.632 189.632 0 0 0-189.632 189.6v353.952c0 13.952 11.328 25.28 25.28 25.28h372.928a170.656 170.656 0 0 0 170.656-170.656v-145.376a25.28 25.28 0 0 0-25.28-25.28z"></path></svg></i>
+					</a>
+				  
+			  
+				  
+				
+			  </p>
+			
+	  </div>
+</div>
+<!-- 搜索栏 -->
+<div id="search">
+	<input class="search-input" type="text" placeholder="search">
+	<span id="search-icon" class="fa fa-bars" title="展开目录"></span>
+</div>
+
+<!-- 侧边目录栏 -->
+<div id="tree">
+	
+
+	
+					<ul>
+						<li class="file">
+							<a href="/2019/12/07/2019-12-07-个人博客搭建流程及一些问题/">
+								<i class="fa fa-file"></i>
+								2019-12-07-个人博客搭建流程及一些问题
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/2021/03/08/2021-03-12-单链表/">
+								<i class="fa fa-file"></i>
+								2021-03-12-单链表
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/2021/03/05/2021-03-13-顺序表/">
+								<i class="fa fa-file"></i>
+								2021-03-13-顺序表
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/2021/03/14/2021-03-14-C++那些事/">
+								<i class="fa fa-file"></i>
+								2021-03-14-C++那些事
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/2021/03/23/2021-03-23-循环链表/">
+								<i class="fa fa-file"></i>
+								2021-03-23-循环链表
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/2021/03/28/2021-03-28-双向循环链表/">
+								<i class="fa fa-file"></i>
+								2021-03-28-双向循环链表
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/2021/04/01/2021-04-01-栈/">
+								<i class="fa fa-file"></i>
+								2021-04-01-栈
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/2021/04/10/2021-04-010-基数排序/">
+								<i class="fa fa-file"></i>
+								2021-04-010-基数排序
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/2021/04/02/2021-04-02-栈的应用/">
+								<i class="fa fa-file"></i>
+								2021-04-02-栈的应用
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/2021/04/03/2021-04-03-队列/">
+								<i class="fa fa-file"></i>
+								2021-04-03-队列
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/2021/05/01/2021-05-01-树/">
+								<i class="fa fa-file"></i>
+								2021-05-01-树
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/2021/04/22/2021-4-22-查找/">
+								<i class="fa fa-file"></i>
+								2021-4-22-查找
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/2022/10/01/2022-10-01-JAVA基础/">
+								<i class="fa fa-file"></i>
+								2022-10-01-JAVA基础
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/2022/12/03/2022-12-03-电脑商城项目/">
+								<i class="fa fa-file"></i>
+								2022-12-03-电脑商城项目
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file active">
+							<a href="/2023/02/16/2023-2-16-MyBatis/">
+								<i class="fa fa-file"></i>
+								2023-2-16-MyBatis
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/2023/02/18/2023-2-18-MyBatis Generator/">
+								<i class="fa fa-file"></i>
+								2023-2-18-MyBatis Generator
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/2023/02/27/2023-2-27-SpringSecurityJWT/">
+								<i class="fa fa-file"></i>
+								2023-2-27-SpringSecurityJWT
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/2023/03/11/2023-3-11-Mall整合SpringTask/">
+								<i class="fa fa-file"></i>
+								2023-3-11-Mall整合SpringTask
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/2023/03/11/2023-3-11-MongoDB/">
+								<i class="fa fa-file"></i>
+								2023-3-11-MongoDB
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/2023/03/14/2023-3-14-RabbitMQ_JAVA/">
+								<i class="fa fa-file"></i>
+								2023-3-14-RabbitMQ_JAVA
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/2023/03/15/2023-3-15-Mall整合RabbitMQ/">
+								<i class="fa fa-file"></i>
+								2023-3-15-Mall整合RabbitMQ
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/2023/03/17/2023-3-17-SpringBoot中使用AOP记录接口访问日志/">
+								<i class="fa fa-file"></i>
+								2023-3-17-SpringBoot中使用AOP记录接口访问日志
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/2023/03/02/2023-3-2-Spring Data Redis/">
+								<i class="fa fa-file"></i>
+								2023-3-2-Spring Data Redis
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/2023/03/20/2023-3-20-Mall商城/">
+								<i class="fa fa-file"></i>
+								2023-3-20-Mall商城
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/2023/03/23/2023-3-23-Mall整合Elasticsearch/">
+								<i class="fa fa-file"></i>
+								2023-3-23-Mall整合Elasticsearch
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/2023/03/02/2023-3-3-Mall-SpringSecurity-JWT/">
+								<i class="fa fa-file"></i>
+								2023-3-3-Mall-SpringSecurity-JWT
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/2023/03/03/2023-3-3-Swagger-UI/">
+								<i class="fa fa-file"></i>
+								2023-3-3-Swagger-UI
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/2023/03/05/2023-3-5-ElasticSearch/">
+								<i class="fa fa-file"></i>
+								2023-3-5-ElasticSearch
+							</a>
+						</li>
+					</ul>
+	
+</div>
+
+        
+      </aside>
+      <div id="header-post" class="hubzy_right">
+        
+          
+  <!-- <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a> -->
+  <!-- <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a> -->
+  <!-- <a id="top-icon-tablet" href="#" "Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"
+    style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a> -->
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        
+          <li><a href="/blog/">
+              首页
+            </a></li>
+          
+          <li><a href="/archives/">
+              归档
+            </a></li>
+          
+          <li><a href="/">
+              关于
+            </a></li>
+          
+      </ul>
+    </span>
+    <br />
+    <div id="toc">
+      
+    </div>
+    <br />
+    <span id="actions">
+      <ul>
+        <!--// 
+          <li><a class="icon" aria-label="上一篇 " href="/2023/02/18/2023-2-18-MyBatis%20Generator/"><i
+                class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();"
+                onmouseout="$('#i-prev').toggle();"></i></a></li>
+          
+            
+              <li><a class="icon" aria-label="下一篇 " href="/2022/12/03/2022-12-03-%E7%94%B5%E8%84%91%E5%95%86%E5%9F%8E%E9%A1%B9%E7%9B%AE/"><i
+                    class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();"
+                    onmouseout="$('#i-next').toggle();"></i></a></li>
+              // -->
+                <li><a class="icon" aria-label="返回顶部 " href="#"
+                    onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up"
+                      aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a>
+                </li>
+                <li><a class="icon" aria-label="分享文章 " href="#"><i class="fas fa-share-alt"
+                      aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();"
+                      onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">
+        上一篇
+      </span>
+      <span id="i-next" class="info" style="display:none;">
+        下一篇
+      </span>
+      <span id="i-top" class="info" style="display:none;">
+        返回顶部
+      </span>
+      <span id="i-share" class="info" style="display:none;">
+        分享文章
+      </span>
+    </span>
+    <br />
+    <div id="share" style="display: none">
+      <ul>
+  <li> 开发中. </li>
+  <!-- <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://www.t1kcode.top/2023/02/16/2023-2-16-MyBatis/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://www.t1kcode.top/2023/02/16/2023-2-16-MyBatis/&text=MyBatis"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://www.t1kcode.top/2023/02/16/2023-2-16-MyBatis/&title=MyBatis"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://www.t1kcode.top/2023/02/16/2023-2-16-MyBatis/&is_video=false&description=MyBatis"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=MyBatis&body=Check out this article: https://www.t1kcode.top/2023/02/16/2023-2-16-MyBatis/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://www.t1kcode.top/2023/02/16/2023-2-16-MyBatis/&title=MyBatis"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://www.t1kcode.top/2023/02/16/2023-2-16-MyBatis/&title=MyBatis"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://www.t1kcode.top/2023/02/16/2023-2-16-MyBatis/&title=MyBatis"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://www.t1kcode.top/2023/02/16/2023-2-16-MyBatis/&title=MyBatis"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://www.t1kcode.top/2023/02/16/2023-2-16-MyBatis/&name=MyBatis&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://www.t1kcode.top/2023/02/16/2023-2-16-MyBatis/&t=MyBatis"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li> -->
+
+</ul>
+
+    </div>
+
+  </span>
+
+        
+      </div>
+       
+      <div class="content  hubzy_center">
+        
+          <!-- //body 引入首页和md编译后的页面 -->
+          <!-- md 编译成 html 后的文件模板 -->
+
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="hubzy_center_title">
+    
+    <h1 class="posttitle" itemprop="name headline">
+        MyBatis
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">t1k</span>
+      </span>
+      <!-- 文章时间和首页时间 -->
+
+    <div class="postdate">
+      
+        <time datetime="2023-02-16T02:07:10.000Z" itemprop="datePublished">2023-02-16</time>
+        
+        <!-- (Updated: <time datetime="2023-03-25T15:50:48.529Z" itemprop="dateModified">2023-03-25</time>) -->
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content conterDiy"  id="article" itemprop="articleBody">
+    <em class="nubScript">
+        ·本篇:3.5k字 大约需要: 16分钟
+    </em>
+    <h1 id="MyBatis"><a href="#MyBatis" class="headerlink" title="MyBatis"></a>MyBatis</h1><blockquote>
+<p><strong>MyBatis是一款非常流行的ORM框架，之前一直使用MyBatis-Plus，使用多了之后对MyBatis的一些常规操作不太熟悉，所以在此总结MyBatis的一些常用方法</strong></p>
+</blockquote>
+<h2 id="MyBatis简介"><a href="#MyBatis简介" class="headerlink" title="MyBatis简介"></a>MyBatis简介</h2><blockquote>
+<p><strong>MyBatis是一款优秀的开源持久层框架，支持自定义SQL查询、存储过程和高级映射。在MyBatis中，我们可以在XML中编写SQL语句，然后绑定到Java方法中，通过参数和结果集的自动映射来实现复杂的查询逻辑。MyBatis消除了几乎所有JDBC操作和手动绑定参数操作。</strong></p>
+</blockquote>
+<h2 id="SpringBoot集成MyBatis"><a href="#SpringBoot集成MyBatis" class="headerlink" title="SpringBoot集成MyBatis"></a>SpringBoot集成MyBatis</h2><ul>
+<li><strong>在<code>pom.xml</code>中添加MyBatis提供的Spring Boot Starter</strong></li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--SpringBoot整合MyBatis--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.mybatis.spring.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.2.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>在<code>application.yml</code>中配置好编写SQL实现的<code>xml</code>文件路径，一般存放在<code>resoueces/mapper</code>文件夹下</strong></li>
+</ul>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">mybatis:</span></span><br><span class="line">  <span class="attr">mapper-locations:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">classpath:mapper/*xml</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>在代码中进行配置，通过<code>@MapperScan</code>配置Mapper接口路径，就可以开始使用了</strong></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@MapperScan(&quot;com.t1k.mall.mapper&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyBatisConfig</span> &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h2><blockquote>
+<p><strong>MyBatis的基本使用，即基本的增删查改操作</strong></p>
+</blockquote>
+<h3 id="表结构"><a href="#表结构" class="headerlink" title="表结构"></a>表结构</h3><blockquote>
+<p><strong>以mall项目中的ums_admin表为例</strong></p>
+</blockquote>
+<h3 id="实体类"><a href="#实体类" class="headerlink" title="实体类"></a>实体类</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@AllArgsConstructor</span></span><br><span class="line"><span class="meta">@NoArgsConstructor</span></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UmsAdmin</span> <span class="keyword">implements</span> <span class="title class_">Serializable</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">private</span> Long id;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String username;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String password;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ApiModelProperty(value = &quot;头像&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> String icon;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ApiModelProperty(value = &quot;邮箱&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> String email;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ApiModelProperty(value = &quot;昵称&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> String nickName;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ApiModelProperty(value = &quot;备注信息&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> String note;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ApiModelProperty(value = &quot;创建时间&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> Date createTime;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ApiModelProperty(value = &quot;最后登录时间&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> Date loginTime;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ApiModelProperty(value = &quot;帐号启用状态：0-&gt;禁用；1-&gt;启用&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> Integer status;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="select"><a href="#select" class="headerlink" title="select"></a>select</h3><ul>
+<li><strong>创建数据操作的接口<code>UmsAdminMapper</code>，并添加<code>根据id查询用户</code>的方法</strong></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 自定义UmsAdmin表查询</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Repository</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">UmsAdminMapper</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 根据id查询用户</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> id 用户id</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 用户对象</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    UmsAdmin <span class="title function_">selectByIdSimple</span><span class="params">(Long id)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>再创建<code>xml</code>文件<code>UmsAdminMapper.xml</code>，并添加查询方法的SQL实现</strong></li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">mapper</span> <span class="keyword">PUBLIC</span> <span class="string">&quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;</span></span></span><br><span class="line"><span class="meta">        <span class="string">&quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">namespace</span>=<span class="string">&quot;com.t1k.mall.mapper.UmsAdminMapper&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;selectByIdSimple&quot;</span> <span class="attr">resultType</span>=<span class="string">&quot;com.t1k.mall.entity.UmsAdmin&quot;</span>&gt;</span></span><br><span class="line">        select * from ums_admin where id=#&#123;id&#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>编写测试类，注入<code>Mapper</code>，调用<code>Mapper</code>方法进行测试</strong></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * UmsAdminMapper基本操作测试方法</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@SpringBootTest</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UmsAdminMapperTest</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 打印日志</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">Logger</span> <span class="variable">LOGGER</span> <span class="operator">=</span> LoggerFactory.getLogger(UmsAdminMapperTest.class);</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Resource</span></span><br><span class="line">    <span class="keyword">private</span> UmsAdminMapper umsAdminMapper;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">selectByIdSimple</span><span class="params">()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">UmsAdmin</span> <span class="variable">umsAdmin</span> <span class="operator">=</span> umsAdminMapper.selectByIdSimple(<span class="number">1L</span>);</span><br><span class="line">        LOGGER.info(<span class="string">&quot;selectByIdSimple result = &#123;&#125;&quot;</span>, umsAdmin);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>对于一些数据库表中以<code>下划线</code>分割的字段无法自动映射，可以通过对字段取别名的方式进行映射，也可以通过在<code>application.yml</code>中开启全局<code>下划线</code>自动转<code>驼峰</code>功能解决</strong></li>
+</ul>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">mybatis:</span></span><br><span class="line">  <span class="attr">configuration:</span></span><br><span class="line">    <span class="comment"># 下划线自动转驼峰</span></span><br><span class="line">    <span class="attr">map-underscore-to-camel-case:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="insert"><a href="#insert" class="headerlink" title="insert"></a>insert</h3><ul>
+<li><strong>编写<code>插入单个用户</code>的方法</strong></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 插入单个用户</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> umsAdmin 用户对象</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> 受影响的数据条数</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">insert</span><span class="params">(UmsAdmin umsAdmin)</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>在<code>xml</code>文件中编写对应SQL实现，如果需要返回插入后的自增<code>id</code>，需要使用<code>selectKey</code>标签进行配置</strong></li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">insert</span> <span class="attr">id</span>=<span class="string">&quot;insert&quot;</span>&gt;</span></span><br><span class="line">    insert into ums_admin(username, password, icon, email, nick_name, note, create_time, login_time)</span><br><span class="line">    values (#&#123;username&#125;, #&#123;password&#125;, #&#123;icon&#125;, #&#123;email&#125;, #&#123;nickName&#125;, #&#123;note&#125;, #&#123;createTime&#125;, #&#123;loginTime&#125;)</span><br><span class="line">    # 插入后返回自增的id</span><br><span class="line">    <span class="tag">&lt;<span class="name">selectKey</span> <span class="attr">keyColumn</span>=<span class="string">&quot;id&quot;</span> <span class="attr">resultType</span>=<span class="string">&quot;long&quot;</span> <span class="attr">keyProperty</span>=<span class="string">&quot;id&quot;</span> <span class="attr">order</span>=<span class="string">&quot;AFTER&quot;</span>&gt;</span></span><br><span class="line">        SELECT LAST_INSERT_ID()</span><br><span class="line">    <span class="tag">&lt;/<span class="name">selectKey</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">insert</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>编写测试方法进行测试</strong></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">insert</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">UmsAdmin</span> <span class="variable">umsAdmin</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">UmsAdmin</span>()&#123;&#123;</span><br><span class="line">        setUsername(<span class="string">&quot;t1k&quot;</span>);</span><br><span class="line">        setPassword(<span class="string">&quot;123&quot;</span>);</span><br><span class="line">    &#125;&#125;;</span><br><span class="line">    <span class="type">int</span> <span class="variable">result</span> <span class="operator">=</span> umsAdminMapper.insert(umsAdmin);</span><br><span class="line">    LOGGER.info(<span class="string">&quot;insert id = &#123;&#125; result = &#123;&#125;&quot;</span>, umsAdmin.getId(), result);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="update"><a href="#update" class="headerlink" title="update"></a>update</h3><ul>
+<li><strong>编写<code>根据id修改用户信息</code>的方法</strong></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 根据id修改用户信息</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> umsAdmin 用户对象</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> 受影响的数据条数</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">updateById</span><span class="params">(UmsAdmin umsAdmin)</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>在<code>xml</code>文件中编写对应SQL实现</strong></li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">update</span> <span class="attr">id</span>=<span class="string">&quot;updateById&quot;</span>&gt;</span></span><br><span class="line">    update</span><br><span class="line">    	ums_admin</span><br><span class="line">    set</span><br><span class="line">        username = #&#123;username&#125;,</span><br><span class="line">        password = #&#123;password&#125;,</span><br><span class="line">        icon = #&#123;icon&#125;,</span><br><span class="line">        email = #&#123;email&#125;,</span><br><span class="line">        nick_name = #&#123;nickName&#125;,</span><br><span class="line">        note = #&#123;note&#125;,</span><br><span class="line">        create_time = #&#123;createTime&#125;,</span><br><span class="line">        login_time = #&#123;loginTime&#125;</span><br><span class="line">    where </span><br><span class="line">    	id = #&#123;id&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">update</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="delete"><a href="#delete" class="headerlink" title="delete"></a>delete</h3><ul>
+<li><strong>编写<code>根据id删除用户</code>的方法</strong></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 根据id删除用户</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> id 用户id</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> 受影响的数据条数</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">deleteById</span><span class="params">(Long id)</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>在<code>xml</code>文件中编写对应SQL实现</strong></li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">delete</span> <span class="attr">id</span>=<span class="string">&quot;deleteById&quot;</span>&gt;</span></span><br><span class="line">    delete from ums_admin where id = #&#123;id&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">delete</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="动态SQL"><a href="#动态SQL" class="headerlink" title="动态SQL"></a>动态SQL</h2><h3 id="if"><a href="#if" class="headerlink" title="if"></a>if</h3><ul>
+<li><strong><code>if</code>标签可以实现逻辑判断，以<code>根据用户名和邮箱模糊查询用户</code>为例</strong></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 根据用户名和邮箱模糊查询用户</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> username 用户名</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> email 邮箱</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> 符合条件的用户</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">List&lt;UmsAdmin&gt; <span class="title function_">selectByUsernameAndEmailLike</span><span class="params">(<span class="meta">@Param(&quot;username&quot;)</span> String username, <span class="meta">@Param(&quot;email&quot;)</span> String email)</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>在<code>xml</code>文件中编写对应SQL实现</strong></li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;selectByUsernameAndEmailLike&quot;</span> <span class="attr">resultType</span>=<span class="string">&quot;com.t1k.mall.entity.UmsAdmin&quot;</span>&gt;</span></span><br><span class="line">    # 这里 where 1=1 的作用是防止sql拼接出错</span><br><span class="line">    select * from ums_admin where 1=1</span><br><span class="line">    <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">&quot;username != null and username != &#x27;&#x27;&quot;</span>&gt;</span></span><br><span class="line">        # concat()函数用于将两个字符串拼接起来，形成一个单一的字符串</span><br><span class="line">        # 下面的作用就是 %username%</span><br><span class="line">        # 注释中不能再使用引用变量</span><br><span class="line">        and username like concat(&#x27;%&#x27;, #&#123;username&#125;, &#x27;%&#x27;)</span><br><span class="line">    <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">&quot;email != null and email != &#x27;&#x27;&quot;</span>&gt;</span></span><br><span class="line">        and email like concat(&#x27;%&#x27;, #&#123;email&#125;, &#x27;%&#x27;)</span><br><span class="line">    <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="choose"><a href="#choose" class="headerlink" title="choose"></a>choose</h3><ul>
+<li><strong><code>choose</code>标签也可以实现逻辑判断，在<code>if</code>标签的例子中，如果用户名和邮箱为空会查询出所有用户，如果想不查询出所有用户，可以使用<code>choose</code></strong></li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--上面的查询当username和email为空时会查询出所有的用户，</span></span><br><span class="line"><span class="comment">    当不想查询出所有用户时，可以使用choose标签，</span></span><br><span class="line"><span class="comment">    choose标签能实现这样的功能，我认为是&lt;otherwise&gt;标签那的 and 1=2--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;selectByUsernameAndEmailLike2&quot;</span> <span class="attr">resultType</span>=<span class="string">&quot;com.t1k.mall.entity.UmsAdmin&quot;</span>&gt;</span></span><br><span class="line">    select * from ums_admin where 1=1</span><br><span class="line">    <span class="tag">&lt;<span class="name">choose</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">when</span> <span class="attr">test</span>=<span class="string">&quot;username != null and username != &#x27;&#x27;&quot;</span>&gt;</span></span><br><span class="line">            and username like concat(&#x27;%&#x27;, #&#123;username&#125;, &#x27;%&#x27;)</span><br><span class="line">        <span class="tag">&lt;/<span class="name">when</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">when</span> <span class="attr">test</span>=<span class="string">&quot;email != null and email != &#x27;&#x27;&quot;</span>&gt;</span></span><br><span class="line">            and email like concat(&#x27;%&#x27;, #&#123;email&#125;, &#x27;%&#x27;)</span><br><span class="line">        <span class="tag">&lt;/<span class="name">when</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">otherwise</span>&gt;</span></span><br><span class="line">            and 1=2</span><br><span class="line">        <span class="tag">&lt;/<span class="name">otherwise</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">choose</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="where"><a href="#where" class="headerlink" title="where"></a>where</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--使用where标签可以避免向前面那样添加where 1=1，当where标签中没有内容时会去除多余的and和where--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;selectByUsernameAndEmailLike3&quot;</span> <span class="attr">resultType</span>=<span class="string">&quot;com.t1k.mall.entity.UmsAdmin&quot;</span>&gt;</span></span><br><span class="line">    select * from ums_admin</span><br><span class="line">    <span class="tag">&lt;<span class="name">where</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">&quot;username!=null and username!=&#x27;&#x27;&quot;</span>&gt;</span></span><br><span class="line">            and username like concat(&#x27;%&#x27;,#&#123;username&#125;,&#x27;%&#x27;)</span><br><span class="line">        <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">&quot;email!=null and email!=&#x27;&#x27;&quot;</span>&gt;</span></span><br><span class="line">            and email like concat(&#x27;%&#x27;,#&#123;email&#125;,&#x27;%&#x27;)</span><br><span class="line">        <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">where</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="set"><a href="#set" class="headerlink" title="set"></a>set</h3><ul>
+<li><strong>当拼接更新字段的语句时，也会面临如前面一样的问题，所以可以使用<code>set</code>标签来解决，编写<code>根据id选择性修改用户信息</code>的方法</strong></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 根据用户id选择性更新用户信息</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> umsAdmin 用户对象</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> 受影响的数据条数</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">updateByIdSelective</span><span class="params">(UmsAdmin umsAdmin)</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong><code>xml</code>中对应的SQL实现，使用<code>set</code>标签，既避免了出现多余的<code>set</code>关键字问题，也会将多余的逗号去除</strong></li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--使用&lt;set&gt;标签可以避免多出set字段这样的情况--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">update</span> <span class="attr">id</span>=<span class="string">&quot;updateByIdSelective&quot;</span>&gt;</span></span><br><span class="line">    update ums_admin</span><br><span class="line">    <span class="tag">&lt;<span class="name">set</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">&quot;username!=null and username!=&#x27;&#x27;&quot;</span>&gt;</span></span><br><span class="line">            username = #&#123;username&#125;,</span><br><span class="line">        <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">&quot;password!=null and password!=&#x27;&#x27;&quot;</span>&gt;</span></span><br><span class="line">            password = #&#123;password&#125;,</span><br><span class="line">        <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">&quot;icon!=null and icon!=&#x27;&#x27;&quot;</span>&gt;</span></span><br><span class="line">            icon = #&#123;icon&#125;,</span><br><span class="line">        <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">&quot;email!=null and email!=&#x27;&#x27;&quot;</span>&gt;</span></span><br><span class="line">            email = #&#123;email&#125;,</span><br><span class="line">        <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">&quot;nickName!=null and nickName!=&#x27;&#x27;&quot;</span>&gt;</span></span><br><span class="line">            nick_name = #&#123;nickName&#125;,</span><br><span class="line">        <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">&quot;note!=null and note!=&#x27;&#x27;&quot;</span>&gt;</span></span><br><span class="line">            note = #&#123;note&#125;,</span><br><span class="line">        <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">&quot;createTime!=null&quot;</span>&gt;</span></span><br><span class="line">            create_time = #&#123;createTime&#125;,</span><br><span class="line">        <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">&quot;loginTime!=null&quot;</span>&gt;</span></span><br><span class="line">            login_time = #&#123;loginTime&#125;,</span><br><span class="line">        <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">set</span>&gt;</span></span><br><span class="line">    where id = #&#123;id&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">update</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="foreach"><a href="#foreach" class="headerlink" title="foreach"></a>foreach</h3><ul>
+<li><strong>通过<code>foreach</code>可以实现一些循环拼接SQL的逻辑，如编写一个<code>批量插入用户</code>的方法</strong></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 批量插入用户</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> umsAdminList 要插入的用户列表</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> 受影响的数据条数</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">insertBatch</span><span class="params">(<span class="meta">@Param(&quot;entityList&quot;)</span> List&lt;UmsAdmin&gt; umsAdminList)</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong><code>xml</code>文件中对应的SQL实现，在<code>foreach</code>标签中的内容会根据传入的集合参数进行循环拼接</strong></li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">insert</span> <span class="attr">id</span>=<span class="string">&quot;insertBatch&quot;</span>&gt;</span></span><br><span class="line">    insert into</span><br><span class="line">    ums_admin(username, password, icon, email, nick_name, note, create_time, login_time)</span><br><span class="line">    values</span><br><span class="line">    <span class="tag">&lt;<span class="name">foreach</span> <span class="attr">collection</span>=<span class="string">&quot;entityList&quot;</span> <span class="attr">separator</span>=<span class="string">&quot;,&quot;</span> <span class="attr">item</span>=<span class="string">&quot;item&quot;</span>&gt;</span></span><br><span class="line">        (#&#123;item.username&#125;, #&#123;item.password&#125;, #&#123;item.icon&#125;, #&#123;item.email&#125;,</span><br><span class="line">        #&#123;item.nickName&#125;, #&#123;item.note&#125;, #&#123;item.createTime&#125;, #&#123;item.loginTime&#125;)</span><br><span class="line">    <span class="tag">&lt;/<span class="name">foreach</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">insert</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>在编写一个<code>根据用户id批量查询</code>的方法</strong></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 根据用户id批量查询</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> ids 用户id列表</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> 查询到的用户列表</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">List&lt;UmsAdmin&gt; <span class="title function_">selectByIds</span><span class="params">(<span class="meta">@Param(&quot;ids&quot;)</span> List&lt;Long&gt; ids)</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong><code>xml</code>文件中对应的SQL实现，可以使用<code>open</code>、<code>close</code>属性指定拼接语句的前后缀</strong></li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;selectByIds&quot;</span> <span class="attr">resultType</span>=<span class="string">&quot;com.t1k.mall.entity.UmsAdmin&quot;</span>&gt;</span></span><br><span class="line">    select * from ums_admin where id in</span><br><span class="line">    <span class="tag">&lt;<span class="name">foreach</span> <span class="attr">collection</span>=<span class="string">&quot;ids&quot;</span> <span class="attr">item</span>=<span class="string">&quot;item&quot;</span> <span class="attr">open</span>=<span class="string">&quot;(&quot;</span> <span class="attr">close</span>=<span class="string">&quot;)&quot;</span> <span class="attr">separator</span>=<span class="string">&quot;,&quot;</span>&gt;</span></span><br><span class="line">        #&#123;item&#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">foreach</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="高级查询"><a href="#高级查询" class="headerlink" title="高级查询"></a>高级查询</h2><h3 id="一对一查询"><a href="#一对一查询" class="headerlink" title="一对一查询"></a>一对一查询</h3><ul>
+<li><strong>在进行SQL查询时，往往会有<code>一对一</code>的情况，比如mall项目中资源分类<code>ums_resource_category</code>和资源<code>ums_resource</code>两张表，资源和资源分类就是一对一的关系，在进行如此类的查询时，一般会编写一个拓展类来继承实体类，实体类放在<code>entity</code>包下，拓展类放在<code>domain</code>包下，如下</strong></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * UmsResource拓展类</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@EqualsAndHashCode(callSuper = true)</span></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UmsResourceExt</span> <span class="keyword">extends</span> <span class="title class_">UmsResource</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">private</span> UmsResourceCategory category;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>编写一个<code>根据资源id获取资源及资源分类信息</code>的方法</strong></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 自定义UmsResource表查询</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Repository</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">UmsResourceMapper</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 根据资源表id获取资源及资源分类信息</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> id 资源表id</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 资源及分类信息</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    UmsResourceExt <span class="title function_">selectResourceWithCategory</span><span class="params">(Long id)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong><code>xml</code>文件中对应SQL实现，可以通过给<code>ums_resource_category</code>表中字段取以<code>category.xxx</code>的别名来进行自动映射</strong></li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;selectResourceWithCategory&quot;</span> <span class="attr">resultType</span>=<span class="string">&quot;com.t1k.mall.domain.UmsResourceExt&quot;</span>&gt;</span></span><br><span class="line">    select</span><br><span class="line">        ur.id,</span><br><span class="line">        ur.create_time  as createTime,</span><br><span class="line">        ur.name,</span><br><span class="line">        ur.url,</span><br><span class="line">        ur.description,</span><br><span class="line">        ur.category_id  as categoryId,</span><br><span class="line">        urc.id          as &quot;category.id&quot;,</span><br><span class="line">        urc.name        as &quot;category.name&quot;,</span><br><span class="line">        urc.sort        as &quot;category.sort&quot;,</span><br><span class="line">        urc.create_time as &quot;category.createTime&quot;</span><br><span class="line">    from</span><br><span class="line">        ums_resource ur</span><br><span class="line">    left join</span><br><span class="line">        ums_resource_category urc on ur.category_id = urc.id</span><br><span class="line">    where</span><br><span class="line">        ur.id = #&#123;id&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>还可以通过<code>ResultMap</code>+<code>association</code>标签来实现，当编写<code>xml</code>文件之前，一般会先给当前文件编写一个<code>BaseResultMap</code>，用于对当前表的字段和对象属性进行直接映射，例如在<code>UmsResourceMapper.xml</code>中这样实现</strong></li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">id</span>=<span class="string">&quot;BaseResultMap&quot;</span> <span class="attr">type</span>=<span class="string">&quot;com.t1k.mall.entity.UmsResource&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">id</span> <span class="attr">column</span>=<span class="string">&quot;id&quot;</span> <span class="attr">property</span>=<span class="string">&quot;id&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">&quot;create_time&quot;</span> <span class="attr">property</span>=<span class="string">&quot;createTime&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">&quot;name&quot;</span> <span class="attr">property</span>=<span class="string">&quot;name&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">&quot;url&quot;</span> <span class="attr">property</span>=<span class="string">&quot;url&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">&quot;description&quot;</span> <span class="attr">property</span>=<span class="string">&quot;description&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">&quot;category_id&quot;</span> <span class="attr">property</span>=<span class="string">&quot;categoryId&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>在<code>UmsResourceCategoryMapper.xml</code>中这样实现</strong></li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">id</span>=<span class="string">&quot;BaseResultMap&quot;</span> <span class="attr">type</span>=<span class="string">&quot;com.t1k.mall.entity.UmsResourceCategory&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">id</span> <span class="attr">column</span>=<span class="string">&quot;id&quot;</span> <span class="attr">property</span>=<span class="string">&quot;id&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">&quot;create_time&quot;</span> <span class="attr">property</span>=<span class="string">&quot;createTime&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">&quot;name&quot;</span> <span class="attr">property</span>=<span class="string">&quot;name&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">&quot;sort&quot;</span> <span class="attr">property</span>=<span class="string">&quot;sort&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>然后可以实现一对一<code>ResultMap</code>，可以使用<code>association</code>标签进行一对一管理，配置<code>columnPrefix</code>属性将匹配到的字段直接映射到关联对象中去</strong></li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">id</span>=<span class="string">&quot;ResourceWithCategoryMap&quot;</span> <span class="attr">type</span>=<span class="string">&quot;com.t1k.mall.domain.UmsResourceExt&quot;</span> <span class="attr">extends</span>=<span class="string">&quot;BaseResultMap&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">association</span> <span class="attr">property</span>=<span class="string">&quot;category&quot;</span> <span class="attr">columnPrefix</span>=<span class="string">&quot;category_&quot;</span> <span class="attr">resultMap</span>=<span class="string">&quot;com.t1k.mall.mapper.UmsResourceCategoryMapper.BaseResultMap&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>然后再编写<code>xml</code>文件中的对应SQL实现，直接使用上面的<code>ResultMap</code>，同时给<code>ums_resource_category</code>表中的字段指定了<code>category_</code>前缀以便于映射</strong></li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;selectResourceWithCategory&quot;</span> <span class="attr">resultMap</span>=<span class="string">&quot;ResourceWithCategoryMap&quot;</span>&gt;</span></span><br><span class="line">    select</span><br><span class="line">        ur.id,</span><br><span class="line">        ur.create_time,</span><br><span class="line">        ur.name,</span><br><span class="line">        ur.url,</span><br><span class="line">        ur.description,</span><br><span class="line">        ur.category_id,</span><br><span class="line">        urc.id          as category_id,</span><br><span class="line">        urc.name        as category_name,</span><br><span class="line">        urc.sort        as category_sort,</span><br><span class="line">        urc.create_time as category_create_time</span><br><span class="line">    from</span><br><span class="line">        ums_resource ur</span><br><span class="line">    left join</span><br><span class="line">        ums_resource_category urc</span><br><span class="line">    on</span><br><span class="line">        ur.category_id = urc.id</span><br><span class="line">    where</span><br><span class="line">        ur.id = #&#123;id&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="一对多映射"><a href="#一对多映射" class="headerlink" title="一对多映射"></a>一对多映射</h3><ul>
+<li><strong>如资源分类和资源就是一种一对多的情况</strong></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * UmsResourceCategory拓展类</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@EqualsAndHashCode(callSuper = true)</span></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UmsResourceCategoryExt</span> <span class="keyword">extends</span> <span class="title class_">UmsResourceCategory</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">private</span> List&lt;UmsResource&gt; resourceList;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>编写一个<code>根据分类id获取资源分类及对应资源的</code>方法</strong></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 自定义UmsResourceCategory表查询</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">UmsResourceCategoryMapper</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 根据分类id获取资源分类及对应资源</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> id 分类表id</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 分类及对应资源</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    UmsResourceCategory <span class="title function_">selectCategoryWithResource</span><span class="params">(Long id)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>在<code>xml</code>文件中配置<code>ResultMap</code>，并通过<code>collection</code>标签建立一对多关系</strong></li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">id</span>=<span class="string">&quot;selectCategoryWithResourceMap&quot;</span> <span class="attr">type</span>=<span class="string">&quot;com.t1k.mall.domain.UmsResourceCategoryExt&quot;</span> <span class="attr">extends</span>=<span class="string">&quot;BaseResultMap&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">collection</span> <span class="attr">property</span>=<span class="string">&quot;resourceList&quot;</span> <span class="attr">columnPrefix</span>=<span class="string">&quot;resource_&quot;</span> <span class="attr">resultMap</span>=<span class="string">&quot;com.t1k.mall.mapper.UmsResourceMapper.BaseResultMap&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>在<code>xml</code>文件中实现对应SQL，并使用上面的<code>ResultMap</code></strong></li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;selectCategoryWithResource&quot;</span> <span class="attr">resultMap</span>=<span class="string">&quot;selectCategoryWithResourceMap&quot;</span>&gt;</span></span><br><span class="line">    select</span><br><span class="line">        urc.id,</span><br><span class="line">        urc.create_time,</span><br><span class="line">        urc.name,</span><br><span class="line">        urc.sort,</span><br><span class="line">        ur.id            resource_id,</span><br><span class="line">        ur.create_time   resource_create_time,</span><br><span class="line">        ur.name          resource_name,</span><br><span class="line">        ur.url           resource_url,</span><br><span class="line">        ur.description   resource_description,</span><br><span class="line">        ur.category_id   resource_category_id</span><br><span class="line">    from</span><br><span class="line">        ums_resource_category urc</span><br><span class="line">    left join</span><br><span class="line">        ums_resource ur</span><br><span class="line">    on</span><br><span class="line">        urc.id = ur.category_id</span><br><span class="line">    where</span><br><span class="line">        urc.id = #&#123;id&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="分页插件"><a href="#分页插件" class="headerlink" title="分页插件"></a>分页插件</h3><ul>
+<li><strong>在实现查询逻辑时，往往会遇到分页查询的请求，这里使用开源的<code>PageHelper</code>插件，首先在<code>pom.xml</code>中添加它的<code>starter</code></strong></li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--MyBatis分页插件--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.github.pagehelper<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>pagehelper-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.4.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>然后在查询方法之前使用它的<code>startPage</code>方法传入分页参数即可，分页后得到的数据可以在<code>PageInfo</code>中获取到</strong></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * UmsResource的Service接口实现类</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UmsResourceServiceImpl</span> <span class="keyword">implements</span> <span class="title class_">UmsResourceService</span></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Resource</span></span><br><span class="line">    <span class="keyword">private</span> UmsResourceMapper umsResourceMapper;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> PageInfo&lt;UmsResource&gt; <span class="title function_">page</span><span class="params">(Integer pageNum, Integer pageSize, Long categoryId)</span> &#123;</span><br><span class="line">        PageHelper.startPage(pageNum, pageSize);</span><br><span class="line">        List&lt;UmsResource&gt; resourceList = umsResourceMapper.selectListByCategoryId(categoryId);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">PageInfo</span>&lt;&gt;(resourceList);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong><code>xml</code>中SQL实现</strong></li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;selectListByCategoryId&quot;</span> <span class="attr">resultMap</span>=<span class="string">&quot;BaseResultMap&quot;</span>&gt;</span></span><br><span class="line">    select * from ums_resource where category_id = #&#123;categoryId&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+  </div>
+</article>
+
+
+
+
+          
+          <!-- //actions_mobile 移动端导航栏 -->
+            <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" class="Popup" style="display: none">
+      <ul>
+         
+          <li><a href="/blog/">首页</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/">关于</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer"  class="Popup" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#MyBatis"><span class="toc-number">1.</span> <span class="toc-text">MyBatis</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#MyBatis%E7%AE%80%E4%BB%8B"><span class="toc-number">1.1.</span> <span class="toc-text">MyBatis简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SpringBoot%E9%9B%86%E6%88%90MyBatis"><span class="toc-number">1.2.</span> <span class="toc-text">SpringBoot集成MyBatis</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="toc-number">1.3.</span> <span class="toc-text">基本使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%A8%E7%BB%93%E6%9E%84"><span class="toc-number">1.3.1.</span> <span class="toc-text">表结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E4%BD%93%E7%B1%BB"><span class="toc-number">1.3.2.</span> <span class="toc-text">实体类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#select"><span class="toc-number">1.3.3.</span> <span class="toc-text">select</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#insert"><span class="toc-number">1.3.4.</span> <span class="toc-text">insert</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#update"><span class="toc-number">1.3.5.</span> <span class="toc-text">update</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#delete"><span class="toc-number">1.3.6.</span> <span class="toc-text">delete</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%A8%E6%80%81SQL"><span class="toc-number">1.4.</span> <span class="toc-text">动态SQL</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#if"><span class="toc-number">1.4.1.</span> <span class="toc-text">if</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#choose"><span class="toc-number">1.4.2.</span> <span class="toc-text">choose</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#where"><span class="toc-number">1.4.3.</span> <span class="toc-text">where</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#set"><span class="toc-number">1.4.4.</span> <span class="toc-text">set</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#foreach"><span class="toc-number">1.4.5.</span> <span class="toc-text">foreach</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%AB%98%E7%BA%A7%E6%9F%A5%E8%AF%A2"><span class="toc-number">1.5.</span> <span class="toc-text">高级查询</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E5%AF%B9%E4%B8%80%E6%9F%A5%E8%AF%A2"><span class="toc-number">1.5.1.</span> <span class="toc-text">一对一查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E5%AF%B9%E5%A4%9A%E6%98%A0%E5%B0%84"><span class="toc-number">1.5.2.</span> <span class="toc-text">一对多映射</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E9%A1%B5%E6%8F%92%E4%BB%B6"><span class="toc-number">1.5.3.</span> <span class="toc-text">分页插件</span></a></li></ol></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer"  class="Popup" style="display: none">
+      <ul>
+  <li> 开发中. </li>
+  <!-- <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://www.t1kcode.top/2023/02/16/2023-2-16-MyBatis/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://www.t1kcode.top/2023/02/16/2023-2-16-MyBatis/&text=MyBatis"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://www.t1kcode.top/2023/02/16/2023-2-16-MyBatis/&title=MyBatis"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://www.t1kcode.top/2023/02/16/2023-2-16-MyBatis/&is_video=false&description=MyBatis"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=MyBatis&body=Check out this article: https://www.t1kcode.top/2023/02/16/2023-2-16-MyBatis/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://www.t1kcode.top/2023/02/16/2023-2-16-MyBatis/&title=MyBatis"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://www.t1kcode.top/2023/02/16/2023-2-16-MyBatis/&title=MyBatis"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://www.t1kcode.top/2023/02/16/2023-2-16-MyBatis/&title=MyBatis"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://www.t1kcode.top/2023/02/16/2023-2-16-MyBatis/&title=MyBatis"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://www.t1kcode.top/2023/02/16/2023-2-16-MyBatis/&name=MyBatis&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://www.t1kcode.top/2023/02/16/2023-2-16-MyBatis/&t=MyBatis"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li> -->
+
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <span id="menu" Popup="#nav-footer" class="icon"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</span>
+        <span id="toc" Popup="#toc-footer" class="icon"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</span>
+        <span id="share" Popup="#share-footer" class="icon"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</span>
+        <span id="top" Popup="" style="display:none" class="icon" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</span>
+    </div>
+
+  </div>
+</div>
+
+            <!-- 图片弹窗 -->
+            <div class="img-pup" style="display: none;">
+              <img>
+            </div>
+          
+
+          <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2019-2023
+    t1k
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/blog/">首页</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/">关于</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+          <!-- jquery -->
+ 
+  
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+
+<script src="/lib/jquery/jquery.pjax.js"></script>
+
+
+
+<!-- clipboard -->
+
+   
+    
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功!");
+      e.clearSelection();
+      setTimeout(()=>{
+        e.trigger.setAttribute('aria-label', "复制到粘贴板!");
+      },1500)
+    })
+  })
+  </script>
+
+
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+     
+      </div>   
+    </div>
+      
+    
+<script src="/js/main.js"></script>
+
+    </body>
+    </html>
