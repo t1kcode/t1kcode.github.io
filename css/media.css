@@ -1,0 +1,34 @@
+@media screen and (max-width: 540px) {
+  .hubzy_left {
+    display: none;
+  }
+  .hubzy_center .hubzy_center_title {
+    position: inherit;
+  }
+  .hubzy_center .hubzy_center_title #nav {
+    margin-top: 6px;
+  }
+  .hubzy_center .post .content {
+    padding: 14px 0px;
+  }
+  .hubzy_right {
+    display: none;
+  }
+  .image-wrap {
+    flex-direction: row;
+    margin-bottom: 2rem;
+  }
+  .image-block {
+    flex: 1 0 35%;
+    margin-right: 2rem;
+  }
+  p {
+    flex: 1 0 65%;
+  }
+  .max-width {
+    max-width: 1920px;
+  }
+}
+.highlight .btn-copy {
+  right: 1rem;
+}

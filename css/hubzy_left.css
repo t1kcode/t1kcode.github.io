@@ -1,0 +1,116 @@
+.hubzy_left {
+  width: 320px;
+  height: 100vh;
+  overflow: auto;
+  position: sticky;
+  top: 0px;
+  overflow: overlay;
+}
+.hubzy_left .hubzy_logo {
+  height: 80px;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  position: sticky;
+  top: 0px;
+  background-color: var(--color-background-op);
+  backdrop-filter: blur(15px);
+  z-index: 99;
+}
+.hubzy_left #logo {
+  width: 42px;
+  height: 42px;
+  background-size: 42px;
+  border-radius: 2px;
+  margin: 0px 12px 0 20px;
+}
+.hubzy_left #title {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 14px 0;
+  box-sizing: border-box;
+}
+.hubzy_left #title a {
+  text-decoration: none;
+  display: inline;
+  height: fit-content;
+  width: 100%;
+  line-height: normal;
+}
+.hubzy_left #title h1 {
+  margin: 0;
+  color: var(--color-text);
+}
+.hubzy_left #search {
+  position: relative;
+  width: 94%;
+  height: 46px;
+  margin-bottom: 10px;
+}
+.hubzy_left #search input {
+  width: 80%;
+  height: 100%;
+  margin-left: 20px;
+  border: 0;
+  padding: 0;
+  left: 0;
+  top: 0;
+  font-size: 16px;
+  background-color: var(--color-background-code);
+  text-indent: 20px;
+  outline: none;
+  color: var(--color-text);
+  position: absolute;
+  border-radius: 0;
+}
+.hubzy_left #search #search-icon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: var(--color-accent-3);
+  font-size: 20px;
+  width: 46px;
+  height: 100%;
+  background-color: var(--color-background-code);
+  text-align: center;
+  line-height: 2.5;
+  text-decoration: none;
+}
+.hubzy_left #search #search-icon:hover {
+  cursor: pointer;
+  color: var(--color-link);
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+}
+.hubzy_left #tree ul {
+  padding: 0px 5px 6px 20px;
+  margin: 0 6px;
+}
+.hubzy_left #tree ul li {
+  list-style: none;
+  line-height: 25px;
+}
+.hubzy_left #tree ul li a {
+  color: var(--color-accent-3);
+  font-size: 14px;
+  text-decoration: none;
+  display: block;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: flow-root;
+}
+.hubzy_left #tree ul li a:hover {
+  color: var(--color-link);
+  cursor: pointer;
+}
+.hubzy_left #tree ul .active a {
+  color: var(--color-link);
+}
+.hubzy_left #tree ul ul {
+  display: none;
+}

@@ -1,0 +1,203 @@
+.hubzy_center {
+  flex: 4;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 80vh;
+  overflow-wrap: break-word;
+  overflow-x: clip;
+  padding: 0 20px;
+}
+.hubzy_center .post .content {
+  padding: 14px 60px;
+}
+.hubzy_center .post .content .nubScript {
+  color: var(--color-meta);
+  font-size: 12px;
+}
+.hubzy_center .img-pup {
+  width: 100vw;
+  height: 100vh;
+  z-index: 99999999;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0,0,0,0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.hubzy_center .img-pup img {
+  display: block;
+  max-width: 90vw;
+  max-height: 90vh;
+  width: auto;
+  height: auto;
+}
+.hubzy_center .hubzy_center_title {
+  height: 80px;
+  display: flex;
+  padding: 14px 0px;
+  width: 100%;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  background-color: var(--color-background-op);
+  backdrop-filter: blur(15px);
+  z-index: 99;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+}
+.hubzy_center .hubzy_center_title a {
+  background: none;
+  color: inherit;
+  text-decoration: none;
+}
+.hubzy_center .hubzy_center_title #logo {
+  display: inline-block;
+  float: left;
+  margin-right: 20px;
+  width: $logo-width;
+  height: $logo-height;
+  border-radius: 5px;
+  background-size: $logo-width $logo-height;
+  background-repeat: no-repeat;
+}
+.hubzy_center .hubzy_center_title h1 {
+  color: var(--color-text);
+  margin: 0;
+  line-height: 28px;
+}
+.hubzy_center .hubzy_center_title .posttitle {
+  width: 100%;
+}
+.hubzy_center .hubzy_center_title .meta {
+  width: 100%;
+  margin: 0;
+}
+.hubzy_center .hubzy_center_title .nav_right {
+  display: flex;
+  flex-direction: column;
+}
+.hubzy_center .hubzy_center_title .nav_right ul {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  line-height: 15px;
+}
+.hubzy_center .hubzy_center_title .nav_right ul a {
+  display: block;
+  margin-right: 15px;
+  color: var(--color-text);
+}
+.hubzy_center .hubzy_center_title .nav_right ul a:hover {
+  color: var(--color-link);
+}
+.hubzy_center .hubzy_center_title .nav_right ul li {
+  display: inline-block;
+  margin-right: 15px;
+  border-color: var(--color-text);
+  border-right: 1px dotted;
+  vertical-align: middle;
+}
+.hubzy_center .hubzy_center_title .nav_right ul .icon {
+  display: none;
+}
+.hubzy_center .hubzy_center_title .nav_right ul li:last-child {
+  margin-right: 0;
+  border-right: 0;
+}
+.hubzy_center .hubzy_center_title .nav_right ul li:last-child a {
+  margin-right: 0;
+}
+.post-list {
+  padding: 0;
+}
+.post-list .post-item {
+  align-items: center;
+  margin-bottom: 1rem;
+  margin-left: 0;
+  list-style-type: none;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+.post-list .post-item .title {
+  position: relative;
+  width: 100%;
+}
+.post-list .post-item a {
+  display: block;
+}
+.post-list .post-item a span {
+  background-color: var(--color-background);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.post-list .post-item .slug::before {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  z-index: -1;
+  width: 100%;
+  border-bottom: 1px dashed var(--color-meta);
+  content: " ";
+  opacity: 0.35;
+}
+.post-list .post-item .meta {
+  z-index: 1;
+  display: block;
+  height: fit-content;
+  color: var(--color-meta);
+  font-size: 0.8rem;
+}
+.post-list .post-item time {
+  display: grid;
+  width: 5rem;
+  background-color: var(--color-background);
+  text-align: left;
+}
+.project-list {
+  padding: 0;
+  list-style: none;
+}
+.project-list .project-item {
+  margin-bottom: 6px;
+}
+.project-list .project-item p {
+  display: inline;
+}
+.post-year {
+  list-style-type: none;
+}
+.pagination {
+  display: inline-block;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  width: 100%;
+  text-align: center;
+}
+.pagination .page-number {
+  color: var(--color-text);
+  font-size: 0.8rem;
+}
+.pagination a {
+  padding: 4px 6px;
+  border-radius: 5px;
+  background-image: none;
+  color: var(--color-text);
+  text-decoration: none;
+}
+.pagination a:hover {
+  background-image: none;
+}
+.pagination a:hover:not(.active) {
+  color: var(--color-accent-2);
+}
+a {
+  cursor: pointer;
+}

@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang=zh-CN>
+  <head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="栈的应用——递归 斐波那契数列实现  斐波那契数列的特点就是：前面相邻两项之和，构成了后一项">
+<meta property="og:type" content="article">
+<meta property="og:title" content="栈的应用">
+<meta property="og:url" content="http://example.com/2021/04/02/2021-04-02-%E6%A0%88%E7%9A%84%E5%BA%94%E7%94%A8/index.html">
+<meta property="og:site_name" content="t1kcode">
+<meta property="og:description" content="栈的应用——递归 斐波那契数列实现  斐波那契数列的特点就是：前面相邻两项之和，构成了后一项">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-04-02T11:00:10.000Z">
+<meta property="article:modified_time" content="2021-04-30T07:58:53.834Z">
+<meta property="article:author" content="t1k">
+<meta property="article:tag" content="数据结构">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/Rolan.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    
+      <title>t1kcode·栈的应用</title>
+    
+    
+    <!-- styles -->
+
+    <!-- 默认CSS引入方法 -->
+    
+<link rel="stylesheet" href="/css/layout.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+
+
+  
+  <!-- L2Dwidget -->
+  
+<script src="/lib/live2d/L2Dwidget.min.js"></script>
+
+
+  <script>
+  // 猫
+  L2Dwidget.init({
+    model: {
+      jsonPath: "/lib/live2d/tororo/assets/tororo.model.json",
+    },
+    display: {
+      superSample: 2,
+      width: 60,
+      height: 80,
+      position: 'right',
+      hOffset: 0,
+      vOffset: 20,
+    },
+    mobile: {
+      show: true,
+      scale: 1,
+      motion: true,
+    },
+    react: {
+      opacityDefault: 1,
+      opacityOnHover: 1,
+    }
+  })
+  //百度搜索爬虫
+
+
+
+var _hmt = _hmt || [];
+(function () {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?7e9a19e5e700f1a2607b47c7bd6b35e8";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+
+  </script>
+  <meta name="baidu-site-verification" content="code-dIan6MAmy5" />
+  
+
+  <!-- styles -->
+
+
+ 
+  <link
+    rel="preload"
+    href="/lib/font-awesome/css/all.min.css"
+    as="style"
+    onload="this.onload=null;this.rel='stylesheet'"
+  />
+  <noscript
+    ><link
+      rel="stylesheet"
+      href="/lib/font-awesome/css/all.min.css"
+  /></noscript>
+
+
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+    <body class="max-width mx-auto">
+     <div class="home">
+        <!-- //actions_desktop 右上角导航栏 -->
+      <aside id="#aside" class="hubzy_left">
+        
+          <div class="hubzy_logo">
+	<a href="/">
+		
+		  
+					<div id="logo" style="background-image: url(/images/logo.jpg);"></div>
+					
+					  
+	  </a>
+	  <div id="title">
+		<a href="/">
+		  <h1>
+			t1kcode
+		  </h1>
+		</a>
+		
+			<!-- icon列表 -->
+			  <p class="iconlist">
+				<!-- # > index.find_me_on -->
+				
+				
+				
+				
+				  
+					<a class="icon" target="_blank" rel="noopener" href="https://github.com/t1kcode" aria-label="github">
+					  <i class="fab fa-github"></i></a>
+					  
+			     
+				  
+				
+				  
+					<a class="icon" target="_blank" rel="noopener" href="https://gitee.com/t1kcode">
+					  <i><svg class='diyIcon'  viewBox="0 0 1024 1024" ><path d="M512 1024C229.248 1024 0 794.752 0 512S229.248 0 512 0s512 229.248 512 512-229.248 512-512 512z m259.168-568.896h-290.752a25.28 25.28 0 0 0-25.28 25.28l-0.032 63.232c0 13.952 11.296 25.28 25.28 25.28h177.024a25.28 25.28 0 0 1 25.28 25.28v12.64a75.84 75.84 0 0 1-75.84 75.84h-240.224a25.28 25.28 0 0 1-25.28-25.28v-240.192a75.84 75.84 0 0 1 75.84-75.84h353.92a25.28 25.28 0 0 0 25.28-25.28l0.064-63.2a25.312 25.312 0 0 0-25.28-25.312H417.184a189.632 189.632 0 0 0-189.632 189.6v353.952c0 13.952 11.328 25.28 25.28 25.28h372.928a170.656 170.656 0 0 0 170.656-170.656v-145.376a25.28 25.28 0 0 0-25.28-25.28z"></path></svg></i>
+					</a>
+				  
+			  
+				  
+				
+			  </p>
+			
+	  </div>
+</div>
+<!-- 搜索栏 -->
+<div id="search">
+	<input class="search-input" type="text" placeholder="search">
+	<span id="search-icon" class="fa fa-bars" title="展开目录"></span>
+</div>
+
+<!-- 侧边目录栏 -->
+<div id="tree">
+	
+
+	
+					<ul>
+						<li class="file">
+							<a href="/2021/03/08/2021-03-12-单链表/">
+								<i class="fa fa-file"></i>
+								2021-03-12-单链表
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/2021/03/05/2021-03-13-顺序表/">
+								<i class="fa fa-file"></i>
+								2021-03-13-顺序表
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/2021/03/14/2021-03-14-C++那些事/">
+								<i class="fa fa-file"></i>
+								2021-03-14-C++那些事
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/2021/03/23/2021-03-23-循环链表/">
+								<i class="fa fa-file"></i>
+								2021-03-23-循环链表
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/2021/03/28/2021-03-28-双向循环链表/">
+								<i class="fa fa-file"></i>
+								2021-03-28-双向循环链表
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/2021/04/01/2021-04-01-栈/">
+								<i class="fa fa-file"></i>
+								2021-04-01-栈
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/2021/04/10/2021-04-010-基数排序/">
+								<i class="fa fa-file"></i>
+								2021-04-010-基数排序
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file active">
+							<a href="/2021/04/02/2021-04-02-栈的应用/">
+								<i class="fa fa-file"></i>
+								2021-04-02-栈的应用
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/2021/04/03/2021-04-03-队列/">
+								<i class="fa fa-file"></i>
+								2021-04-03-队列
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/2021/05/01/2021-05-01-树/">
+								<i class="fa fa-file"></i>
+								2021-05-01-树
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/2021/04/22/2021-4-22-查找/">
+								<i class="fa fa-file"></i>
+								2021-4-22-查找
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/2022/10/01/2022-10-01-JAVA基础/">
+								<i class="fa fa-file"></i>
+								2022-10-01-JAVA基础
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/2022/12/03/2022-12-03-电脑商城项目/">
+								<i class="fa fa-file"></i>
+								2022-12-03-电脑商城项目
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/2023/02/16/2023-02-16-Mall商城/">
+								<i class="fa fa-file"></i>
+								2023-02-16-Mall商城
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/2019/12/07/关于我搭建个人博客的流程及一些问题/">
+								<i class="fa fa-file"></i>
+								关于我搭建个人博客的流程及一些问题
+							</a>
+						</li>
+					</ul>
+	
+</div>
+
+        
+      </aside>
+      <div id="header-post" class="hubzy_right">
+        
+          
+  <!-- <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a> -->
+  <!-- <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a> -->
+  <!-- <a id="top-icon-tablet" href="#" "Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"
+    style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a> -->
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        
+          <li><a href="/">
+              首页
+            </a></li>
+          
+          <li><a href="/categories/%E9%A1%B9%E7%9B%AE/">
+              项目
+            </a></li>
+          
+          <li><a href="/archives/">
+              归档
+            </a></li>
+          
+          <li><a href="/about/">
+              关于
+            </a></li>
+          
+      </ul>
+    </span>
+    <br />
+    <div id="toc">
+      
+    </div>
+    <br />
+    <span id="actions">
+      <ul>
+        <!--// 
+          <li><a class="icon" aria-label="上一篇 " href="/2021/04/03/2021-04-03-%E9%98%9F%E5%88%97/"><i
+                class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();"
+                onmouseout="$('#i-prev').toggle();"></i></a></li>
+          
+            
+              <li><a class="icon" aria-label="下一篇 " href="/2021/04/01/2021-04-01-%E6%A0%88/"><i
+                    class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();"
+                    onmouseout="$('#i-next').toggle();"></i></a></li>
+              // -->
+                <li><a class="icon" aria-label="返回顶部 " href="#"
+                    onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up"
+                      aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a>
+                </li>
+                <li><a class="icon" aria-label="分享文章 " href="#"><i class="fas fa-share-alt"
+                      aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();"
+                      onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">
+        上一篇
+      </span>
+      <span id="i-next" class="info" style="display:none;">
+        下一篇
+      </span>
+      <span id="i-top" class="info" style="display:none;">
+        返回顶部
+      </span>
+      <span id="i-share" class="info" style="display:none;">
+        分享文章
+      </span>
+    </span>
+    <br />
+    <div id="share" style="display: none">
+      <ul>
+  <li> 开发中. </li>
+  <!-- <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2021/04/02/2021-04-02-%E6%A0%88%E7%9A%84%E5%BA%94%E7%94%A8/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2021/04/02/2021-04-02-%E6%A0%88%E7%9A%84%E5%BA%94%E7%94%A8/&text=栈的应用"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2021/04/02/2021-04-02-%E6%A0%88%E7%9A%84%E5%BA%94%E7%94%A8/&title=栈的应用"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2021/04/02/2021-04-02-%E6%A0%88%E7%9A%84%E5%BA%94%E7%94%A8/&is_video=false&description=栈的应用"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=栈的应用&body=Check out this article: http://example.com/2021/04/02/2021-04-02-%E6%A0%88%E7%9A%84%E5%BA%94%E7%94%A8/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2021/04/02/2021-04-02-%E6%A0%88%E7%9A%84%E5%BA%94%E7%94%A8/&title=栈的应用"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2021/04/02/2021-04-02-%E6%A0%88%E7%9A%84%E5%BA%94%E7%94%A8/&title=栈的应用"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2021/04/02/2021-04-02-%E6%A0%88%E7%9A%84%E5%BA%94%E7%94%A8/&title=栈的应用"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2021/04/02/2021-04-02-%E6%A0%88%E7%9A%84%E5%BA%94%E7%94%A8/&title=栈的应用"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2021/04/02/2021-04-02-%E6%A0%88%E7%9A%84%E5%BA%94%E7%94%A8/&name=栈的应用&description=&lt;h1 id=&#34;栈的应用——递归&#34;&gt;&lt;a href=&#34;#栈的应用——递归&#34; class=&#34;headerlink&#34; title=&#34;栈的应用——递归&#34;&gt;&lt;/a&gt;栈的应用——递归&lt;/h1&gt;&lt;hr&gt;
+&lt;h2 id=&#34;斐波那契数列实现&#34;&gt;&lt;a href=&#34;#斐波那契数列实现&#34; class=&#34;headerlink&#34; title=&#34;斐波那契数列实现&#34;&gt;&lt;/a&gt;斐波那契数列实现&lt;/h2&gt;&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;斐波那契数列的特点就是：前面相邻两项之和，构成了后一项&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2021/04/02/2021-04-02-%E6%A0%88%E7%9A%84%E5%BA%94%E7%94%A8/&t=栈的应用"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li> -->
+
+</ul>
+
+    </div>
+
+  </span>
+
+        
+      </div>
+       
+      <div class="content  hubzy_center">
+        
+          <!-- //body 引入首页和md编译后的页面 -->
+          <!-- md 编译成 html 后的文件模板 -->
+
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="hubzy_center_title">
+    
+    <h1 class="posttitle" itemprop="name headline">
+        栈的应用
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">t1k</span>
+      </span>
+      <!-- 文章时间和首页时间 -->
+
+    <div class="postdate">
+      
+        <time datetime="2021-04-02T11:00:10.000Z" itemprop="datePublished">2021-04-02</time>
+        
+        <!-- (Updated: <time datetime="2021-04-30T07:58:53.834Z" itemprop="dateModified">2021-04-30</time>) -->
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content conterDiy"  id="article" itemprop="articleBody">
+    <em class="nubScript">
+        ·本篇:1.1k字 大约需要: 4分钟
+    </em>
+    <h1 id="栈的应用——递归"><a href="#栈的应用——递归" class="headerlink" title="栈的应用——递归"></a>栈的应用——递归</h1><hr>
+<h2 id="斐波那契数列实现"><a href="#斐波那契数列实现" class="headerlink" title="斐波那契数列实现"></a>斐波那契数列实现</h2><blockquote>
+<ul>
+<li><strong>斐波那契数列的特点就是：前面相邻两项之和，构成了后一项</strong></li>
+</ul>
+<span id="more"></span>
+
+<ul>
+<li><p><strong>数学函数定义</strong></p>
+<p>  $$  F(n)&#x3D;\begin{cases} 0, &amp; \text{当$ n&#x3D;0 $} \\ 1, &amp; \text{当$ n&#x3D;1 $} \\ F(n-1)+	F(n-2), &amp; \text{当$ n&gt;1 $} \end{cases} $$</p>
+</li>
+<li><p><strong>假设需要打印出前40位的斐波那契数列数</strong></p>
+</li>
+</ul>
+</blockquote>
+<hr>
+<h2 id="代码如下"><a href="#代码如下" class="headerlink" title="代码如下"></a>代码如下</h2><blockquote>
+<p><strong>迭代方法</strong></p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> i, a[<span class="number">40</span>];</span><br><span class="line">    a[<span class="number">0</span>] = <span class="number">0</span>, a[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>, a[<span class="number">0</span>]);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>, a[<span class="number">1</span>]);</span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">2</span>; i &lt; <span class="number">40</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        a[i] = a[i - <span class="number">1</span>] + a[i <span class="number">-2</span>];</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>, a[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<blockquote>
+<p><strong>递归方法</strong></p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">Fbi</span><span class="params">(<span class="type">int</span> i)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(i &lt; <span class="number">2</span>)</span><br><span class="line">        <span class="keyword">return</span> i == <span class="number">0</span> ? <span class="number">0</span> : <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">return</span> Fbi(i - <span class="number">1</span>) + Fbi(i - <span class="number">2</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">40</span>; i++)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>, Fbi[i]);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="递归定义"><a href="#递归定义" class="headerlink" title="递归定义"></a>递归定义</h2><blockquote>
+<ul>
+<li><p><strong>把一个直接调用自己或通过一系列的调用语句间接地调用自己的函数，称做递归函数</strong></p>
+</li>
+<li><p><strong>每个递归定义必须至少有一个条件，满足时递归不再进行，即不再引用自身而是返回值退出</strong></p>
+</li>
+</ul>
+</blockquote>
+<hr>
+<h2 id="两种方法对比"><a href="#两种方法对比" class="headerlink" title="两种方法对比"></a>两种方法对比</h2><blockquote>
+<p><strong>迭代和递归的区别：</strong></p>
+<ul>
+<li><strong>迭代使用的是循环结构，递归使用的是选择结构</strong></li>
+<li><strong>递归能使程序的结构更清晰、更简洁、更容易让人理解，从而减少读懂代码的时间</strong></li>
+<li><strong>但是大量的递归调用会建立函数的副本，会耗费大量的时间和内存</strong></li>
+<li><strong>迭代则不需要反复调用函数和占用额外的内存</strong></li>
+</ul>
+</blockquote>
+<hr>
+<h2 id="栈和递归的关系"><a href="#栈和递归的关系" class="headerlink" title="栈和递归的关系"></a>栈和递归的关系</h2><blockquote>
+<ul>
+<li><strong>递归过程退回的顺序是它前行顺序的逆序，在退回过程中，可能要执行某些动作，包括恢复在前行过程存储起来的某些数据</strong></li>
+<li><strong>这种存储某些数据，并在后面又以存储的逆序恢复这些数据，以提供之后使用的需求，显然很符合栈这样的数据结构</strong></li>
+<li><strong>简单来说，就是在前行阶段，对于每一层递归，函数的局部变量、参数值以及返回地址都被压入栈中，在退回阶段，位于栈顶的局部变量、参数值和返回地址被弹出，用于返回调用层次中执行代码的其余部分，也就是恢复了调用的状态</strong></li>
+</ul>
+</blockquote>
+<hr>
+<h1 id="栈的应用——四则运算表达式求值"><a href="#栈的应用——四则运算表达式求值" class="headerlink" title="栈的应用——四则运算表达式求值"></a>栈的应用——四则运算表达式求值</h1><hr>
+<h2 id="后缀（逆波兰）表示法定义"><a href="#后缀（逆波兰）表示法定义" class="headerlink" title="后缀（逆波兰）表示法定义"></a>后缀（逆波兰）表示法定义</h2><blockquote>
+<ul>
+<li><p><strong>一种不需要括号的后缀表达法，我们也把它称为逆波兰表示</strong></p>
+</li>
+<li><p><strong>对于”9 + (3 - 1) ✖ 3 + 8 ➗ 2”，用后缀表示法就为”9 3 1 - 3 ✖ + 8 2 ➗ +”</strong></p>
+</li>
+<li><p><strong>所有的符号都是在要运算数字的后面出现</strong></p>
+</li>
+</ul>
+</blockquote>
+<hr>
+<h2 id="后缀表达式计算"><a href="#后缀表达式计算" class="headerlink" title="后缀表达式计算"></a>后缀表达式计算</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">Operations</span><span class="params">(SqStack *S)</span></span><br><span class="line">&#123;</span><br><span class="line">    SqStack *a = S;</span><br><span class="line">    <span class="type">int</span> temp;</span><br><span class="line">    <span class="type">char</span> ptr[<span class="number">20</span>] = &#123;<span class="string">&#x27;9&#x27;</span>, <span class="string">&#x27;3&#x27;</span>, <span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;-&#x27;</span>, <span class="string">&#x27;3&#x27;</span>, <span class="string">&#x27;*&#x27;</span>, <span class="string">&#x27;+&#x27;</span>, <span class="string">&#x27;8&#x27;</span>, <span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;/&#x27;</span>, <span class="string">&#x27;+&#x27;</span>&#125;;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; ptr[i] != <span class="string">&#x27;\0&#x27;</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(ptr[i] &lt;= <span class="string">&#x27;9&#x27;</span> &amp;&amp; ptr[i] &gt;= <span class="string">&#x27;0&#x27;</span>)</span><br><span class="line">            Push(a, (<span class="type">int</span>) ptr[i] - <span class="number">48</span>);</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(ptr[i] == <span class="string">&#x27;-&#x27;</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            temp = a-&gt;data[a-&gt;top - <span class="number">1</span>] - a-&gt;data[a-&gt;top];</span><br><span class="line">            a-&gt;data[--a-&gt;top] = temp;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(ptr[i] == <span class="string">&#x27;+&#x27;</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            temp = a-&gt;data[a-&gt;top - <span class="number">1</span>] + a-&gt;data[a-&gt;top];</span><br><span class="line">            a-&gt;data[--a-&gt;top] = temp;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(ptr[i] == <span class="string">&#x27;*&#x27;</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            temp = a-&gt;data[a-&gt;top - <span class="number">1</span>] * a-&gt;data[a-&gt;top];</span><br><span class="line">            a-&gt;data[--a-&gt;top] = temp;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(ptr[i] == <span class="string">&#x27;/&#x27;</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            temp = a-&gt;data[a-&gt;top - <span class="number">1</span>] / a-&gt;data[a-&gt;top];</span><br><span class="line">            a-&gt;data[--a-&gt;top] = temp;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> temp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>结果为19</strong></p>
+</blockquote>
+<hr>
+<h2 id="中缀表达式转后缀表达式"><a href="#中缀表达式转后缀表达式" class="headerlink" title="中缀表达式转后缀表达式"></a>中缀表达式转后缀表达式</h2><blockquote>
+<p><strong>我们把平时所用的标准四则运算表达式，称为中缀表达式</strong></p>
+<p><strong>规则：</strong></p>
+<ul>
+<li><strong>从左到右遍历中缀表达式的每个数字和符号，若是数字就输出，即成为后缀表达式的一部分</strong></li>
+<li><strong>若是符号，则判断其与栈顶符号的优先级，是右括号或优先级高于栈顶符号（乘除优先加减）则栈顶元素依次出栈并输出，并将当前符号进栈</strong></li>
+<li><strong>一直到最终输出后缀表达式为止</strong></li>
+</ul>
+</blockquote>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><blockquote>
+<p><strong>要想让计算机具有处理我们通常的标准表达式的能力，最重要的就是两步：</strong></p>
+<ul>
+<li><strong>将中缀表达式转化为后缀表达式（栈用来进出运算的符号）</strong></li>
+<li><strong>将后缀表达式进行运算得出结果（栈用来进出运算的数字）</strong></li>
+</ul>
+</blockquote>
+
+  </div>
+</article>
+
+
+
+
+          
+          <!-- //actions_mobile 移动端导航栏 -->
+            <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" class="Popup" style="display: none">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/categories/%E9%A1%B9%E7%9B%AE/">项目</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer"  class="Popup" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A0%88%E7%9A%84%E5%BA%94%E7%94%A8%E2%80%94%E2%80%94%E9%80%92%E5%BD%92"><span class="toc-number">1.</span> <span class="toc-text">栈的应用——递归</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B0%E5%88%97%E5%AE%9E%E7%8E%B0"><span class="toc-number">1.1.</span> <span class="toc-text">斐波那契数列实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%A6%82%E4%B8%8B"><span class="toc-number">1.2.</span> <span class="toc-text">代码如下</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%92%E5%BD%92%E5%AE%9A%E4%B9%89"><span class="toc-number">1.3.</span> <span class="toc-text">递归定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%A4%E7%A7%8D%E6%96%B9%E6%B3%95%E5%AF%B9%E6%AF%94"><span class="toc-number">1.4.</span> <span class="toc-text">两种方法对比</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%88%E5%92%8C%E9%80%92%E5%BD%92%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="toc-number">1.5.</span> <span class="toc-text">栈和递归的关系</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A0%88%E7%9A%84%E5%BA%94%E7%94%A8%E2%80%94%E2%80%94%E5%9B%9B%E5%88%99%E8%BF%90%E7%AE%97%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%B1%82%E5%80%BC"><span class="toc-number">2.</span> <span class="toc-text">栈的应用——四则运算表达式求值</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%8E%E7%BC%80%EF%BC%88%E9%80%86%E6%B3%A2%E5%85%B0%EF%BC%89%E8%A1%A8%E7%A4%BA%E6%B3%95%E5%AE%9A%E4%B9%89"><span class="toc-number">2.1.</span> <span class="toc-text">后缀（逆波兰）表示法定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%8E%E7%BC%80%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%AE%A1%E7%AE%97"><span class="toc-number">2.2.</span> <span class="toc-text">后缀表达式计算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%AD%E7%BC%80%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BD%AC%E5%90%8E%E7%BC%80%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="toc-number">2.3.</span> <span class="toc-text">中缀表达式转后缀表达式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">2.4.</span> <span class="toc-text">总结</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer"  class="Popup" style="display: none">
+      <ul>
+  <li> 开发中. </li>
+  <!-- <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2021/04/02/2021-04-02-%E6%A0%88%E7%9A%84%E5%BA%94%E7%94%A8/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2021/04/02/2021-04-02-%E6%A0%88%E7%9A%84%E5%BA%94%E7%94%A8/&text=栈的应用"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2021/04/02/2021-04-02-%E6%A0%88%E7%9A%84%E5%BA%94%E7%94%A8/&title=栈的应用"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2021/04/02/2021-04-02-%E6%A0%88%E7%9A%84%E5%BA%94%E7%94%A8/&is_video=false&description=栈的应用"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=栈的应用&body=Check out this article: http://example.com/2021/04/02/2021-04-02-%E6%A0%88%E7%9A%84%E5%BA%94%E7%94%A8/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2021/04/02/2021-04-02-%E6%A0%88%E7%9A%84%E5%BA%94%E7%94%A8/&title=栈的应用"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2021/04/02/2021-04-02-%E6%A0%88%E7%9A%84%E5%BA%94%E7%94%A8/&title=栈的应用"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2021/04/02/2021-04-02-%E6%A0%88%E7%9A%84%E5%BA%94%E7%94%A8/&title=栈的应用"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2021/04/02/2021-04-02-%E6%A0%88%E7%9A%84%E5%BA%94%E7%94%A8/&title=栈的应用"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2021/04/02/2021-04-02-%E6%A0%88%E7%9A%84%E5%BA%94%E7%94%A8/&name=栈的应用&description=&lt;h1 id=&#34;栈的应用——递归&#34;&gt;&lt;a href=&#34;#栈的应用——递归&#34; class=&#34;headerlink&#34; title=&#34;栈的应用——递归&#34;&gt;&lt;/a&gt;栈的应用——递归&lt;/h1&gt;&lt;hr&gt;
+&lt;h2 id=&#34;斐波那契数列实现&#34;&gt;&lt;a href=&#34;#斐波那契数列实现&#34; class=&#34;headerlink&#34; title=&#34;斐波那契数列实现&#34;&gt;&lt;/a&gt;斐波那契数列实现&lt;/h2&gt;&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;斐波那契数列的特点就是：前面相邻两项之和，构成了后一项&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2021/04/02/2021-04-02-%E6%A0%88%E7%9A%84%E5%BA%94%E7%94%A8/&t=栈的应用"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li> -->
+
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <span id="menu" Popup="#nav-footer" class="icon"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</span>
+        <span id="toc" Popup="#toc-footer" class="icon"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</span>
+        <span id="share" Popup="#share-footer" class="icon"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</span>
+        <span id="top" Popup="" style="display:none" class="icon" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</span>
+    </div>
+
+  </div>
+</div>
+
+            <!-- 图片弹窗 -->
+            <div class="img-pup" style="display: none;">
+              <img>
+            </div>
+          
+
+          <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2019-2023
+    t1k
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/categories/%E9%A1%B9%E7%9B%AE/">项目</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+          <!-- jquery -->
+ 
+  
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+
+<script src="/lib/jquery/jquery.pjax.js"></script>
+
+
+
+<!-- clipboard -->
+
+   
+    
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功!");
+      e.clearSelection();
+      setTimeout(()=>{
+        e.trigger.setAttribute('aria-label', "复制到粘贴板!");
+      },1500)
+    })
+  })
+  </script>
+
+
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+     
+      </div>   
+    </div>
+      
+    
+<script src="/js/main.js"></script>
+
+    </body>
+    </html>
