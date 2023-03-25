@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang=zh-CN>
+  <head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="前言C++那些事 这是一个适合新手学习的C++开源项目 [Github地址] (https:&#x2F;&#x2F;github.com&#x2F;Light-City&#x2F;CPlusPlusThings)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++那些事笔记——const那些事">
+<meta property="og:url" content="https://www.t1kcode.top/posts/20210314161900-40356.html">
+<meta property="og:site_name" content="t1kcode">
+<meta property="og:description" content="前言C++那些事 这是一个适合新手学习的C++开源项目 [Github地址] (https:&#x2F;&#x2F;github.com&#x2F;Light-City&#x2F;CPlusPlusThings)">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-03-14T08:19:00.000Z">
+<meta property="article:modified_time" content="2023-03-25T15:43:51.994Z">
+<meta property="article:author" content="t1k">
+<meta property="article:tag" content="项目">
+<meta property="article:tag" content="C++">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/Rolan.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    
+      <title>t1kcode·C++那些事笔记——const那些事</title>
+    
+    
+    <!-- styles -->
+
+    <!-- 默认CSS引入方法 -->
+    
+<link rel="stylesheet" href="/css/layout.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+
+
+  
+  <!-- L2Dwidget -->
+  
+<script src="/lib/live2d/L2Dwidget.min.js"></script>
+
+
+  <script>
+  // 猫
+  L2Dwidget.init({
+    model: {
+      jsonPath: "/lib/live2d/tororo/assets/tororo.model.json",
+    },
+    display: {
+      superSample: 2,
+      width: 60,
+      height: 80,
+      position: 'right',
+      hOffset: 0,
+      vOffset: 20,
+    },
+    mobile: {
+      show: true,
+      scale: 1,
+      motion: true,
+    },
+    react: {
+      opacityDefault: 1,
+      opacityOnHover: 1,
+    }
+  })
+  //百度搜索爬虫
+
+
+
+var _hmt = _hmt || [];
+(function () {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?7e9a19e5e700f1a2607b47c7bd6b35e8";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+
+  </script>
+  <meta name="baidu-site-verification" content="code-dIan6MAmy5" />
+  
+
+  <!-- styles -->
+
+
+ 
+  <link
+    rel="preload"
+    href="/lib/font-awesome/css/all.min.css"
+    as="style"
+    onload="this.onload=null;this.rel='stylesheet'"
+  />
+  <noscript
+    ><link
+      rel="stylesheet"
+      href="/lib/font-awesome/css/all.min.css"
+  /></noscript>
+
+
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+    <body class="max-width mx-auto">
+     <div class="home">
+        <!-- //actions_desktop 右上角导航栏 -->
+      <aside id="#aside" class="hubzy_left">
+        
+          <div class="hubzy_logo">
+	<a href="/">
+		
+		  
+					<div id="logo" style="background-image: url(/images/logo.jpg);"></div>
+					
+					  
+	  </a>
+	  <div id="title">
+		<a href="/">
+		  <h1>
+			t1k
+		  </h1>
+		</a>
+		
+			<!-- icon列表 -->
+			  <p class="iconlist">
+				<!-- # > index.find_me_on -->
+				
+				
+				
+				
+				  
+					<a class="icon" target="_blank" rel="noopener" href="https://github.com/t1kcode" aria-label="github">
+					  <i class="fab fa-github"></i></a>
+					  
+			     
+				  
+				
+				  
+					<a class="icon" target="_blank" rel="noopener" href="https://gitee.com/t1kcode">
+					  <i><svg class='diyIcon'  viewBox="0 0 1024 1024" ><path d="M512 1024C229.248 1024 0 794.752 0 512S229.248 0 512 0s512 229.248 512 512-229.248 512-512 512z m259.168-568.896h-290.752a25.28 25.28 0 0 0-25.28 25.28l-0.032 63.232c0 13.952 11.296 25.28 25.28 25.28h177.024a25.28 25.28 0 0 1 25.28 25.28v12.64a75.84 75.84 0 0 1-75.84 75.84h-240.224a25.28 25.28 0 0 1-25.28-25.28v-240.192a75.84 75.84 0 0 1 75.84-75.84h353.92a25.28 25.28 0 0 0 25.28-25.28l0.064-63.2a25.312 25.312 0 0 0-25.28-25.312H417.184a189.632 189.632 0 0 0-189.632 189.6v353.952c0 13.952 11.328 25.28 25.28 25.28h372.928a170.656 170.656 0 0 0 170.656-170.656v-145.376a25.28 25.28 0 0 0-25.28-25.28z"></path></svg></i>
+					</a>
+				  
+			  
+				  
+				
+			  </p>
+			
+	  </div>
+</div>
+<!-- 搜索栏 -->
+<div id="search">
+	<input class="search-input" type="text" placeholder="search">
+	<span id="search-icon" class="fa fa-bars" title="展开目录"></span>
+</div>
+
+<!-- 侧边目录栏 -->
+<div id="tree">
+	
+
+	
+					<ul>
+						<li class="file">
+							<a href="/posts/20191207173653-34322.html">
+								<i class="fa fa-file"></i>
+								2019-12-07-个人博客搭建流程及一些问题
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/posts/20210308180810-45748.html">
+								<i class="fa fa-file"></i>
+								2021-03-12-单链表
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/posts/20210305160710-52078.html">
+								<i class="fa fa-file"></i>
+								2021-03-13-顺序表
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file active">
+							<a href="/posts/20210314161900-40356.html">
+								<i class="fa fa-file"></i>
+								2021-03-14-C++那些事
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/posts/20210323180810-48829.html">
+								<i class="fa fa-file"></i>
+								2021-03-23-循环链表
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/posts/20210328161810-12508.html">
+								<i class="fa fa-file"></i>
+								2021-03-28-双向循环链表
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/posts/20210401203910-37273.html">
+								<i class="fa fa-file"></i>
+								2021-04-01-栈
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/posts/20210410143910-48527.html">
+								<i class="fa fa-file"></i>
+								2021-04-010-基数排序
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/posts/20210402190010-36496.html">
+								<i class="fa fa-file"></i>
+								2021-04-02-栈的应用
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/posts/20210403143910-26671.html">
+								<i class="fa fa-file"></i>
+								2021-04-03-队列
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/posts/20210501195710-23384.html">
+								<i class="fa fa-file"></i>
+								2021-05-01-树
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/posts/20210422183910-27506.html">
+								<i class="fa fa-file"></i>
+								2021-4-22-查找
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/posts/20221001175710-33701.html">
+								<i class="fa fa-file"></i>
+								2022-10-01-JAVA基础
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/posts/20221203185710-45889.html">
+								<i class="fa fa-file"></i>
+								2022-12-03-电脑商城项目
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/posts/20230216100710-1bff3c65.html">
+								<i class="fa fa-file"></i>
+								2023-2-16-MyBatis
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/posts/20230218080710-bed8b4fb.html">
+								<i class="fa fa-file"></i>
+								2023-2-18-MyBatis Generator
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/posts/20230227202410-ed4aca2b.html">
+								<i class="fa fa-file"></i>
+								2023-2-27-SpringSecurityJWT
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/posts/20230311163310-3b72b36d.html">
+								<i class="fa fa-file"></i>
+								2023-3-11-Mall整合SpringTask
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/posts/20230311153410-8ead567e.html">
+								<i class="fa fa-file"></i>
+								2023-3-11-MongoDB
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/posts/20230314103110-e0a3f475.html">
+								<i class="fa fa-file"></i>
+								2023-3-14-RabbitMQ_JAVA
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/posts/20230315220410-e0a3f475.html">
+								<i class="fa fa-file"></i>
+								2023-3-15-Mall整合RabbitMQ
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/posts/20230317105310-7d1f0793.html">
+								<i class="fa fa-file"></i>
+								2023-3-17-SpringBoot中使用AOP记录接口访问日志
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/posts/20230302211010-feec57d.html">
+								<i class="fa fa-file"></i>
+								2023-3-2-Spring Data Redis
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/posts/20230320134010-cc2903eb.html">
+								<i class="fa fa-file"></i>
+								2023-3-20-Mall商城
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/posts/20230323121710-57e98fa8.html">
+								<i class="fa fa-file"></i>
+								2023-3-23-Mall整合Elasticsearch
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/posts/20230302105710-8aebab8e.html">
+								<i class="fa fa-file"></i>
+								2023-3-3-Mall-SpringSecurity-JWT
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/posts/20230303201610-6b63fba0.html">
+								<i class="fa fa-file"></i>
+								2023-3-3-Swagger-UI
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/posts/20230305194310-d48132d3.html">
+								<i class="fa fa-file"></i>
+								2023-3-5-ElasticSearch
+							</a>
+						</li>
+					</ul>
+	
+</div>
+
+        
+      </aside>
+      <div id="header-post" class="hubzy_right">
+        
+          
+  <!-- <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a> -->
+  <!-- <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a> -->
+  <!-- <a id="top-icon-tablet" href="#" "Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"
+    style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a> -->
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        
+          <li><a href="/blog/">
+              首页
+            </a></li>
+          
+          <li><a href="/archives/">
+              归档
+            </a></li>
+          
+          <li><a href="/">
+              关于
+            </a></li>
+          
+      </ul>
+    </span>
+    <br />
+    <div id="toc">
+      
+    </div>
+    <br />
+    <span id="actions">
+      <ul>
+        <!--// 
+          <li><a class="icon" aria-label="上一篇 " href="/posts/20210323180810-48829.html"><i
+                class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();"
+                onmouseout="$('#i-prev').toggle();"></i></a></li>
+          
+            
+              <li><a class="icon" aria-label="下一篇 " href="/posts/20210308180810-45748.html"><i
+                    class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();"
+                    onmouseout="$('#i-next').toggle();"></i></a></li>
+              // -->
+                <li><a class="icon" aria-label="返回顶部 " href="#"
+                    onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up"
+                      aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a>
+                </li>
+                <li><a class="icon" aria-label="分享文章 " href="#"><i class="fas fa-share-alt"
+                      aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();"
+                      onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">
+        上一篇
+      </span>
+      <span id="i-next" class="info" style="display:none;">
+        下一篇
+      </span>
+      <span id="i-top" class="info" style="display:none;">
+        返回顶部
+      </span>
+      <span id="i-share" class="info" style="display:none;">
+        分享文章
+      </span>
+    </span>
+    <br />
+    <div id="share" style="display: none">
+      <ul>
+  <li> 开发中. </li>
+  <!-- <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://www.t1kcode.top/posts/20210314161900-40356.html"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://www.t1kcode.top/posts/20210314161900-40356.html&text=C++那些事笔记——const那些事"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://www.t1kcode.top/posts/20210314161900-40356.html&title=C++那些事笔记——const那些事"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://www.t1kcode.top/posts/20210314161900-40356.html&is_video=false&description=C++那些事笔记——const那些事"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=C++那些事笔记——const那些事&body=Check out this article: https://www.t1kcode.top/posts/20210314161900-40356.html"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://www.t1kcode.top/posts/20210314161900-40356.html&title=C++那些事笔记——const那些事"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://www.t1kcode.top/posts/20210314161900-40356.html&title=C++那些事笔记——const那些事"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://www.t1kcode.top/posts/20210314161900-40356.html&title=C++那些事笔记——const那些事"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://www.t1kcode.top/posts/20210314161900-40356.html&title=C++那些事笔记——const那些事"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://www.t1kcode.top/posts/20210314161900-40356.html&name=C++那些事笔记——const那些事&description=&lt;h1 id=&#34;前言&#34;&gt;&lt;a href=&#34;#前言&#34; class=&#34;headerlink&#34; title=&#34;前言&#34;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;h2 id=&#34;C-那些事&#34;&gt;&lt;a href=&#34;#C-那些事&#34; class=&#34;headerlink&#34; title=&#34;C++那些事&#34;&gt;&lt;/a&gt;C++那些事&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;这是一个适合新手学习的C++开源项目&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;[&lt;strong&gt;Github地址&lt;/strong&gt;] (&lt;a href=&#34;https://github.com/Light-City/CPlusPlusThings&#34;&gt;https://github.com/Light-City/CPlusPlusThings&lt;/a&gt;)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://www.t1kcode.top/posts/20210314161900-40356.html&t=C++那些事笔记——const那些事"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li> -->
+
+</ul>
+
+    </div>
+
+  </span>
+
+        
+      </div>
+       
+      <div class="content  hubzy_center">
+        
+          <!-- //body 引入首页和md编译后的页面 -->
+          <!-- md 编译成 html 后的文件模板 -->
+
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="hubzy_center_title">
+    
+    <h1 class="posttitle" itemprop="name headline">
+        C++那些事笔记——const那些事
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">t1k</span>
+      </span>
+      <!-- 文章时间和首页时间 -->
+
+    <div class="postdate">
+      
+        <time datetime="2021-03-14T08:19:00.000Z" itemprop="datePublished">2021-03-14</time>
+        
+        <!-- (Updated: <time datetime="2023-03-25T15:43:51.994Z" itemprop="dateModified">2023-03-25</time>) -->
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/%E9%A1%B9%E7%9B%AE/">项目</a> › <a class="category-link" href="/categories/%E9%A1%B9%E7%9B%AE/C/">C++</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/C/" rel="tag">C++</a>, <a class="tag-link-link" href="/tags/%E9%A1%B9%E7%9B%AE/" rel="tag">项目</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content conterDiy"  id="article" itemprop="articleBody">
+    <em class="nubScript">
+        ·本篇:1.4k字 大约需要: 5分钟
+    </em>
+    <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><h2 id="C-那些事"><a href="#C-那些事" class="headerlink" title="C++那些事"></a>C++那些事</h2><blockquote>
+<p><strong>这是一个适合新手学习的C++开源项目</strong></p>
+<p>[<strong>Github地址</strong>] (<a target="_blank" rel="noopener" href="https://github.com/Light-City/CPlusPlusThings">https://github.com/Light-City/CPlusPlusThings</a>)</p>
+</blockquote>
+<hr>
+<span id="more"></span>
+
+<h1 id="const那些事"><a href="#const那些事" class="headerlink" title="const那些事"></a>const那些事</h1><h2 id="1-const的作用"><a href="#1-const的作用" class="headerlink" title="1.const的作用"></a>1.const的作用</h2><ul>
+<li><p>可以定义常量</p>
+<blockquote>
+<p>创建常量的通用格式如下：</p>
+</blockquote>
+  <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> type name = value;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>当你在声明常量的时候必须对它进行初始化，如果在声明常量时没有对它进行初始化，则该常量的值是不确定的，且无法修改。</p>
+</blockquote>
+</li>
+<li><p>类型检查</p>
+<ul>
+<li><p><code>const</code>常量与<code>#define</code>宏定义常量的区别：</p>
+<blockquote>
+<ul>
+<li>const能够明确指定类型，并且可以使用C++的作用域规则将定义限制在特定的函数或文件中</li>
+<li>const定义的变量只有类型为整型或枚举时，且以常量表达式初始化时才能作为常量表达式</li>
+<li>其他情况下它只是一个const限定的变量而不是一个常量</li>
+</ul>
+</blockquote>
+</li>
+<li><p>防止修改，起保护作用，增加程序健壮性</p>
+</li>
+<li><p>可以节省空间，避免不必要的浪费</p>
+<blockquote>
+<ul>
+<li>const定义常量从汇编角度来看，只是给出了对应的内存地址，而不是像#define一样给出的是立即数</li>
+<li>const定义的常量在程序运行过程中只有一份拷贝，而#define定义的常量在内存中却有多份拷贝</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-const对象默认为局部变量"><a href="#2-const对象默认为局部变量" class="headerlink" title="2.const对象默认为局部变量"></a>2.const对象默认为局部变量</h2><blockquote>
+<ul>
+<li>未被const修饰的变量不需要extern显式声明</li>
+<li>const常量需要显式声明extern，并且需要做初始化</li>
+<li>常量在定义后就不能被修改，所以定义时必须初始化</li>
+</ul>
+</blockquote>
+<h2 id="3-指针与const"><a href="#3-指针与const" class="headerlink" title="3.指针与const"></a>3.指针与const</h2><ul>
+<li><p>如果const在*的左侧，则const就是用来修饰指针所指向的变量，即指针指向常量</p>
+  <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">char</span> * a; <span class="comment">//指向常量的指针。</span></span><br><span class="line"><span class="type">char</span> <span class="type">const</span> * a; <span class="comment">//同上</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<ul>
+<li>对于指向常量的指针，不能通过指针来修改对象的值</li>
+<li>允许把非const对象的地址赋给指向常量的指针，当要修改其值时需要像通过非const指针修改</li>
+</ul>
+</blockquote>
+  <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> val = <span class="number">3</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> *ptr = &amp;val; <span class="comment">//ok</span></span><br><span class="line"><span class="type">int</span> *ptr1 = &amp;val;</span><br><span class="line">*ptr = <span class="number">4</span>;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<ul>
+<li>不能使用void *指针去保存const对象的地址，必须使用const void *类型的指针保存const对象的地址</li>
+</ul>
+</blockquote>
+  <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span> p = <span class="number">10</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">void</span> * vp = &amp;p;</span><br><span class="line"><span class="type">void</span> *vp = &amp;p; <span class="comment">//error</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果const在*的右侧，则const就是修饰指针本身，即指针本身就是常量，称为常指针</p>
+<ul>
+<li><p>常指针在定义是必须进行初始化，且常指针的值不能再进行修改，但是可以通过非const指针来修改</p>
+  <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> num=<span class="number">0</span>;</span><br><span class="line"><span class="type">int</span> * <span class="type">const</span> ptr=&amp;num; <span class="comment">//const指针必须初始化，且const指针的值不能修改</span></span><br><span class="line"><span class="type">int</span> * t = &amp;num;</span><br><span class="line">*t = <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>因为此时const修饰的是指针本身，ptr指向的还是一个变量，只是不能通过ptr修改它的值，所以不能将const对象的地址赋值给ptr</p>
+</li>
+<li><p>上述情况若改为const int *ptr或const int *const ptr就可以正常运行</p>
+</li>
+</ul>
+</li>
+<li><p>上述两种情况的结合就是指向常量的常指针</p>
+<ul>
+<li><p>ptr是一个const指针，然后它指向了一个int类型的const对象</p>
+  <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span> p = <span class="number">3</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> * <span class="type">const</span> ptr = &amp;p; </span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<h2 id="4-函数与const"><a href="#4-函数与const" class="headerlink" title="4.函数与const"></a>4.函数与const</h2><ul>
+<li><p>const修饰函数返回值</p>
+<blockquote>
+<p>这个和cosnt修饰普通变量和指针含义基本相同，但没有意义</p>
+</blockquote>
+</li>
+<li><p>const修饰函数参数</p>
+<ul>
+<li><p>输入参数只是”值复制”，对原变量没有影响，无需保护，即使传入的形参是指针也是一样，const修饰的是指针本身，它所指向的地址还是可变的，所以此操作无意义</p>
+  <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">func</span><span class="params">(<span class="type">const</span> <span class="type">int</span> var)</span></span>;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">func</span><span class="params">(<span class="type">int</span> *<span class="type">const</span> var)</span></span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>参数指针所指内容为常量不可变</p>
+  <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">StringCopy</span><span class="params">(<span class="type">char</span> *dst, <span class="type">const</span> <span class="type">char</span> *src)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>dst是输出参数，src是输入参数，当我们需要保护src指向对象的值时，将src用const修饰，这样当函数体的语句试图修改src的值时，编译器将指出错误</p>
+</blockquote>
+</li>
+<li><p>参数为引用，增加效率同时防止修改</p>
+  <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">func</span><span class="params">(<span class="type">const</span> A &amp;a)</span></span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<ul>
+<li><p>对于非内部数据类型的参数而言，象void func(A a) 这样声明的函数注定效率比较低。因为函数体内将产生A 类型的临时对象用于复制参数a，而临时对象的构造、复制、析构过程都将消耗时间</p>
+</li>
+<li><p>为了提高效率，可以将函数声明改为void func(A &amp;a)，因为“引用传递”仅借用一下参数的别名而已，不需要产生临时对象</p>
+</li>
+<li><p>但是函数void func(A &amp;a) 存在一个缺点:“引用传递”有可能改变参数a，这是我们不期望的</p>
+</li>
+<li><p>解决这个问题很容易，加const修饰即可，因此函数最终成为 void func(const A &amp;a)。</p>
+</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li><p>以此类推，是否应将void func(int x) 改写为void func(const int &amp;x)，以便提高效率？</p>
+</li>
+<li><p>没有必要，因为内部数据的参数不存在构造、析构之内的过程，“值传递”和“引用传递”的效率几乎相当</p>
+</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="5-类与const"><a href="#5-类与const" class="headerlink" title="5.类与const"></a>5.类与const</h2><blockquote>
+<ul>
+<li><p>在一个类中，任何不会修改数据成员的函数都应该声明为const类型，如果在编写const成员函数时，不慎修改数据成员，或者调用了其它非const成员函数，编译器将指出错误，这无疑会提高程序的健壮性</p>
+</li>
+<li><p>使用const关键字进行说明的成员函数，称为常成员函数，只有常成员函数才有资格操作常量或常对象，没有使用const关键字进行说明的成员函数不能用来操作常对象</p>
+</li>
+<li><p>对于类中的const成员变量必须通过初始化列表进行初始化</p>
+</li>
+</ul>
+</blockquote>
+
+  </div>
+</article>
+
+
+
+
+          
+          <!-- //actions_mobile 移动端导航栏 -->
+            <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" class="Popup" style="display: none">
+      <ul>
+         
+          <li><a href="/blog/">首页</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/">关于</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer"  class="Popup" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#C-%E9%82%A3%E4%BA%9B%E4%BA%8B"><span class="toc-number">1.1.</span> <span class="toc-text">C++那些事</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#const%E9%82%A3%E4%BA%9B%E4%BA%8B"><span class="toc-number">2.</span> <span class="toc-text">const那些事</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-const%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="toc-number">2.1.</span> <span class="toc-text">1.const的作用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-const%E5%AF%B9%E8%B1%A1%E9%BB%98%E8%AE%A4%E4%B8%BA%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F"><span class="toc-number">2.2.</span> <span class="toc-text">2.const对象默认为局部变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E6%8C%87%E9%92%88%E4%B8%8Econst"><span class="toc-number">2.3.</span> <span class="toc-text">3.指针与const</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E5%87%BD%E6%95%B0%E4%B8%8Econst"><span class="toc-number">2.4.</span> <span class="toc-text">4.函数与const</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E7%B1%BB%E4%B8%8Econst"><span class="toc-number">2.5.</span> <span class="toc-text">5.类与const</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer"  class="Popup" style="display: none">
+      <ul>
+  <li> 开发中. </li>
+  <!-- <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://www.t1kcode.top/posts/20210314161900-40356.html"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://www.t1kcode.top/posts/20210314161900-40356.html&text=C++那些事笔记——const那些事"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://www.t1kcode.top/posts/20210314161900-40356.html&title=C++那些事笔记——const那些事"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://www.t1kcode.top/posts/20210314161900-40356.html&is_video=false&description=C++那些事笔记——const那些事"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=C++那些事笔记——const那些事&body=Check out this article: https://www.t1kcode.top/posts/20210314161900-40356.html"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://www.t1kcode.top/posts/20210314161900-40356.html&title=C++那些事笔记——const那些事"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://www.t1kcode.top/posts/20210314161900-40356.html&title=C++那些事笔记——const那些事"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://www.t1kcode.top/posts/20210314161900-40356.html&title=C++那些事笔记——const那些事"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://www.t1kcode.top/posts/20210314161900-40356.html&title=C++那些事笔记——const那些事"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://www.t1kcode.top/posts/20210314161900-40356.html&name=C++那些事笔记——const那些事&description=&lt;h1 id=&#34;前言&#34;&gt;&lt;a href=&#34;#前言&#34; class=&#34;headerlink&#34; title=&#34;前言&#34;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;h2 id=&#34;C-那些事&#34;&gt;&lt;a href=&#34;#C-那些事&#34; class=&#34;headerlink&#34; title=&#34;C++那些事&#34;&gt;&lt;/a&gt;C++那些事&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;这是一个适合新手学习的C++开源项目&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;[&lt;strong&gt;Github地址&lt;/strong&gt;] (&lt;a href=&#34;https://github.com/Light-City/CPlusPlusThings&#34;&gt;https://github.com/Light-City/CPlusPlusThings&lt;/a&gt;)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://www.t1kcode.top/posts/20210314161900-40356.html&t=C++那些事笔记——const那些事"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li> -->
+
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <span id="menu" Popup="#nav-footer" class="icon"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</span>
+        <span id="toc" Popup="#toc-footer" class="icon"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</span>
+        <span id="share" Popup="#share-footer" class="icon"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</span>
+        <span id="top" Popup="" style="display:none" class="icon" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</span>
+    </div>
+
+  </div>
+</div>
+
+            <!-- 图片弹窗 -->
+            <div class="img-pup" style="display: none;">
+              <img>
+            </div>
+          
+
+          <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2019-2023
+    t1k
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/blog/">首页</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/">关于</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+          <!-- jquery -->
+ 
+  
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+
+<script src="/lib/jquery/jquery.pjax.js"></script>
+
+
+
+<!-- clipboard -->
+
+   
+    
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功!");
+      e.clearSelection();
+      setTimeout(()=>{
+        e.trigger.setAttribute('aria-label', "复制到粘贴板!");
+      },1500)
+    })
+  })
+  </script>
+
+
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+     
+      </div>   
+    </div>
+      
+    
+<script src="/js/main.js"></script>
+
+    </body>
+    </html>

@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang=zh-CN>
+  <head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="前言 查找概论  查找表（Search Table）是由同一类型的数据元素(或记录)构成的集合">
+<meta property="og:type" content="article">
+<meta property="og:title" content="查找结构">
+<meta property="og:url" content="https://www.t1kcode.top/posts/20210422183910-27506.html">
+<meta property="og:site_name" content="t1kcode">
+<meta property="og:description" content="前言 查找概论  查找表（Search Table）是由同一类型的数据元素(或记录)构成的集合">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-04-22T10:39:10.000Z">
+<meta property="article:modified_time" content="2023-03-25T15:41:55.726Z">
+<meta property="article:author" content="t1k">
+<meta property="article:tag" content="数据结构">
+<meta property="article:tag" content="C">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/Rolan.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    
+      <title>t1kcode·查找结构</title>
+    
+    
+    <!-- styles -->
+
+    <!-- 默认CSS引入方法 -->
+    
+<link rel="stylesheet" href="/css/layout.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+
+
+  
+  <!-- L2Dwidget -->
+  
+<script src="/lib/live2d/L2Dwidget.min.js"></script>
+
+
+  <script>
+  // 猫
+  L2Dwidget.init({
+    model: {
+      jsonPath: "/lib/live2d/tororo/assets/tororo.model.json",
+    },
+    display: {
+      superSample: 2,
+      width: 60,
+      height: 80,
+      position: 'right',
+      hOffset: 0,
+      vOffset: 20,
+    },
+    mobile: {
+      show: true,
+      scale: 1,
+      motion: true,
+    },
+    react: {
+      opacityDefault: 1,
+      opacityOnHover: 1,
+    }
+  })
+  //百度搜索爬虫
+
+
+
+var _hmt = _hmt || [];
+(function () {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?7e9a19e5e700f1a2607b47c7bd6b35e8";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+
+  </script>
+  <meta name="baidu-site-verification" content="code-dIan6MAmy5" />
+  
+
+  <!-- styles -->
+
+
+ 
+  <link
+    rel="preload"
+    href="/lib/font-awesome/css/all.min.css"
+    as="style"
+    onload="this.onload=null;this.rel='stylesheet'"
+  />
+  <noscript
+    ><link
+      rel="stylesheet"
+      href="/lib/font-awesome/css/all.min.css"
+  /></noscript>
+
+
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+    <body class="max-width mx-auto">
+     <div class="home">
+        <!-- //actions_desktop 右上角导航栏 -->
+      <aside id="#aside" class="hubzy_left">
+        
+          <div class="hubzy_logo">
+	<a href="/">
+		
+		  
+					<div id="logo" style="background-image: url(/images/logo.jpg);"></div>
+					
+					  
+	  </a>
+	  <div id="title">
+		<a href="/">
+		  <h1>
+			t1k
+		  </h1>
+		</a>
+		
+			<!-- icon列表 -->
+			  <p class="iconlist">
+				<!-- # > index.find_me_on -->
+				
+				
+				
+				
+				  
+					<a class="icon" target="_blank" rel="noopener" href="https://github.com/t1kcode" aria-label="github">
+					  <i class="fab fa-github"></i></a>
+					  
+			     
+				  
+				
+				  
+					<a class="icon" target="_blank" rel="noopener" href="https://gitee.com/t1kcode">
+					  <i><svg class='diyIcon'  viewBox="0 0 1024 1024" ><path d="M512 1024C229.248 1024 0 794.752 0 512S229.248 0 512 0s512 229.248 512 512-229.248 512-512 512z m259.168-568.896h-290.752a25.28 25.28 0 0 0-25.28 25.28l-0.032 63.232c0 13.952 11.296 25.28 25.28 25.28h177.024a25.28 25.28 0 0 1 25.28 25.28v12.64a75.84 75.84 0 0 1-75.84 75.84h-240.224a25.28 25.28 0 0 1-25.28-25.28v-240.192a75.84 75.84 0 0 1 75.84-75.84h353.92a25.28 25.28 0 0 0 25.28-25.28l0.064-63.2a25.312 25.312 0 0 0-25.28-25.312H417.184a189.632 189.632 0 0 0-189.632 189.6v353.952c0 13.952 11.328 25.28 25.28 25.28h372.928a170.656 170.656 0 0 0 170.656-170.656v-145.376a25.28 25.28 0 0 0-25.28-25.28z"></path></svg></i>
+					</a>
+				  
+			  
+				  
+				
+			  </p>
+			
+	  </div>
+</div>
+<!-- 搜索栏 -->
+<div id="search">
+	<input class="search-input" type="text" placeholder="search">
+	<span id="search-icon" class="fa fa-bars" title="展开目录"></span>
+</div>
+
+<!-- 侧边目录栏 -->
+<div id="tree">
+	
+
+	
+					<ul>
+						<li class="file">
+							<a href="/posts/20191207173653-34322.html">
+								<i class="fa fa-file"></i>
+								2019-12-07-个人博客搭建流程及一些问题
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/posts/20210308180810-45748.html">
+								<i class="fa fa-file"></i>
+								2021-03-12-单链表
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/posts/20210305160710-52078.html">
+								<i class="fa fa-file"></i>
+								2021-03-13-顺序表
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/posts/20210314161900-40356.html">
+								<i class="fa fa-file"></i>
+								2021-03-14-C++那些事
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/posts/20210323180810-48829.html">
+								<i class="fa fa-file"></i>
+								2021-03-23-循环链表
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/posts/20210328161810-12508.html">
+								<i class="fa fa-file"></i>
+								2021-03-28-双向循环链表
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/posts/20210401203910-37273.html">
+								<i class="fa fa-file"></i>
+								2021-04-01-栈
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/posts/20210410143910-48527.html">
+								<i class="fa fa-file"></i>
+								2021-04-010-基数排序
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/posts/20210402190010-36496.html">
+								<i class="fa fa-file"></i>
+								2021-04-02-栈的应用
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/posts/20210403143910-26671.html">
+								<i class="fa fa-file"></i>
+								2021-04-03-队列
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/posts/20210501195710-23384.html">
+								<i class="fa fa-file"></i>
+								2021-05-01-树
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file active">
+							<a href="/posts/20210422183910-27506.html">
+								<i class="fa fa-file"></i>
+								2021-4-22-查找
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/posts/20221001175710-33701.html">
+								<i class="fa fa-file"></i>
+								2022-10-01-JAVA基础
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/posts/20221203185710-45889.html">
+								<i class="fa fa-file"></i>
+								2022-12-03-电脑商城项目
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/posts/20230216100710-1bff3c65.html">
+								<i class="fa fa-file"></i>
+								2023-2-16-MyBatis
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/posts/20230218080710-bed8b4fb.html">
+								<i class="fa fa-file"></i>
+								2023-2-18-MyBatis Generator
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/posts/20230227202410-ed4aca2b.html">
+								<i class="fa fa-file"></i>
+								2023-2-27-SpringSecurityJWT
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/posts/20230311163310-3b72b36d.html">
+								<i class="fa fa-file"></i>
+								2023-3-11-Mall整合SpringTask
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/posts/20230311153410-8ead567e.html">
+								<i class="fa fa-file"></i>
+								2023-3-11-MongoDB
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/posts/20230314103110-e0a3f475.html">
+								<i class="fa fa-file"></i>
+								2023-3-14-RabbitMQ_JAVA
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/posts/20230315220410-e0a3f475.html">
+								<i class="fa fa-file"></i>
+								2023-3-15-Mall整合RabbitMQ
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/posts/20230317105310-7d1f0793.html">
+								<i class="fa fa-file"></i>
+								2023-3-17-SpringBoot中使用AOP记录接口访问日志
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/posts/20230302211010-feec57d.html">
+								<i class="fa fa-file"></i>
+								2023-3-2-Spring Data Redis
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/posts/20230320134010-cc2903eb.html">
+								<i class="fa fa-file"></i>
+								2023-3-20-Mall商城
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/posts/20230323121710-57e98fa8.html">
+								<i class="fa fa-file"></i>
+								2023-3-23-Mall整合Elasticsearch
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/posts/20230302105710-8aebab8e.html">
+								<i class="fa fa-file"></i>
+								2023-3-3-Mall-SpringSecurity-JWT
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/posts/20230303201610-6b63fba0.html">
+								<i class="fa fa-file"></i>
+								2023-3-3-Swagger-UI
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/posts/20230305194310-d48132d3.html">
+								<i class="fa fa-file"></i>
+								2023-3-5-ElasticSearch
+							</a>
+						</li>
+					</ul>
+	
+</div>
+
+        
+      </aside>
+      <div id="header-post" class="hubzy_right">
+        
+          
+  <!-- <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a> -->
+  <!-- <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a> -->
+  <!-- <a id="top-icon-tablet" href="#" "Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"
+    style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a> -->
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        
+          <li><a href="/blog/">
+              首页
+            </a></li>
+          
+          <li><a href="/archives/">
+              归档
+            </a></li>
+          
+          <li><a href="/">
+              关于
+            </a></li>
+          
+      </ul>
+    </span>
+    <br />
+    <div id="toc">
+      
+    </div>
+    <br />
+    <span id="actions">
+      <ul>
+        <!--// 
+          <li><a class="icon" aria-label="上一篇 " href="/posts/20210501195710-23384.html"><i
+                class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();"
+                onmouseout="$('#i-prev').toggle();"></i></a></li>
+          
+            
+              <li><a class="icon" aria-label="下一篇 " href="/posts/20210410143910-48527.html"><i
+                    class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();"
+                    onmouseout="$('#i-next').toggle();"></i></a></li>
+              // -->
+                <li><a class="icon" aria-label="返回顶部 " href="#"
+                    onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up"
+                      aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a>
+                </li>
+                <li><a class="icon" aria-label="分享文章 " href="#"><i class="fas fa-share-alt"
+                      aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();"
+                      onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">
+        上一篇
+      </span>
+      <span id="i-next" class="info" style="display:none;">
+        下一篇
+      </span>
+      <span id="i-top" class="info" style="display:none;">
+        返回顶部
+      </span>
+      <span id="i-share" class="info" style="display:none;">
+        分享文章
+      </span>
+    </span>
+    <br />
+    <div id="share" style="display: none">
+      <ul>
+  <li> 开发中. </li>
+  <!-- <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://www.t1kcode.top/posts/20210422183910-27506.html"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://www.t1kcode.top/posts/20210422183910-27506.html&text=查找结构"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://www.t1kcode.top/posts/20210422183910-27506.html&title=查找结构"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://www.t1kcode.top/posts/20210422183910-27506.html&is_video=false&description=查找结构"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=查找结构&body=Check out this article: https://www.t1kcode.top/posts/20210422183910-27506.html"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://www.t1kcode.top/posts/20210422183910-27506.html&title=查找结构"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://www.t1kcode.top/posts/20210422183910-27506.html&title=查找结构"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://www.t1kcode.top/posts/20210422183910-27506.html&title=查找结构"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://www.t1kcode.top/posts/20210422183910-27506.html&title=查找结构"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://www.t1kcode.top/posts/20210422183910-27506.html&name=查找结构&description=&lt;h1 id=&#34;前言&#34;&gt;&lt;a href=&#34;#前言&#34; class=&#34;headerlink&#34; title=&#34;前言&#34;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;hr&gt;
+&lt;h2 id=&#34;查找概论&#34;&gt;&lt;a href=&#34;#查找概论&#34; class=&#34;headerlink&#34; title=&#34;查找概论&#34;&gt;&lt;/a&gt;查找概论&lt;/h2&gt;&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;查找表（Search Table）是由同一类型的数据元素(或记录)构成的集合&lt;/strong&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://www.t1kcode.top/posts/20210422183910-27506.html&t=查找结构"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li> -->
+
+</ul>
+
+    </div>
+
+  </span>
+
+        
+      </div>
+       
+      <div class="content  hubzy_center">
+        
+          <!-- //body 引入首页和md编译后的页面 -->
+          <!-- md 编译成 html 后的文件模板 -->
+
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="hubzy_center_title">
+    
+    <h1 class="posttitle" itemprop="name headline">
+        查找结构
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">t1k</span>
+      </span>
+      <!-- 文章时间和首页时间 -->
+
+    <div class="postdate">
+      
+        <time datetime="2021-04-22T10:39:10.000Z" itemprop="datePublished">2021-04-22</time>
+        
+        <!-- (Updated: <time datetime="2023-03-25T15:41:55.726Z" itemprop="dateModified">2023-03-25</time>) -->
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a> › <a class="category-link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/C/">C</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/C/" rel="tag">C</a>, <a class="tag-link-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content conterDiy"  id="article" itemprop="articleBody">
+    <em class="nubScript">
+        ·本篇:2.7k字 大约需要: 10分钟
+    </em>
+    <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><hr>
+<h2 id="查找概论"><a href="#查找概论" class="headerlink" title="查找概论"></a>查找概论</h2><blockquote>
+<ul>
+<li><strong>查找表（Search Table）是由同一类型的数据元素(或记录)构成的集合</strong><span id="more"></span></li>
+<li><strong>关键字（Key）是数据元素中某个数据项的值</strong></li>
+<li><strong>若此关键字可以唯一地标识一个记录，则称此关键字为主关键字（Primary Key）</strong></li>
+<li><strong>对于那些可以识别多个数据元素（或记录）的关键字，称为次关键字（Secondary Key）</strong></li>
+<li><strong>查找（Searching）就是根据给定的某个值，在查找表中确定一个其关键字等于给定值的数据元素（或记录）</strong></li>
+</ul>
+</blockquote>
+<hr>
+<h2 id="查找分类"><a href="#查找分类" class="headerlink" title="查找分类"></a>查找分类</h2><blockquote>
+<ul>
+<li><p><strong>查找表按照操作方式来分有两种：静态查找表和动态查找表</strong></p>
+</li>
+<li><p><strong>静态查找表（Static Search Table）：只作查找操作的查找表</strong></p>
+<ul>
+<li><strong>查询某个“特定的”数据元素是否在查找表中</strong></li>
+<li><strong>检索某个“特定的”数据元素和各种属性</strong></li>
+</ul>
+</li>
+<li><p><strong>动态查找表（Dynamic Search Table）：在查找过程中同时插入查找表中不存在的数据元素，或者从查找表中删除已经存在的某个数据元素</strong></p>
+</li>
+<li><p><strong>查找时插入数据元素</strong></p>
+</li>
+<li><p><strong>查找时删除数据元素</strong></p>
+</li>
+</ul>
+</blockquote>
+<hr>
+<blockquote>
+<p><strong>这种面向查找操作的数据结构称为查找结构</strong></p>
+</blockquote>
+<hr>
+<h1 id="顺序表查找"><a href="#顺序表查找" class="headerlink" title="顺序表查找"></a>顺序表查找</h1><hr>
+<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><blockquote>
+<ul>
+<li><strong>顺序查找（Sequential Search）又叫线性查找，是最基本的查找技术，它的查找过程是：从表中第一个（或最后一个）记录开始，逐个进行记录的关键字和给定值比较，若某个记录的关键字和给定值相等，则查找成功，找到所查的记录；如果知道最后一个（或第一个）记录，其关键字和给定值比较都不等时，则表中没有所查的记录，查找不成功</strong></li>
+</ul>
+</blockquote>
+<hr>
+<h2 id="顺序表查找算法"><a href="#顺序表查找算法" class="headerlink" title="顺序表查找算法"></a>顺序表查找算法</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//a为数组，n为要查找的数组长度，key为要查找的关键字</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">SequentialSearch</span><span class="params">(<span class="type">const</span> <span class="type">int</span> *a, <span class="type">int</span> n, <span class="type">int</span> key)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> ans = <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(a[i] == key)</span><br><span class="line">        &#123;</span><br><span class="line">            ans = i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="顺序表查找优化"><a href="#顺序表查找优化" class="headerlink" title="顺序表查找优化"></a>顺序表查找优化</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">SequentialSearch1</span><span class="params">(<span class="type">int</span> *a, <span class="type">int</span> n, <span class="type">int</span> key)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line">    a[<span class="number">0</span>] = key; <span class="comment">// 设置a[0]为哨兵</span></span><br><span class="line">    i = n;</span><br><span class="line">    <span class="keyword">while</span>(a[i] != key)</span><br><span class="line">    &#123;</span><br><span class="line">        i--;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> i; <span class="comment">// 返回0说明查找失败</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="比较"><a href="#比较" class="headerlink" title="比较"></a>比较</h2><blockquote>
+<ul>
+<li><strong>这种在查找方向的尽头放置“哨兵”免去了在查找过程中每一次比较后都要判断查找位置是否越界的小技巧，看似与原先差别不大，但在总数据较多时，效率提高很大</strong></li>
+<li><strong>“哨兵”不一定要在数组头，也可以在末端</strong></li>
+</ul>
+</blockquote>
+<hr>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><blockquote>
+<ul>
+<li><strong>时间复杂度O(n)</strong></li>
+<li><strong>顺序查找有很大的缺点，数据量很大时，查找效率极为低下，不过优点是这个算法非常简单，对静态查找表的记录没有任何要求，在一些小型数据的查找时，是可以适用的</strong></li>
+</ul>
+</blockquote>
+<hr>
+<h1 id="有序表查找"><a href="#有序表查找" class="headerlink" title="有序表查找"></a>有序表查找</h1><hr>
+<h2 id="折半查找"><a href="#折半查找" class="headerlink" title="折半查找"></a>折半查找</h2><blockquote>
+<ul>
+<li><strong>折半查找（Binary Search）技术，又称为二分查找。它的前提是线性表中的记录必须是关键码有序（通常是从小到大有序），线性表必须采用顺序存储。折半查找的基本思想是：在有序表中，取中间记录作为比较对象，若给定值与中间记录的关键字相等，则查找成功；若给定值小于中间记录的关键字，则在中间记录的左半区继续查找；若给定值大于中间记录的关键字，则在中间记录的右半区继续查找。不断重复上述过程，直到查找成功，或所有查找区域无记录，查找失败为止。</strong></li>
+</ul>
+</blockquote>
+<hr>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 数组a从小到大排序，n为数组长度，target为要查找的目标</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">BinarySearch</span><span class="params">(<span class="type">const</span> <span class="type">int</span> *a, <span class="type">int</span> n, <span class="type">int</span> target)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> ans = <span class="number">-1</span>; <span class="comment">// 未找到则返回-1</span></span><br><span class="line">    <span class="type">int</span> low = <span class="number">0</span>, high = n - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(low &lt;= high)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> mid = (low + high) / <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span>(a[mid] &lt; target)</span><br><span class="line">            low = mid + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(a[mid] &gt; target)</span><br><span class="line">            high = mid - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            ans = mid;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="插值查找"><a href="#插值查找" class="headerlink" title="插值查找"></a>插值查找</h2><blockquote>
+<ul>
+<li><strong>插值查找（Interpolation Search）是根据要查找的关键字key与查找表中的最大最小记录的关键字比较后的查找方法，其核心就在于插值的计算公式( key - a[low]) &#x2F; (a[high] - a[low] )</strong></li>
+</ul>
+</blockquote>
+<hr>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">InterpolationSearch</span><span class="params">(<span class="type">const</span> <span class="type">int</span> *a, <span class="type">int</span> n, <span class="type">int</span> target)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> ans = <span class="number">-1</span>;</span><br><span class="line">    <span class="type">int</span> low = <span class="number">0</span>, high = n - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(low &lt;= high)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> mid = low + (high - low) * (target - a[low]) / (a[high] - a[low]);</span><br><span class="line">        <span class="keyword">if</span>(a[mid] &lt; target)</span><br><span class="line">            low = mid + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(a[mid] &gt; target)</span><br><span class="line">            high = mid - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            ans = mid;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="斐波那契查找"><a href="#斐波那契查找" class="headerlink" title="斐波那契查找"></a>斐波那契查找</h2><blockquote>
+<ul>
+<li><strong>斐波那契查找（Fibonacci Search），它是利用了黄金分割原理来实现的</strong></li>
+</ul>
+</blockquote>
+<hr>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> MAXSIZE 20 <span class="comment">// 斐波那契数列数组的长度大于或等于要查找的表长</span></span></span><br><span class="line"><span class="type">int</span> F[MAXSIZE] = &#123;<span class="number">1</span>, <span class="number">1</span>&#125;;</span><br><span class="line"><span class="type">static</span> <span class="type">void</span> <span class="title function_">Fibonacci</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">2</span>; i &lt; MAXSIZE; i++)</span><br><span class="line">        F[i] = F[i - <span class="number">1</span>] + F[i - <span class="number">2</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 斐波那契查找</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">FibonacciSearch</span><span class="params">(<span class="type">int</span> *a, <span class="type">int</span> n, <span class="type">int</span> target)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// a[N] = &#123;0, 1, 16, 24, 35, 47, 59, 62, 73, 88, 99&#125;</span></span><br><span class="line">    Fibonacci();</span><br><span class="line">    <span class="type">int</span> ans = <span class="number">-1</span>;</span><br><span class="line">    <span class="type">int</span> low = <span class="number">0</span>, high = n - <span class="number">1</span>;</span><br><span class="line">    <span class="type">int</span> k = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(n &gt; F[k] - <span class="number">1</span>) <span class="comment">// 计算n位于斐波那契数列的位置</span></span><br><span class="line">        k++;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = n; i &lt; F[k] - <span class="number">1</span>; i++) <span class="comment">// 将不满的数值补全</span></span><br><span class="line">        a[i] = a[n];</span><br><span class="line">    <span class="keyword">while</span>(low &lt;= high)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> mid = low + F[k - <span class="number">1</span>] - <span class="number">1</span>; <span class="comment">// 计算当前分割的下标</span></span><br><span class="line">        <span class="keyword">if</span>(target &lt; a[mid])</span><br><span class="line">        &#123;</span><br><span class="line">            high = mid - <span class="number">1</span>;</span><br><span class="line">            k--;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(target &gt; a[mid])</span><br><span class="line">        &#123;</span><br><span class="line">            low = mid + <span class="number">1</span>;</span><br><span class="line">            k -= <span class="number">2</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(mid &lt;= n)</span><br><span class="line">            &#123;</span><br><span class="line">                ans = mid;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="comment">// 若mid &gt; n说明是补全数值, 返回n</span></span><br><span class="line">            &#123;</span><br><span class="line">                ans = n;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<blockquote>
+<ul>
+<li><strong>当target &#x3D; a[mid]时，查找就成功</strong></li>
+<li><strong>当target &lt; a[mid]时，新范围是第low个到第mid - 1个，此时范围个数为F[k - 1] - 1个</strong></li>
+<li><strong>当target &gt; a[mid]时，新范围是第mid + 1个到第high个，此时范围个数为F[k - 2] - 1个</strong></li>
+</ul>
+</blockquote>
+<hr>
+<h2 id="比较-1"><a href="#比较-1" class="headerlink" title="比较"></a>比较</h2><blockquote>
+<ul>
+<li><p><strong>折半查找</strong></p>
+<ul>
+<li><strong>折半查找最好情况查找次数为1次，最坏情况查找次数为logn + 1，所以时间复杂度为O(logn)</strong></li>
+<li><strong>折半查找的前提条件是需要有序表顺序存储，对于静态查找表，一次排序后不再变化，这样的算法比较好。但对于需要频繁执行插入或删除操作的数据集来说，维护有序的排序会带来不小的工作量，那就不建议使用</strong></li>
+</ul>
+</li>
+<li><p><strong>插值查找</strong></p>
+<ul>
+<li><strong>时间复杂度为O(logn)</strong></li>
+<li><strong>对于表长较大，而关键字分布又比较均匀的查找表来说，插值查找算法的性能要比折半查找要好得多</strong></li>
+</ul>
+</li>
+<li><p><strong>斐波那契查找</strong>   </p>
+</li>
+<li><p><strong>时间复杂度为O(logn)</strong></p>
+<ul>
+<li><strong>就平均性能来说，斐波那契查找要优于折半查找，但如果是最坏情况，比如这里target &#x3D; 1，那么始终都处于左侧长半区查找，则查找效率要低于折半查找</strong></li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<hr>
+<h2 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h2><blockquote>
+<ul>
+<li><strong>折半查找时进行加法与除法运算（ mid &#x3D; (low + high) &#x2F; 2 ），插值查找进行复杂的四则运算（ mid &#x3D; low + ( high - low) * (key - a[low]) &#x2F; (a[high] - a[low]) ），而斐波那契查找只是最简单加减法运算（ mid &#x3D; low + F[k - 1] - 1 ），并且需要额外的空间来保存斐波那契数列，在海量数据的查找过程中，这种细微的差别可能会影响最终的查找效率</strong></li>
+<li><strong>三种有序表的查找本质上是分割点的选择不同，各有优劣</strong></li>
+</ul>
+</blockquote>
+<hr>
+<h1 id="线性索引查找"><a href="#线性索引查找" class="headerlink" title="线性索引查找"></a>线性索引查找</h1><hr>
+<h2 id="索引概念"><a href="#索引概念" class="headerlink" title="索引概念"></a>索引概念</h2><blockquote>
+<ul>
+<li><strong>数据结构的最终目的是提高数据的处理速度，索引是为了加快查找速度而设计的一种数据结构</strong></li>
+<li><strong>索引就是把一个关键字与它对应的记录相关联的过程</strong></li>
+<li><strong>一个索引由若干个索引项构成，每个索引项至少应包含关键字和其对应的记录在存储器中的位置等信息</strong></li>
+<li><strong>索引技术是组织大型数据库以及磁盘文件的一种重要技术</strong></li>
+<li><strong>索引按照结构可以分为线性索引、树形索引和多级索引</strong></li>
+</ul>
+</blockquote>
+<hr>
+<h2 id="线性索引"><a href="#线性索引" class="headerlink" title="线性索引"></a>线性索引</h2><blockquote>
+<ul>
+<li><strong>线性索引就是将索引项集合组织为线性结构，也称为索引表</strong></li>
+</ul>
+</blockquote>
+<hr>
+<h2 id="稠密索引"><a href="#稠密索引" class="headerlink" title="稠密索引"></a>稠密索引</h2><blockquote>
+<ul>
+<li><strong>稠密索引是指在线性索引中，将数据集中的每个记录对应一个索引项</strong></li>
+<li><strong>对于稠密索引这个索引表来说，索引项一定是按照关键码有序的排列</strong></li>
+<li><strong>索引表有序也就意味着，我们要查找关键字时，可以用到折半、插值、斐波那契等有序查找算法</strong></li>
+</ul>
+</blockquote>
+<hr>
+<h2 id="分块索引"><a href="#分块索引" class="headerlink" title="分块索引"></a>分块索引</h2><blockquote>
+<p><strong>分块有序，是把数据集的记录分成了若干块，并且这些块需要满足两个条件</strong></p>
+<ul>
+<li><p><strong>块内无序</strong></p>
+<ul>
+<li><strong>即每一块内的记录不要求有序</strong></li>
+</ul>
+</li>
+<li><p><strong>块间有序</strong></p>
+<ul>
+<li><strong>即后一块所有记录的关键字都要大于前一块所有记录的关键字</strong></li>
+</ul>
+</li>
+</ul>
+<p><strong>对于分块有序的数据集，将每块对应一个索引项，这种索引方法叫做分块索引</strong></p>
+</blockquote>
+<hr>
+<h2 id="结构描述"><a href="#结构描述" class="headerlink" title="结构描述"></a>结构描述</h2><blockquote>
+<p><strong>分块索引的索引项结构分为三个数据项</strong></p>
+<ul>
+<li><strong>最大关键码，它存储每一块的最大关键字</strong></li>
+<li><strong>存储块中的元素个数，以便循环时使用</strong></li>
+<li><strong>指向块首数据元素的指针，便于开始对这一块中的记录进行遍历</strong></li>
+</ul>
+<p><strong>在分块索引表中查找，就是分两步进行</strong></p>
+<ul>
+<li><strong>在分块索引表中查找要查关键字所在的块，由于分块索引表是块间有序的，因此很容易利用折半、插值等算法得到结果</strong></li>
+<li><strong>根据首指针找到相应的块，并在块中顺序查找关键码，因为块中可以是无序的，所以只能顺序查找</strong></li>
+</ul>
+</blockquote>
+<hr>
+<h2 id="平均查找长度"><a href="#平均查找长度" class="headerlink" title="平均查找长度"></a>平均查找长度</h2><blockquote>
+<ul>
+<li><p><strong>设n个记录的数据集被平均分成m块，每个块中有t条记录，显然n &#x3D; m * t，或者说m &#x3D; n &#x2F; t。假设L<del>b</del>为查找索引表的平均长度，因最好与最差的等概率原则，所以L<del>b</del>的平均长度为(m + 1) &#x2F; 2。L<del>w</del>为块中查找记录的平均查找长度，同理可知它的平均长度为(t + 1) &#x2F; 2</strong></p>
+</li>
+<li><p><strong>这样分块索引查找的平均查找长度为：ASL<del>w</del> &#x3D; L<del>b</del> + L<del>w</del></strong></p>
+</li>
+<li><p><strong>最佳的情况就是分的块数m与块中的记录数t相同，此时意味着n &#x3D; m * t &#x3D; t^2^，即ASL<del>w</del> &#x3D; t + 1 &#x3D; $\sqrt{n}$ + 1</strong></p>
+</li>
+</ul>
+</blockquote>
+<hr>
+<h2 id="倒排索引"><a href="#倒排索引" class="headerlink" title="倒排索引"></a>倒排索引</h2><blockquote>
+<ul>
+<li><p><strong>索引项的通用结构</strong></p>
+<ul>
+<li><strong>次关键码</strong></li>
+<li><strong>记录号表</strong></li>
+</ul>
+</li>
+<li><p><strong>其中记录号表存储具有相同次关键字的所有记录的记录号（可以是指向记录的指针或者是该记录的主关键字）</strong></p>
+</li>
+<li><p><strong>这样的索引方法就是倒排索引（inverted index）</strong></p>
+</li>
+</ul>
+</blockquote>
+<hr>
+
+  </div>
+</article>
+
+
+
+
+          
+          <!-- //actions_mobile 移动端导航栏 -->
+            <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" class="Popup" style="display: none">
+      <ul>
+         
+          <li><a href="/blog/">首页</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/">关于</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer"  class="Popup" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9F%A5%E6%89%BE%E6%A6%82%E8%AE%BA"><span class="toc-number">1.1.</span> <span class="toc-text">查找概论</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9F%A5%E6%89%BE%E5%88%86%E7%B1%BB"><span class="toc-number">1.2.</span> <span class="toc-text">查找分类</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%A1%BA%E5%BA%8F%E8%A1%A8%E6%9F%A5%E6%89%BE"><span class="toc-number">2.</span> <span class="toc-text">顺序表查找</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89"><span class="toc-number">2.1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A1%BA%E5%BA%8F%E8%A1%A8%E6%9F%A5%E6%89%BE%E7%AE%97%E6%B3%95"><span class="toc-number">2.2.</span> <span class="toc-text">顺序表查找算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A1%BA%E5%BA%8F%E8%A1%A8%E6%9F%A5%E6%89%BE%E4%BC%98%E5%8C%96"><span class="toc-number">2.3.</span> <span class="toc-text">顺序表查找优化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AF%94%E8%BE%83"><span class="toc-number">2.4.</span> <span class="toc-text">比较</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">2.5.</span> <span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9C%89%E5%BA%8F%E8%A1%A8%E6%9F%A5%E6%89%BE"><span class="toc-number">3.</span> <span class="toc-text">有序表查找</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8A%98%E5%8D%8A%E6%9F%A5%E6%89%BE"><span class="toc-number">3.1.</span> <span class="toc-text">折半查找</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%92%E5%80%BC%E6%9F%A5%E6%89%BE"><span class="toc-number">3.2.</span> <span class="toc-text">插值查找</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%9F%A5%E6%89%BE"><span class="toc-number">3.3.</span> <span class="toc-text">斐波那契查找</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AF%94%E8%BE%83-1"><span class="toc-number">3.4.</span> <span class="toc-text">比较</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93-1"><span class="toc-number">3.5.</span> <span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E7%B4%A2%E5%BC%95%E6%9F%A5%E6%89%BE"><span class="toc-number">4.</span> <span class="toc-text">线性索引查找</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95%E6%A6%82%E5%BF%B5"><span class="toc-number">4.1.</span> <span class="toc-text">索引概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E7%B4%A2%E5%BC%95"><span class="toc-number">4.2.</span> <span class="toc-text">线性索引</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A8%A0%E5%AF%86%E7%B4%A2%E5%BC%95"><span class="toc-number">4.3.</span> <span class="toc-text">稠密索引</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E5%9D%97%E7%B4%A2%E5%BC%95"><span class="toc-number">4.4.</span> <span class="toc-text">分块索引</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E6%9E%84%E6%8F%8F%E8%BF%B0"><span class="toc-number">4.5.</span> <span class="toc-text">结构描述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B9%B3%E5%9D%87%E6%9F%A5%E6%89%BE%E9%95%BF%E5%BA%A6"><span class="toc-number">4.6.</span> <span class="toc-text">平均查找长度</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%80%92%E6%8E%92%E7%B4%A2%E5%BC%95"><span class="toc-number">4.7.</span> <span class="toc-text">倒排索引</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer"  class="Popup" style="display: none">
+      <ul>
+  <li> 开发中. </li>
+  <!-- <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://www.t1kcode.top/posts/20210422183910-27506.html"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://www.t1kcode.top/posts/20210422183910-27506.html&text=查找结构"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://www.t1kcode.top/posts/20210422183910-27506.html&title=查找结构"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://www.t1kcode.top/posts/20210422183910-27506.html&is_video=false&description=查找结构"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=查找结构&body=Check out this article: https://www.t1kcode.top/posts/20210422183910-27506.html"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://www.t1kcode.top/posts/20210422183910-27506.html&title=查找结构"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://www.t1kcode.top/posts/20210422183910-27506.html&title=查找结构"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://www.t1kcode.top/posts/20210422183910-27506.html&title=查找结构"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://www.t1kcode.top/posts/20210422183910-27506.html&title=查找结构"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://www.t1kcode.top/posts/20210422183910-27506.html&name=查找结构&description=&lt;h1 id=&#34;前言&#34;&gt;&lt;a href=&#34;#前言&#34; class=&#34;headerlink&#34; title=&#34;前言&#34;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;hr&gt;
+&lt;h2 id=&#34;查找概论&#34;&gt;&lt;a href=&#34;#查找概论&#34; class=&#34;headerlink&#34; title=&#34;查找概论&#34;&gt;&lt;/a&gt;查找概论&lt;/h2&gt;&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;查找表（Search Table）是由同一类型的数据元素(或记录)构成的集合&lt;/strong&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://www.t1kcode.top/posts/20210422183910-27506.html&t=查找结构"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li> -->
+
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <span id="menu" Popup="#nav-footer" class="icon"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</span>
+        <span id="toc" Popup="#toc-footer" class="icon"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</span>
+        <span id="share" Popup="#share-footer" class="icon"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</span>
+        <span id="top" Popup="" style="display:none" class="icon" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</span>
+    </div>
+
+  </div>
+</div>
+
+            <!-- 图片弹窗 -->
+            <div class="img-pup" style="display: none;">
+              <img>
+            </div>
+          
+
+          <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2019-2023
+    t1k
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/blog/">首页</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/">关于</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+          <!-- jquery -->
+ 
+  
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+
+<script src="/lib/jquery/jquery.pjax.js"></script>
+
+
+
+<!-- clipboard -->
+
+   
+    
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功!");
+      e.clearSelection();
+      setTimeout(()=>{
+        e.trigger.setAttribute('aria-label', "复制到粘贴板!");
+      },1500)
+    })
+  })
+  </script>
+
+
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+     
+      </div>   
+    </div>
+      
+    
+<script src="/js/main.js"></script>
+
+    </body>
+    </html>

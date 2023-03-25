@@ -1,0 +1,1400 @@
+<!DOCTYPE html>
+<html lang=zh-CN>
+  <head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="前言 树的实现及相关操作  编程语言：C">
+<meta property="og:type" content="article">
+<meta property="og:title" content="树">
+<meta property="og:url" content="https://www.t1kcode.top/posts/20210501195710-23384.html">
+<meta property="og:site_name" content="t1kcode">
+<meta property="og:description" content="前言 树的实现及相关操作  编程语言：C">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://takdoor-1304868802.cos.ap-shanghai.myqcloud.com/blog/ADT%E6%A0%91.png">
+<meta property="og:image" content="https://takdoor-1304868802.cos.ap-shanghai.myqcloud.com/blog/%E6%A0%91%E6%BC%94%E7%A4%BA1.png">
+<meta property="og:image" content="https://takdoor-1304868802.cos.ap-shanghai.myqcloud.com/blog/%E5%AD%A9%E5%AD%90%E8%A1%A8%E7%A4%BA%E6%B3%95%E6%96%B9%E6%A1%88%E4%B8%80%E6%BC%94%E7%A4%BA.png">
+<meta property="og:image" content="https://takdoor-1304868802.cos.ap-shanghai.myqcloud.com/blog/%E5%AD%A9%E5%AD%90%E8%A1%A8%E7%A4%BA%E6%B3%95%E6%96%B9%E6%A1%88%E4%BA%8C%E6%BC%94%E7%A4%BA.png">
+<meta property="og:image" content="https://takdoor-1304868802.cos.ap-shanghai.myqcloud.com/blog/%E5%AD%A9%E5%AD%90%E8%A1%A8%E7%A4%BA%E6%B3%95%E6%BC%94%E7%A4%BA.png">
+<meta property="og:image" content="https://takdoor-1304868802.cos.ap-shanghai.myqcloud.com/blog/%E5%8F%8C%E4%BA%B2%E5%AD%A9%E5%AD%90%E8%A1%A8%E7%A4%BA%E6%B3%95%E6%BC%94%E7%A4%BA.png">
+<meta property="og:image" content="https://takdoor-1304868802.cos.ap-shanghai.myqcloud.com/blog/%E5%AD%A9%E5%AD%90%E5%85%84%E5%BC%9F%E8%A1%A8%E7%A4%BA%E6%B3%95%E6%BC%94%E7%A4%BA.png">
+<meta property="og:image" content="https://takdoor-1304868802.cos.ap-shanghai.myqcloud.com/blog/%E5%AD%A9%E5%AD%90%E5%85%84%E5%BC%9F%E8%A1%A8%E7%A4%BA%E6%B3%95%E5%8F%98%E5%BD%A2.png">
+<meta property="og:image" content="https://takdoor-1304868802.cos.ap-shanghai.myqcloud.com/blog/%E4%BA%8C%E5%8F%89%E6%A0%91%E6%BC%94%E7%A4%BA.png">
+<meta property="article:published_time" content="2021-05-01T11:57:10.000Z">
+<meta property="article:modified_time" content="2023-03-25T15:41:26.472Z">
+<meta property="article:author" content="t1k">
+<meta property="article:tag" content="数据结构">
+<meta property="article:tag" content="C">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://takdoor-1304868802.cos.ap-shanghai.myqcloud.com/blog/ADT%E6%A0%91.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/Rolan.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    
+      <title>t1kcode·树</title>
+    
+    
+    <!-- styles -->
+
+    <!-- 默认CSS引入方法 -->
+    
+<link rel="stylesheet" href="/css/layout.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+
+
+  
+  <!-- L2Dwidget -->
+  
+<script src="/lib/live2d/L2Dwidget.min.js"></script>
+
+
+  <script>
+  // 猫
+  L2Dwidget.init({
+    model: {
+      jsonPath: "/lib/live2d/tororo/assets/tororo.model.json",
+    },
+    display: {
+      superSample: 2,
+      width: 60,
+      height: 80,
+      position: 'right',
+      hOffset: 0,
+      vOffset: 20,
+    },
+    mobile: {
+      show: true,
+      scale: 1,
+      motion: true,
+    },
+    react: {
+      opacityDefault: 1,
+      opacityOnHover: 1,
+    }
+  })
+  //百度搜索爬虫
+
+
+
+var _hmt = _hmt || [];
+(function () {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?7e9a19e5e700f1a2607b47c7bd6b35e8";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+
+  </script>
+  <meta name="baidu-site-verification" content="code-dIan6MAmy5" />
+  
+
+  <!-- styles -->
+
+
+ 
+  <link
+    rel="preload"
+    href="/lib/font-awesome/css/all.min.css"
+    as="style"
+    onload="this.onload=null;this.rel='stylesheet'"
+  />
+  <noscript
+    ><link
+      rel="stylesheet"
+      href="/lib/font-awesome/css/all.min.css"
+  /></noscript>
+
+
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+    <body class="max-width mx-auto">
+     <div class="home">
+        <!-- //actions_desktop 右上角导航栏 -->
+      <aside id="#aside" class="hubzy_left">
+        
+          <div class="hubzy_logo">
+	<a href="/">
+		
+		  
+					<div id="logo" style="background-image: url(/images/logo.jpg);"></div>
+					
+					  
+	  </a>
+	  <div id="title">
+		<a href="/">
+		  <h1>
+			t1k
+		  </h1>
+		</a>
+		
+			<!-- icon列表 -->
+			  <p class="iconlist">
+				<!-- # > index.find_me_on -->
+				
+				
+				
+				
+				  
+					<a class="icon" target="_blank" rel="noopener" href="https://github.com/t1kcode" aria-label="github">
+					  <i class="fab fa-github"></i></a>
+					  
+			     
+				  
+				
+				  
+					<a class="icon" target="_blank" rel="noopener" href="https://gitee.com/t1kcode">
+					  <i><svg class='diyIcon'  viewBox="0 0 1024 1024" ><path d="M512 1024C229.248 1024 0 794.752 0 512S229.248 0 512 0s512 229.248 512 512-229.248 512-512 512z m259.168-568.896h-290.752a25.28 25.28 0 0 0-25.28 25.28l-0.032 63.232c0 13.952 11.296 25.28 25.28 25.28h177.024a25.28 25.28 0 0 1 25.28 25.28v12.64a75.84 75.84 0 0 1-75.84 75.84h-240.224a25.28 25.28 0 0 1-25.28-25.28v-240.192a75.84 75.84 0 0 1 75.84-75.84h353.92a25.28 25.28 0 0 0 25.28-25.28l0.064-63.2a25.312 25.312 0 0 0-25.28-25.312H417.184a189.632 189.632 0 0 0-189.632 189.6v353.952c0 13.952 11.328 25.28 25.28 25.28h372.928a170.656 170.656 0 0 0 170.656-170.656v-145.376a25.28 25.28 0 0 0-25.28-25.28z"></path></svg></i>
+					</a>
+				  
+			  
+				  
+				
+			  </p>
+			
+	  </div>
+</div>
+<!-- 搜索栏 -->
+<div id="search">
+	<input class="search-input" type="text" placeholder="search">
+	<span id="search-icon" class="fa fa-bars" title="展开目录"></span>
+</div>
+
+<!-- 侧边目录栏 -->
+<div id="tree">
+	
+
+	
+					<ul>
+						<li class="file">
+							<a href="/posts/20191207173653-34322.html">
+								<i class="fa fa-file"></i>
+								2019-12-07-个人博客搭建流程及一些问题
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/posts/20210308180810-45748.html">
+								<i class="fa fa-file"></i>
+								2021-03-12-单链表
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/posts/20210305160710-52078.html">
+								<i class="fa fa-file"></i>
+								2021-03-13-顺序表
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/posts/20210314161900-40356.html">
+								<i class="fa fa-file"></i>
+								2021-03-14-C++那些事
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/posts/20210323180810-48829.html">
+								<i class="fa fa-file"></i>
+								2021-03-23-循环链表
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/posts/20210328161810-12508.html">
+								<i class="fa fa-file"></i>
+								2021-03-28-双向循环链表
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/posts/20210401203910-37273.html">
+								<i class="fa fa-file"></i>
+								2021-04-01-栈
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/posts/20210410143910-48527.html">
+								<i class="fa fa-file"></i>
+								2021-04-010-基数排序
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/posts/20210402190010-36496.html">
+								<i class="fa fa-file"></i>
+								2021-04-02-栈的应用
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/posts/20210403143910-26671.html">
+								<i class="fa fa-file"></i>
+								2021-04-03-队列
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file active">
+							<a href="/posts/20210501195710-23384.html">
+								<i class="fa fa-file"></i>
+								2021-05-01-树
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/posts/20210422183910-27506.html">
+								<i class="fa fa-file"></i>
+								2021-4-22-查找
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/posts/20221001175710-33701.html">
+								<i class="fa fa-file"></i>
+								2022-10-01-JAVA基础
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/posts/20221203185710-45889.html">
+								<i class="fa fa-file"></i>
+								2022-12-03-电脑商城项目
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/posts/20230216100710-1bff3c65.html">
+								<i class="fa fa-file"></i>
+								2023-2-16-MyBatis
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/posts/20230218080710-bed8b4fb.html">
+								<i class="fa fa-file"></i>
+								2023-2-18-MyBatis Generator
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/posts/20230227202410-ed4aca2b.html">
+								<i class="fa fa-file"></i>
+								2023-2-27-SpringSecurityJWT
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/posts/20230311163310-3b72b36d.html">
+								<i class="fa fa-file"></i>
+								2023-3-11-Mall整合SpringTask
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/posts/20230311153410-8ead567e.html">
+								<i class="fa fa-file"></i>
+								2023-3-11-MongoDB
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/posts/20230314103110-e0a3f475.html">
+								<i class="fa fa-file"></i>
+								2023-3-14-RabbitMQ_JAVA
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/posts/20230315220410-e0a3f475.html">
+								<i class="fa fa-file"></i>
+								2023-3-15-Mall整合RabbitMQ
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/posts/20230317105310-7d1f0793.html">
+								<i class="fa fa-file"></i>
+								2023-3-17-SpringBoot中使用AOP记录接口访问日志
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/posts/20230302211010-feec57d.html">
+								<i class="fa fa-file"></i>
+								2023-3-2-Spring Data Redis
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/posts/20230320134010-cc2903eb.html">
+								<i class="fa fa-file"></i>
+								2023-3-20-Mall商城
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/posts/20230323121710-57e98fa8.html">
+								<i class="fa fa-file"></i>
+								2023-3-23-Mall整合Elasticsearch
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/posts/20230302105710-8aebab8e.html">
+								<i class="fa fa-file"></i>
+								2023-3-3-Mall-SpringSecurity-JWT
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/posts/20230303201610-6b63fba0.html">
+								<i class="fa fa-file"></i>
+								2023-3-3-Swagger-UI
+							</a>
+						</li>
+					</ul>
+	
+					<ul>
+						<li class="file">
+							<a href="/posts/20230305194310-d48132d3.html">
+								<i class="fa fa-file"></i>
+								2023-3-5-ElasticSearch
+							</a>
+						</li>
+					</ul>
+	
+</div>
+
+        
+      </aside>
+      <div id="header-post" class="hubzy_right">
+        
+          
+  <!-- <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a> -->
+  <!-- <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a> -->
+  <!-- <a id="top-icon-tablet" href="#" "Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"
+    style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a> -->
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        
+          <li><a href="/blog/">
+              首页
+            </a></li>
+          
+          <li><a href="/archives/">
+              归档
+            </a></li>
+          
+          <li><a href="/">
+              关于
+            </a></li>
+          
+      </ul>
+    </span>
+    <br />
+    <div id="toc">
+      
+    </div>
+    <br />
+    <span id="actions">
+      <ul>
+        <!--// 
+          <li><a class="icon" aria-label="上一篇 " href="/posts/20221001175710-33701.html"><i
+                class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();"
+                onmouseout="$('#i-prev').toggle();"></i></a></li>
+          
+            
+              <li><a class="icon" aria-label="下一篇 " href="/posts/20210422183910-27506.html"><i
+                    class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();"
+                    onmouseout="$('#i-next').toggle();"></i></a></li>
+              // -->
+                <li><a class="icon" aria-label="返回顶部 " href="#"
+                    onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up"
+                      aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a>
+                </li>
+                <li><a class="icon" aria-label="分享文章 " href="#"><i class="fas fa-share-alt"
+                      aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();"
+                      onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">
+        上一篇
+      </span>
+      <span id="i-next" class="info" style="display:none;">
+        下一篇
+      </span>
+      <span id="i-top" class="info" style="display:none;">
+        返回顶部
+      </span>
+      <span id="i-share" class="info" style="display:none;">
+        分享文章
+      </span>
+    </span>
+    <br />
+    <div id="share" style="display: none">
+      <ul>
+  <li> 开发中. </li>
+  <!-- <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://www.t1kcode.top/posts/20210501195710-23384.html"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://www.t1kcode.top/posts/20210501195710-23384.html&text=树"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://www.t1kcode.top/posts/20210501195710-23384.html&title=树"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://www.t1kcode.top/posts/20210501195710-23384.html&is_video=false&description=树"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=树&body=Check out this article: https://www.t1kcode.top/posts/20210501195710-23384.html"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://www.t1kcode.top/posts/20210501195710-23384.html&title=树"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://www.t1kcode.top/posts/20210501195710-23384.html&title=树"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://www.t1kcode.top/posts/20210501195710-23384.html&title=树"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://www.t1kcode.top/posts/20210501195710-23384.html&title=树"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://www.t1kcode.top/posts/20210501195710-23384.html&name=树&description=&lt;h1 id=&#34;前言&#34;&gt;&lt;a href=&#34;#前言&#34; class=&#34;headerlink&#34; title=&#34;前言&#34;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;树的实现及相关操作&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;编程语言：C&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://www.t1kcode.top/posts/20210501195710-23384.html&t=树"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li> -->
+
+</ul>
+
+    </div>
+
+  </span>
+
+        
+      </div>
+       
+      <div class="content  hubzy_center">
+        
+          <!-- //body 引入首页和md编译后的页面 -->
+          <!-- md 编译成 html 后的文件模板 -->
+
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="hubzy_center_title">
+    
+    <h1 class="posttitle" itemprop="name headline">
+        树
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">t1k</span>
+      </span>
+      <!-- 文章时间和首页时间 -->
+
+    <div class="postdate">
+      
+        <time datetime="2021-05-01T11:57:10.000Z" itemprop="datePublished">2021-05-01</time>
+        
+        <!-- (Updated: <time datetime="2023-03-25T15:41:26.472Z" itemprop="dateModified">2023-03-25</time>) -->
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a> › <a class="category-link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/C/">C</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/C/" rel="tag">C</a>, <a class="tag-link-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content conterDiy"  id="article" itemprop="articleBody">
+    <em class="nubScript">
+        ·本篇:3.6k字 大约需要: 13分钟
+    </em>
+    <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><hr>
+<p><strong>树的实现及相关操作</strong></p>
+<blockquote>
+<p><strong>编程语言：C</strong></p>
+</blockquote>
+<hr>
+<span id="more"></span>
+
+<h1 id="树"><a href="#树" class="headerlink" title="树"></a>树</h1><hr>
+<h2 id="树的定义"><a href="#树的定义" class="headerlink" title="树的定义"></a>树的定义</h2><blockquote>
+<p><strong>树（Tree）是n（n ≥ 0）个结点的有限集</strong></p>
+<p><strong>n &#x3D; 0时称为空树</strong></p>
+<p><strong>在任意一棵非空树中：</strong></p>
+<ul>
+<li><strong>有且仅有一个特定的称为根（Root）的结点</strong></li>
+<li><strong>当n &gt; 1时，其余结点可分为m（m &gt; 0）个互不相交的有限集T<del>1</del>、T<del>2</del>、……、T<del>m</del>，其中每一个集合本身又是一棵树，并且称为根的子树（SubTree）</strong></li>
+</ul>
+</blockquote>
+<hr>
+<h2 id="结点分类"><a href="#结点分类" class="headerlink" title="结点分类"></a>结点分类</h2><blockquote>
+<p><strong>结点拥有的子树数称为结点的度（Degree）</strong></p>
+<p><strong>度为0的结点称为叶节点（Leaf）或终端结点；度不为0的结点称为非终端结点或分支结点</strong></p>
+<p><strong>除根节点之外，分支结点也称为内部节点</strong></p>
+<p><strong>树的度是树内各结点的度的最大值</strong></p>
+</blockquote>
+<hr>
+<h2 id="结点间的关系"><a href="#结点间的关系" class="headerlink" title="结点间的关系"></a>结点间的关系</h2><blockquote>
+<p><strong>结点的子树的根称为该结点的孩子（Child），相应的，该结点称为孩子的双亲（Parent）</strong></p>
+<p><strong>同一个双亲的孩子之间互称兄弟（Sibling）</strong></p>
+<p><strong>结点的祖先是从根到该结点所经分支上的所有结点，反之，以某结点为根的子树中的任一结点都称为该结点的子孙</strong></p>
+</blockquote>
+<hr>
+<h2 id="树的其他相关概念"><a href="#树的其他相关概念" class="headerlink" title="树的其他相关概念"></a>树的其他相关概念</h2><blockquote>
+<p><strong>结点的层次（Level）是从根开始定义起，根为第一层，根的孩子为第二层</strong></p>
+<p><strong>双亲在同一层的结点互为堂兄弟</strong></p>
+<p><strong>树中结点的最大层次称为树的深度（Depth）或高度</strong></p>
+<p><strong>如果将树中结点的各子树看成从左至右是有次序的，不能互换的，则称该树为有序树，否则称为无序树</strong></p>
+<p><strong>森林（Forest）是m（m ≥ 0）棵互不相交的树的结合</strong></p>
+</blockquote>
+<hr>
+<h2 id="树的抽象数据类型"><a href="#树的抽象数据类型" class="headerlink" title="树的抽象数据类型"></a>树的抽象数据类型</h2><div align=center>
+<img src="https://takdoor-1304868802.cos.ap-shanghai.myqcloud.com/blog/ADT树.png" style="zoom: 33%;" />
+</div>
+
+
+<hr>
+<h1 id="树的存储结构"><a href="#树的存储结构" class="headerlink" title="树的存储结构"></a>树的存储结构</h1><hr>
+<h2 id="双亲表示法"><a href="#双亲表示法" class="headerlink" title="双亲表示法"></a>双亲表示法</h2><blockquote>
+<p><strong>假设以一组连续空间存储树的结点，同时在每个结点中，附设一个指示器指示其双亲结点在数组中的位置</strong></p>
+</blockquote>
+<hr>
+<h3 id="结构代码"><a href="#结构代码" class="headerlink" title="结构代码"></a>结构代码</h3><hr>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> MAXSIZE 100</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">PTNode</span> // 结点结构</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="type">int</span> data; <span class="comment">// 结点数据，可以为任意数据类型</span></span><br><span class="line">    <span class="type">int</span> parent; <span class="comment">// 双亲位置</span></span><br><span class="line">&#125; PTNode;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> // 树结构</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    PTNode nodes[MAXSIZE];</span><br><span class="line">    <span class="type">int</span> r, n; <span class="comment">// 根的位置和结点数</span></span><br><span class="line">&#125; PTree;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<blockquote>
+<p><strong>由于根结点是没有双亲的，所以我们约定根结点的位置域设置为-1，这也意味着所有的结点都存有它双亲的位置</strong></p>
+</blockquote>
+<hr>
+<center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+    src="https://takdoor-1304868802.cos.ap-shanghai.myqcloud.com/blog/树演示1.png">
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #470024;
+    padding: 2px;">图一</div>
+</center>
+
+
+<table>
+<thead>
+<tr>
+<th align="center">下标</th>
+<th align="center">data</th>
+<th align="center">parent</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">0</td>
+<td align="center">A</td>
+<td align="center">-1</td>
+</tr>
+<tr>
+<td align="center">1</td>
+<td align="center">B</td>
+<td align="center">0</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">C</td>
+<td align="center">0</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center">D</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td align="center">E</td>
+<td align="center">2</td>
+</tr>
+<tr>
+<td align="center">5</td>
+<td align="center">F</td>
+<td align="center">2</td>
+</tr>
+<tr>
+<td align="center">6</td>
+<td align="center">G</td>
+<td align="center">3</td>
+</tr>
+<tr>
+<td align="center">7</td>
+<td align="center">H</td>
+<td align="center">3</td>
+</tr>
+<tr>
+<td align="center">8</td>
+<td align="center">I</td>
+<td align="center">3</td>
+</tr>
+<tr>
+<td align="center">9</td>
+<td align="center">J</td>
+<td align="center">4</td>
+</tr>
+</tbody></table>
+<hr>
+<blockquote>
+<ul>
+<li><strong>表中为双亲表示法各结点的信息</strong></li>
+</ul>
+</blockquote>
+<blockquote>
+<p><strong>这样的存储结构，可以根据结点的parent指针很容易找到它的双亲结点，时间复杂度为O(1)，直到parent为-1时，表示找到了树结点的根，但是如果想知道结点的孩子是什么，需要遍历整个结构才行</strong></p>
+<p><strong>当然，我们可以增加一个结点最左边孩子的域，叫它长子域，这样就可以得到结点的孩子，如果没有孩子的结点，这个长子域就设置为-1，如下表所示</strong></p>
+</blockquote>
+<hr>
+<table>
+<thead>
+<tr>
+<th align="center">下标</th>
+<th align="center">data</th>
+<th align="center">parent</th>
+<th align="center">firstchild</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">0</td>
+<td align="center">A</td>
+<td align="center">-1</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">1</td>
+<td align="center">B</td>
+<td align="center">0</td>
+<td align="center">3</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">C</td>
+<td align="center">0</td>
+<td align="center">4</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center">D</td>
+<td align="center">1</td>
+<td align="center">6</td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td align="center">E</td>
+<td align="center">2</td>
+<td align="center">9</td>
+</tr>
+<tr>
+<td align="center">5</td>
+<td align="center">F</td>
+<td align="center">2</td>
+<td align="center">-1</td>
+</tr>
+<tr>
+<td align="center">6</td>
+<td align="center">G</td>
+<td align="center">3</td>
+<td align="center">-1</td>
+</tr>
+<tr>
+<td align="center">7</td>
+<td align="center">H</td>
+<td align="center">3</td>
+<td align="center">-1</td>
+</tr>
+<tr>
+<td align="center">8</td>
+<td align="center">I</td>
+<td align="center">3</td>
+<td align="center">-1</td>
+</tr>
+<tr>
+<td align="center">9</td>
+<td align="center">J</td>
+<td align="center">4</td>
+<td align="center">-1</td>
+</tr>
+</tbody></table>
+<hr>
+<blockquote>
+<ul>
+<li><strong>对于0个或1个孩子结点来说，这样的结构是解决了要找结点孩子的问题，甚至是有两个孩子，知道了长子是谁，另一个当然就是次子了</strong></li>
+<li><strong>但是双亲表示法无法体现出兄弟之间的关系，可以增加一个右兄弟域来体现兄弟关系，每一个结点如果它存在右兄弟，则记录下右兄弟的下标，如果右兄弟不存在，则赋值为-1，如下表所示</strong></li>
+</ul>
+</blockquote>
+<hr>
+<table>
+<thead>
+<tr>
+<th align="center">下标</th>
+<th align="center">data</th>
+<th align="center">parent</th>
+<th align="center">rightsib</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">0</td>
+<td align="center">A</td>
+<td align="center">-1</td>
+<td align="center">-1</td>
+</tr>
+<tr>
+<td align="center">1</td>
+<td align="center">B</td>
+<td align="center">0</td>
+<td align="center">2</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">C</td>
+<td align="center">0</td>
+<td align="center">-1</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center">D</td>
+<td align="center">1</td>
+<td align="center">-1</td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td align="center">E</td>
+<td align="center">2</td>
+<td align="center">5</td>
+</tr>
+<tr>
+<td align="center">5</td>
+<td align="center">F</td>
+<td align="center">2</td>
+<td align="center">-1</td>
+</tr>
+<tr>
+<td align="center">6</td>
+<td align="center">G</td>
+<td align="center">3</td>
+<td align="center">7</td>
+</tr>
+<tr>
+<td align="center">7</td>
+<td align="center">H</td>
+<td align="center">3</td>
+<td align="center">8</td>
+</tr>
+<tr>
+<td align="center">8</td>
+<td align="center">I</td>
+<td align="center">3</td>
+<td align="center">-1</td>
+</tr>
+<tr>
+<td align="center">9</td>
+<td align="center">J</td>
+<td align="center">4</td>
+<td align="center">-1</td>
+</tr>
+</tbody></table>
+<hr>
+<blockquote>
+<ul>
+<li><strong>但如果结点的孩子很多，超过了2个。我们又关注结点的双亲，又关注结点的孩子，还关注结点的兄弟，而且对时间的遍历要求还比较高，那么可以把此结构扩展为有双亲域、长子域、再有右兄弟域</strong></li>
+</ul>
+</blockquote>
+<hr>
+<h2 id="孩子表示法"><a href="#孩子表示法" class="headerlink" title="孩子表示法"></a>孩子表示法</h2><blockquote>
+<p><strong>每个结点有多个指针域，其中每个指针指向一棵子树的根结点，把这种方法叫做多重链表表示法</strong></p>
+<p><strong>不过，树的每个结点的度，也就是它的孩子个数是不同的，所以可以设计两种方案来解决</strong></p>
+</blockquote>
+<hr>
+<h3 id="方案一"><a href="#方案一" class="headerlink" title="方案一"></a>方案一</h3><hr>
+<blockquote>
+<p><strong>指针域的个数等于树的度</strong></p>
+<p><strong>树的度是树各个结点度的最大值</strong></p>
+<p><strong>其结构如下表所示</strong></p>
+</blockquote>
+<hr>
+<table>
+    <tr>
+        <td>data</td>
+        <td>child1</td>
+        <td>child2</td>
+        <td>child3</td>
+        <td>......</td>
+        <td>childn</td>
+    </tr>
+</table>
+
+<hr>
+<blockquote>
+<ul>
+<li><strong>其中data是数据域，child1到childn是指针域，用来指向该结点的孩子结点</strong></li>
+</ul>
+</blockquote>
+<blockquote>
+<p><strong>对于图一的树来说，树的度是3，所以我们的指针域的个数是3，如下图所示</strong></p>
+</blockquote>
+<hr>
+<center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+    src="https://takdoor-1304868802.cos.ap-shanghai.myqcloud.com/blog/孩子表示法方案一演示.png">
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #470024;
+    padding: 2px;">图二</div>
+</center>
+
+<hr>
+<blockquote>
+<p><strong>从图中可以看到，这种方法对于树中各结点的度相差很大时，显然是很浪费空间的，因为有很多结点的指针域都是空的</strong></p>
+</blockquote>
+<hr>
+<h3 id="方案二"><a href="#方案二" class="headerlink" title="方案二"></a>方案二</h3><hr>
+<blockquote>
+<p><strong>第二种方案每个结点指针域个数等于该结点的度，专门取一个位置来存储结点指针域的个数，其结构如下表所示</strong></p>
+</blockquote>
+<hr>
+<table>
+    <tr>
+        <td>data</td>
+        <td>degree</td>
+        <td>child1</td>
+        <td>child2</td>
+        <td>child3</td>
+        <td>......</td>
+        <td>childn</td>
+    </tr>
+</table>
+
+<blockquote>
+<ul>
+<li><strong>其中data为数据域，degree为度域，即存储该结点的孩子结点的个数，child1到childn为指针域，指向该结点的各个孩子的结点</strong></li>
+</ul>
+<p><strong>对于图二的树，用方案二实现如下图</strong></p>
+</blockquote>
+<hr>
+<center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+    src="https://takdoor-1304868802.cos.ap-shanghai.myqcloud.com/blog/孩子表示法方案二演示.png">
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #470024;
+    padding: 2px;">图三</div>
+</center>
+
+<hr>
+<blockquote>
+<p><strong>这种方法克服了浪费空间的缺点，对空间利用率是很高了，但是由于各个结点的链表是不相同的结构，加上要维护结点的度的数值，在运算上就会带来时间上的损耗</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>仔细观察，我们为了要遍历整棵树，把每个结点放到一个顺序存储结构的数组中是合理的，但每个结点的孩子有多少是不确定的，所以我们再对每个结点的孩子建立一个单链表体现它们的关系</strong></p>
+</blockquote>
+<hr>
+<h3 id="孩子表示法-1"><a href="#孩子表示法-1" class="headerlink" title="孩子表示法"></a>孩子表示法</h3><hr>
+<blockquote>
+<p><strong>把每个结点的孩子结点排列起来，以单链表作存储结构，则n个结点有n个孩子链表，如果是叶子结点则此单链表为空。然后n个头指针又组成一个线性表，采用顺序存储结构，存放进一个一维数组中，如下图所示</strong></p>
+</blockquote>
+<center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+    src="https://takdoor-1304868802.cos.ap-shanghai.myqcloud.com/blog/孩子表示法演示.png">
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #470024;
+    padding: 2px;">图四</div>
+</center>
+
+<blockquote>
+<p><strong>为此，设计两种结点结构，一个是孩子链表的孩子结点</strong></p>
+</blockquote>
+<table>
+    <tr>
+        <td>child</td>
+        <td>next</td>
+    </tr>
+</table>
+
+<blockquote>
+<ul>
+<li><strong>其中child是数据域，用来存储某个结点在表头数组中的下标，next是指针域，用来存储指向某结点的下一个孩子结点的指针</strong></li>
+</ul>
+</blockquote>
+<blockquote>
+<p><strong>另一个是表头数组的表头结点</strong></p>
+</blockquote>
+<table>
+    <tr>
+        <td>data</td>
+        <td>firstchild</td>
+    </tr>
+</table>
+
+<blockquote>
+<ul>
+<li><strong>其中data是数据域，存储某结点的数据信息，firstchild是头指针域，存储该结点的孩子链表的头指针</strong></li>
+</ul>
+</blockquote>
+<hr>
+<h4 id="结构代码-1"><a href="#结构代码-1" class="headerlink" title="结构代码"></a>结构代码</h4><hr>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> MAXTREESIZE 100</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">CTNode</span> // 孩子结点</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="type">int</span> child;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">CTNode</span> *<span class="title">next</span>;</span></span><br><span class="line">&#125; CTNode, *ChildPtr;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> // 表头结构</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="type">int</span> data; <span class="comment">// 可以为任意数据类型</span></span><br><span class="line">    ChildPtr FirstChild;</span><br><span class="line">&#125; CTBox;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> </span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    CTBox nodes[MAXTREESIZE]; <span class="comment">// 结点数组</span></span><br><span class="line">    <span class="type">int</span> r, n; <span class="comment">// 根的位置和结点数</span></span><br><span class="line">&#125; CTree;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>这样的结构对于我们要查找某个结点的某个孩子，或者找某个结点的兄弟，只需要查找这个结点的孩子单链表即可，对于遍历整棵树也很方便，只需要对头结点数组循环即可</strong></p>
+</blockquote>
+<hr>
+<blockquote>
+<p><strong>但是，我如何知道某个结点的双亲是谁呢？需要将整棵树遍历才行</strong></p>
+<p><strong>所以将双亲表示法和孩子表示法综合一下</strong></p>
+</blockquote>
+<hr>
+<h3 id="双亲孩子表示法"><a href="#双亲孩子表示法" class="headerlink" title="双亲孩子表示法"></a>双亲孩子表示法</h3><hr>
+<blockquote>
+<p><strong>只需要在孩子表示法的表头结点中加入双亲结点的下标即可，根结点的下标设为-1</strong></p>
+</blockquote>
+<hr>
+<center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+    src="https://takdoor-1304868802.cos.ap-shanghai.myqcloud.com/blog/双亲孩子表示法演示.png">
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #470024;
+    padding: 2px;">图五</div>
+</center>
+
+<hr>
+<h4 id="结构代码-2"><a href="#结构代码-2" class="headerlink" title="结构代码"></a>结构代码</h4><hr>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> MAXTREESIZE 100</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">CTNode</span> // 孩子结点</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="type">int</span> child;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">CTNode</span> *<span class="title">next</span>;</span></span><br><span class="line">&#125; CTNode, *ChildPtr;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> // 表头结构</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="type">int</span> data; <span class="comment">// 可以为任意数据类型</span></span><br><span class="line">    <span class="type">int</span> Parent; <span class="comment">// 双亲结点的下标</span></span><br><span class="line">    ChildPtr FirstChild;</span><br><span class="line">&#125; CTBox;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    CTBox nodes[MAXTREESIZE]; <span class="comment">// 结点数组</span></span><br><span class="line">    <span class="type">int</span> r, n; <span class="comment">// 根的位置和结点数</span></span><br><span class="line">&#125; CTree;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="孩子兄弟表示法"><a href="#孩子兄弟表示法" class="headerlink" title="孩子兄弟表示法"></a>孩子兄弟表示法</h2><blockquote>
+<p><strong>任意一棵树，它的结点的第一个孩子如果存在就是唯一的，它的右兄弟如果存在也是唯一的。因此，我们设置两个指针，分别指向该结点的第一个孩子和此结点的兄弟</strong></p>
+<p><strong>结点结构如下表所示</strong></p>
+</blockquote>
+<table>
+    <tr>
+        <td>data</td>
+        <td>firstchild</td>
+        <td>rightsib</td>
+    </tr>
+</table>
+
+<blockquote>
+<ul>
+<li><strong>其中data是数据域，firstchild为指针域，存储该结点的第一个孩子结点的存储地址，rightsib是指针域，存储该结点的右兄弟结点的存储地址</strong></li>
+</ul>
+</blockquote>
+<hr>
+<h3 id="结构代码-3"><a href="#结构代码-3" class="headerlink" title="结构代码"></a>结构代码</h3><hr>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">CSNode</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="type">int</span> data; <span class="comment">// 可以为任意数据类型</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">CSNode</span> *<span class="title">FirstChild</span>, *<span class="title">RightSib</span>;</span></span><br><span class="line">&#125; CSNode, *CSTree;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<blockquote>
+<p><strong>对于图一的树，用该方法实现如下图</strong></p>
+</blockquote>
+<center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+    src="https://takdoor-1304868802.cos.ap-shanghai.myqcloud.com/blog/孩子兄弟表示法演示.png">
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #470024;
+    padding: 2px;">图六</div>
+</center>
+
+<blockquote>
+<ul>
+<li><p><strong>这种表示法，给查找某个结点的孩子带来了方便，只需要通过firstchild找到此结点的长子，然后再通过长子结点的rightsib找到它的二弟，接着一直下去，直到找到具体的孩子</strong></p>
+</li>
+<li><p><strong>如果有必要可以再增加一个parent指针域来解决快速查找双亲的问题</strong></p>
+</li>
+<li><p><strong>这个表示法的最大好处就是把一棵复杂的树变成了一棵二叉树</strong></p>
+</li>
+</ul>
+</blockquote>
+<hr>
+<blockquote>
+<p><strong>将图六变变形，如下图</strong></p>
+</blockquote>
+<center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+    src="https://takdoor-1304868802.cos.ap-shanghai.myqcloud.com/blog/孩子兄弟表示法变形.png">
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #470024;
+    padding: 2px;">图七</div>
+</center>
+
+<blockquote>
+<ul>
+<li><strong>这样就可以充分利用二叉树的特性和算法来处理这棵树了</strong></li>
+</ul>
+</blockquote>
+<hr>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><blockquote>
+<p><strong>没有哪一种结构可以解决所有的问题，在具体的问题中我们应该针对问题来设计结构</strong></p>
+<p><strong>存储结构的设计是一个非常灵活的过程</strong></p>
+<p><strong>一个存储结构设计得是否合理，取决于基于该存储结构的运算是否合适、是否方便、时间复杂度好不好等</strong></p>
+</blockquote>
+<hr>
+<h1 id="二叉树"><a href="#二叉树" class="headerlink" title="二叉树"></a>二叉树</h1><hr>
+<h2 id="二叉树的定义"><a href="#二叉树的定义" class="headerlink" title="二叉树的定义"></a>二叉树的定义</h2><blockquote>
+<p><strong>二叉树（Binary Tree）是n（n ≥ 0）个结点的有限集合，该集合或者为空集（称为空二叉树），或者由一个根结点和两棵互不相交的、分别称为根结点的左子树和右子树的二叉树组成</strong></p>
+</blockquote>
+<center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+    src="https://takdoor-1304868802.cos.ap-shanghai.myqcloud.com/blog/二叉树演示.png">
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #470024;
+    padding: 2px;">图八</div>
+</center>
+
+<hr>
+<h2 id="二叉树特点"><a href="#二叉树特点" class="headerlink" title="二叉树特点"></a>二叉树特点</h2><blockquote>
+<ul>
+<li><strong>每个结点最多有两棵子树，所以二叉树中不存在度大于2的结点</strong></li>
+<li><strong>左子树和右子树是有顺序的，次序不能任意颠倒</strong></li>
+<li><strong>即使树中某结点只有一棵子树，也要区分它是左子树还是右子树</strong></li>
+</ul>
+</blockquote>
+<hr>
+<h2 id="二叉树具有五种基本形态"><a href="#二叉树具有五种基本形态" class="headerlink" title="二叉树具有五种基本形态"></a>二叉树具有五种基本形态</h2><blockquote>
+<ul>
+<li><strong>空二叉树</strong></li>
+<li><strong>只有一个根结点</strong></li>
+<li><strong>根结点只有左子树</strong></li>
+<li><strong>根结点只有右子树</strong></li>
+<li><strong>根结点既有左子树又有右子树</strong></li>
+</ul>
+</blockquote>
+<hr>
+<h2 id="特殊二叉树"><a href="#特殊二叉树" class="headerlink" title="特殊二叉树"></a>特殊二叉树</h2><h3 id="1-斜树"><a href="#1-斜树" class="headerlink" title="1.斜树"></a>1.斜树</h3><hr>
+<blockquote>
+<p><strong>所有结点都是只有左子树的二叉树叫左斜树，所有结点都是只有右子树的二叉树叫右斜树，这两者统称为斜树</strong></p>
+<p><strong>斜树的每一层都只有一个结点，结点的个数与二叉树的深度相同</strong></p>
+<p><strong>线性表结构就可以理解为是斜树的一种极其特殊的表现形式</strong></p>
+</blockquote>
+<hr>
+<h3 id="2-满二叉树"><a href="#2-满二叉树" class="headerlink" title="2.满二叉树"></a>2.满二叉树</h3><hr>
+<blockquote>
+<p><strong>在一棵二叉树中，如果所有分支结点都存在左子树和右子树，并且所有叶子都在同一层上，这样的二叉树称为满二叉树</strong></p>
+</blockquote>
+<hr>
+<h4 id="满二叉树的特点"><a href="#满二叉树的特点" class="headerlink" title="满二叉树的特点"></a>满二叉树的特点</h4><hr>
+<blockquote>
+<ul>
+<li><strong>叶子只能出现在最下一层</strong></li>
+<li><strong>非叶子结点的度一定是2</strong></li>
+<li><strong>在同样深度的二叉树中，满二叉树的节点个数最多，叶子树最多</strong></li>
+</ul>
+</blockquote>
+<hr>
+<h3 id="3-完全二叉树"><a href="#3-完全二叉树" class="headerlink" title="3.完全二叉树"></a>3.完全二叉树</h3><hr>
+<blockquote>
+<p><strong>对一棵具有n个结点的二叉树按层序编号，如果编号为i（1 ⩽ i ⩽ n ）的结点与同样深度的满二叉树中编号为i的结点在二叉树中位置完全相同，则这棵二叉树称为完全二叉树</strong></p>
+<p><strong>满二叉树一定是一棵完全二叉树，但完全二叉树不一定是满的</strong></p>
+</blockquote>
+<hr>
+<h4 id="完全二叉树的特点"><a href="#完全二叉树的特点" class="headerlink" title="完全二叉树的特点"></a>完全二叉树的特点</h4><hr>
+<blockquote>
+<ul>
+<li><strong>叶子结点只能出现在最下两层</strong></li>
+<li><strong>最下层的叶子一定集中在左部连续位置</strong></li>
+<li><strong>倒数二层，若有叶子结点，一定都在右部连续位置</strong></li>
+<li><strong>如果结点度为1，则该结点只有左孩子，即不存在只有右子树的情况</strong></li>
+<li><strong>同样结点数的二叉树，完全二叉树的深度最小</strong></li>
+</ul>
+</blockquote>
+<hr>
+<h2 id="二叉树的性质"><a href="#二叉树的性质" class="headerlink" title="二叉树的性质"></a>二叉树的性质</h2><blockquote>
+<ul>
+<li><strong>在二叉树的第i层上至多有2^i-1^个结点（i ≥ 1）</strong></li>
+<li><strong>深度为k的二叉树至多有2^k^-1个结点（k ≥ 1）</strong></li>
+<li><strong>对任何一棵二叉树T，如果其终端结点数为n<del>0</del>，度为2的结点数为n<del>2</del>，则n<del>0</del>&#x3D;n<del>2</del>+1</strong></li>
+<li><strong>具有n个结点的完全二叉树的深度为$\lfloor log<del>2</del>n\rfloor$+1（$\lfloor x\rfloor$表示不大于x的最大整数）</strong></li>
+<li><strong>如果对一棵有n个结点的完全二叉树（其深度为$\lfloor log<del>2</del>n\rfloor$+1）的结点按层序编号（从第1层到第$\lfloor log<del>2</del>n\rfloor$+1层，每层从左到右），对任一结点i（1 ≤ i ≤ n）有：</strong><ul>
+<li><strong>如果i &#x3D; 1，则结点i是二叉树的根，无双亲；如果i ＞ 1，则其双亲是结点$\lfloor $$\frac{i}{2}$$\rfloor$</strong></li>
+<li><strong>如果2i ＞ n，则结点i无左孩子（结点i为叶子结点）；否则其左孩子是结点2i</strong></li>
+<li><strong>如果2i + 1 ＞ n，则结点i无右孩子；否则其右孩子是结点2i + 1</strong></li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<hr>
+<h2 id="二叉树的存储结构"><a href="#二叉树的存储结构" class="headerlink" title="二叉树的存储结构"></a>二叉树的存储结构</h2><blockquote>
+<p><strong>顺序存储适用性不强，所以只考虑链式存储结构</strong></p>
+</blockquote>
+<hr>
+<h3 id="二叉链表"><a href="#二叉链表" class="headerlink" title="二叉链表"></a>二叉链表</h3><hr>
+<blockquote>
+<p><strong>二叉树每个结点最多有两个孩子，所以为它设计一个数据域和两个指针域</strong></p>
+<p><strong>这样的链表叫作二叉链表</strong></p>
+</blockquote>
+<table>
+    <tr>
+        <td>lchild</td>
+        <td>data</td>
+        <td>rchild</td>
+    </tr>
+</table>
+
+<blockquote>
+<p><strong>其中data是数据域，lchild和rchild都是指针域，分别存放左孩子和右孩子的指针</strong></p>
+</blockquote>
+<hr>
+<h3 id="结构代码-4"><a href="#结构代码-4" class="headerlink" title="结构代码"></a>结构代码</h3><hr>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">BiTNode</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="type">int</span> data; <span class="comment">// 可以为任意类型 </span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">BiTNode</span> *<span class="title">l</span>, *<span class="title">r</span>;</span></span><br><span class="line">&#125; BiTNode, *BiTree;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="二叉树的建立"><a href="#二叉树的建立" class="headerlink" title="二叉树的建立"></a>二叉树的建立</h3><hr>
+
+  </div>
+</article>
+
+
+
+
+          
+          <!-- //actions_mobile 移动端导航栏 -->
+            <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" class="Popup" style="display: none">
+      <ul>
+         
+          <li><a href="/blog/">首页</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/">关于</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer"  class="Popup" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A0%91"><span class="toc-number">2.</span> <span class="toc-text">树</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%91%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="toc-number">2.1.</span> <span class="toc-text">树的定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E7%82%B9%E5%88%86%E7%B1%BB"><span class="toc-number">2.2.</span> <span class="toc-text">结点分类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E7%82%B9%E9%97%B4%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="toc-number">2.3.</span> <span class="toc-text">结点间的关系</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%91%E7%9A%84%E5%85%B6%E4%BB%96%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5"><span class="toc-number">2.4.</span> <span class="toc-text">树的其他相关概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%91%E7%9A%84%E6%8A%BD%E8%B1%A1%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-number">2.5.</span> <span class="toc-text">树的抽象数据类型</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A0%91%E7%9A%84%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84"><span class="toc-number">3.</span> <span class="toc-text">树的存储结构</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%8C%E4%BA%B2%E8%A1%A8%E7%A4%BA%E6%B3%95"><span class="toc-number">3.1.</span> <span class="toc-text">双亲表示法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E6%9E%84%E4%BB%A3%E7%A0%81"><span class="toc-number">3.1.1.</span> <span class="toc-text">结构代码</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%A9%E5%AD%90%E8%A1%A8%E7%A4%BA%E6%B3%95"><span class="toc-number">3.2.</span> <span class="toc-text">孩子表示法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E6%A1%88%E4%B8%80"><span class="toc-number">3.2.1.</span> <span class="toc-text">方案一</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E6%A1%88%E4%BA%8C"><span class="toc-number">3.2.2.</span> <span class="toc-text">方案二</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%A9%E5%AD%90%E8%A1%A8%E7%A4%BA%E6%B3%95-1"><span class="toc-number">3.2.3.</span> <span class="toc-text">孩子表示法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%93%E6%9E%84%E4%BB%A3%E7%A0%81-1"><span class="toc-number">3.2.3.1.</span> <span class="toc-text">结构代码</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8C%E4%BA%B2%E5%AD%A9%E5%AD%90%E8%A1%A8%E7%A4%BA%E6%B3%95"><span class="toc-number">3.2.4.</span> <span class="toc-text">双亲孩子表示法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%93%E6%9E%84%E4%BB%A3%E7%A0%81-2"><span class="toc-number">3.2.4.1.</span> <span class="toc-text">结构代码</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%A9%E5%AD%90%E5%85%84%E5%BC%9F%E8%A1%A8%E7%A4%BA%E6%B3%95"><span class="toc-number">3.3.</span> <span class="toc-text">孩子兄弟表示法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E6%9E%84%E4%BB%A3%E7%A0%81-3"><span class="toc-number">3.3.1.</span> <span class="toc-text">结构代码</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">3.4.</span> <span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="toc-number">4.</span> <span class="toc-text">二叉树</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="toc-number">4.1.</span> <span class="toc-text">二叉树的定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E5%8F%89%E6%A0%91%E7%89%B9%E7%82%B9"><span class="toc-number">4.2.</span> <span class="toc-text">二叉树特点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E5%8F%89%E6%A0%91%E5%85%B7%E6%9C%89%E4%BA%94%E7%A7%8D%E5%9F%BA%E6%9C%AC%E5%BD%A2%E6%80%81"><span class="toc-number">4.3.</span> <span class="toc-text">二叉树具有五种基本形态</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%89%B9%E6%AE%8A%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="toc-number">4.4.</span> <span class="toc-text">特殊二叉树</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%96%9C%E6%A0%91"><span class="toc-number">4.4.1.</span> <span class="toc-text">1.斜树</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%BB%A1%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="toc-number">4.4.2.</span> <span class="toc-text">2.满二叉树</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%BB%A1%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E7%89%B9%E7%82%B9"><span class="toc-number">4.4.2.1.</span> <span class="toc-text">满二叉树的特点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%AE%8C%E5%85%A8%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="toc-number">4.4.3.</span> <span class="toc-text">3.完全二叉树</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%8C%E5%85%A8%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E7%89%B9%E7%82%B9"><span class="toc-number">4.4.3.1.</span> <span class="toc-text">完全二叉树的特点</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="toc-number">4.5.</span> <span class="toc-text">二叉树的性质</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84"><span class="toc-number">4.6.</span> <span class="toc-text">二叉树的存储结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E5%8F%89%E9%93%BE%E8%A1%A8"><span class="toc-number">4.6.1.</span> <span class="toc-text">二叉链表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E6%9E%84%E4%BB%A3%E7%A0%81-4"><span class="toc-number">4.6.2.</span> <span class="toc-text">结构代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%BB%BA%E7%AB%8B"><span class="toc-number">4.6.3.</span> <span class="toc-text">二叉树的建立</span></a></li></ol></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer"  class="Popup" style="display: none">
+      <ul>
+  <li> 开发中. </li>
+  <!-- <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://www.t1kcode.top/posts/20210501195710-23384.html"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://www.t1kcode.top/posts/20210501195710-23384.html&text=树"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://www.t1kcode.top/posts/20210501195710-23384.html&title=树"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://www.t1kcode.top/posts/20210501195710-23384.html&is_video=false&description=树"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=树&body=Check out this article: https://www.t1kcode.top/posts/20210501195710-23384.html"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://www.t1kcode.top/posts/20210501195710-23384.html&title=树"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://www.t1kcode.top/posts/20210501195710-23384.html&title=树"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://www.t1kcode.top/posts/20210501195710-23384.html&title=树"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://www.t1kcode.top/posts/20210501195710-23384.html&title=树"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://www.t1kcode.top/posts/20210501195710-23384.html&name=树&description=&lt;h1 id=&#34;前言&#34;&gt;&lt;a href=&#34;#前言&#34; class=&#34;headerlink&#34; title=&#34;前言&#34;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;树的实现及相关操作&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;编程语言：C&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://www.t1kcode.top/posts/20210501195710-23384.html&t=树"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li> -->
+
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <span id="menu" Popup="#nav-footer" class="icon"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</span>
+        <span id="toc" Popup="#toc-footer" class="icon"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</span>
+        <span id="share" Popup="#share-footer" class="icon"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</span>
+        <span id="top" Popup="" style="display:none" class="icon" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</span>
+    </div>
+
+  </div>
+</div>
+
+            <!-- 图片弹窗 -->
+            <div class="img-pup" style="display: none;">
+              <img>
+            </div>
+          
+
+          <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2019-2023
+    t1k
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/blog/">首页</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/">关于</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+          <!-- jquery -->
+ 
+  
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+
+<script src="/lib/jquery/jquery.pjax.js"></script>
+
+
+
+<!-- clipboard -->
+
+   
+    
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功!");
+      e.clearSelection();
+      setTimeout(()=>{
+        e.trigger.setAttribute('aria-label', "复制到粘贴板!");
+      },1500)
+    })
+  })
+  </script>
+
+
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+     
+      </div>   
+    </div>
+      
+    
+<script src="/js/main.js"></script>
+
+    </body>
+    </html>
