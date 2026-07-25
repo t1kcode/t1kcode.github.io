@@ -13,29 +13,29 @@
 <meta property="og:site_name" content="t1kcode">
 <meta property="og:description" content="SpringSecurity-JWT简介SpringSecurity是Spring家族中的一个安全管理框架，相比于另一个安全框架Shiro，它提供了更丰富的功能，社区资源也比Shiro丰富。 一般来说中大型的项目都是使用SpringSecurity来做安全框架，小项目用Shiro的比较多。因为相比于SpringSecurity，Shiro上手更加简单 一般Web应用需要进行认证和授权： ​	认证：">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="c:/Users/TAK/AppData/Roaming/Typora/typora-user-images/image-20230227101119024.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/t1kcode/image@master/%E5%B7%B2%E5%A4%B1%E6%95%88/2026/07/25/50d9734a39-%E5%B7%B2%E5%A4%B1%E6%95%88.png">
 <meta property="og:image" content="c:/Users/TAK/AppData/Roaming/Typora/typora-user-images/image-20230227101133806.png">
-<meta property="og:image" content="https://www.t1kdoor.cc.cd/SpringSecurity-image/%E7%99%BB%E5%BD%95%E6%A0%A1%E9%AA%8C%E6%B5%81%E7%A8%8B.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/t1kcode/image@master/%E5%B7%B2%E5%A4%B1%E6%95%88/2026/07/25/50d9734a39-%E5%B7%B2%E5%A4%B1%E6%95%88.png">
 <meta property="og:image" content="https://www.t1kdoor.cc.cd/SpringSecurity-image/SpringSecurity%E8%BF%87%E6%BB%A4%E5%99%A8%E9%93%BE.png">
-<meta property="og:image" content="c:/Users/TAK/AppData/Roaming/Typora/typora-user-images/image-20230227110057410.png">
-<meta property="og:image" content="https://www.t1kdoor.cc.cd/SpringSecurity-image/%E5%85%A5%E9%97%A8%E6%A1%88%E4%BE%8B%E8%AE%A4%E8%AF%81%E6%B5%81%E7%A8%8B.png">
-<meta property="og:image" content="c:/Users/TAK/AppData/Roaming/Typora/typora-user-images/image-20230227202410979.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/t1kcode/image@master/%E5%B7%B2%E5%A4%B1%E6%95%88/2026/07/25/50d9734a39-%E5%B7%B2%E5%A4%B1%E6%95%88.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/t1kcode/image@master/%E5%B7%B2%E5%A4%B1%E6%95%88/2026/07/25/50d9734a39-%E5%B7%B2%E5%A4%B1%E6%95%88.png">
+<meta property="og:image" content="https://cdn.jsdmirror.com/gh/t1kcode/image@master/%E5%B7%B2%E5%A4%B1%E6%95%88/2026/07/25/50d9734a39-%E5%B7%B2%E5%A4%B1%E6%95%88.png">
 <meta property="article:published_time" content="2023-02-27T12:24:10.000Z">
-<meta property="article:modified_time" content="2023-03-25T16:06:30.611Z">
+<meta property="article:modified_time" content="2026-07-25T13:30:59.789Z">
 <meta property="article:author" content="t1k">
 <meta property="article:tag" content="JWT">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="c:/Users/TAK/AppData/Roaming/Typora/typora-user-images/image-20230227101119024.png">
+<meta name="twitter:image" content="https://cdn.jsdmirror.com/gh/t1kcode/image@master/%E5%B7%B2%E5%A4%B1%E6%95%88/2026/07/25/50d9734a39-%E5%B7%B2%E5%A4%B1%E6%95%88.png">
     
     
       
         
-          <link rel="shortcut icon" href="/images/Rolan.ico">
+          <link rel="shortcut icon" href="/images/mo_ico_32x32.ico">
         
       
       
         
-          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          <link rel="icon" type="image/png" href="/images/mo_192x192.png" sizes="192x192">
         
       
       
@@ -81,7 +81,7 @@
       width: 60,
       height: 80,
       position: 'right',
-      hOffset: 0,
+      hOffset: 100,
       vOffset: 20,
     },
     mobile: {
@@ -94,10 +94,8 @@
       opacityOnHover: 1,
     }
   })
+
   //百度搜索爬虫
-
-
-
 var _hmt = _hmt || [];
 (function () {
   var hm = document.createElement("script");
@@ -128,7 +126,7 @@ var _hmt = _hmt || [];
 
 
 
-<meta name="generator" content="Hexo 6.3.0"></head>
+<meta name="generator" content="Hexo 8.1.2"></head>
 
 
     <body class="max-width mx-auto">
@@ -162,12 +160,20 @@ var _hmt = _hmt || [];
 					<a class="icon" target="_blank" rel="noopener" href="https://github.com/t1kcode" aria-label="github">
 					  <i class="fab fa-github"></i></a>
 					  
-			     
+			    
 				  
 				
 				  
 					<a class="icon" target="_blank" rel="noopener" href="https://gitee.com/t1kcode">
 					  <i><svg class='diyIcon'  viewBox="0 0 1024 1024" ><path d="M512 1024C229.248 1024 0 794.752 0 512S229.248 0 512 0s512 229.248 512 512-229.248 512-512 512z m259.168-568.896h-290.752a25.28 25.28 0 0 0-25.28 25.28l-0.032 63.232c0 13.952 11.296 25.28 25.28 25.28h177.024a25.28 25.28 0 0 1 25.28 25.28v12.64a75.84 75.84 0 0 1-75.84 75.84h-240.224a25.28 25.28 0 0 1-25.28-25.28v-240.192a75.84 75.84 0 0 1 75.84-75.84h353.92a25.28 25.28 0 0 0 25.28-25.28l0.064-63.2a25.312 25.312 0 0 0-25.28-25.312H417.184a189.632 189.632 0 0 0-189.632 189.6v353.952c0 13.952 11.328 25.28 25.28 25.28h372.928a170.656 170.656 0 0 0 170.656-170.656v-145.376a25.28 25.28 0 0 0-25.28-25.28z"></path></svg></i>
+					</a>
+				  
+			     
+				  
+				
+				  
+					<a class="icon" target="_blank" rel="noopener" href="t1kdoor@163.com" aria-label="mail">
+					  <i class="fas fa-envelope"></i>
 					</a>
 				  
 			  
@@ -447,15 +453,15 @@ var _hmt = _hmt || [];
       <div id="header-post" class="hubzy_right">
         
           
-  <!-- <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a> -->
-  <!-- <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a> -->
-  <!-- <a id="top-icon-tablet" href="#" "Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"
+  <!-- <a id="menu-icon" href="#" aria-label="icons.menu"><i class="fas fa-bars fa-lg"></i></a> -->
+  <!-- <a id="menu-icon-tablet" href="#" aria-label="icons.menu"><i class="fas fa-bars fa-lg"></i></a> -->
+  <!-- <a id="top-icon-tablet" href="#" "icons.top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"
     style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a> -->
   <span id="menu">
     <span id="nav">
       <ul>
         
-          <li><a href="/blog/">
+          <li><a href="/">
               首页
             </a></li>
           
@@ -465,6 +471,10 @@ var _hmt = _hmt || [];
           
           <li><a href="/archives/">
               归档
+            </a></li>
+          
+          <li><a href="/tags/">
+              tags
             </a></li>
           
           <li><a href="/">
@@ -490,11 +500,11 @@ var _hmt = _hmt || [];
                     class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();"
                     onmouseout="$('#i-next').toggle();"></i></a></li>
               // -->
-                <li><a class="icon" aria-label="返回顶部 " href="#"
+                <li><a class="icon" aria-label="回顶 " href="#"
                     onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up"
                       aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a>
                 </li>
-                <li><a class="icon" aria-label="分享文章 " href="#"><i class="fas fa-share-alt"
+                <li><a class="icon" aria-label="分享 " href="#"><i class="fas fa-share-alt"
                       aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();"
                       onclick="$('#share').toggle();return false;"></i></a></li>
       </ul>
@@ -505,10 +515,10 @@ var _hmt = _hmt || [];
         下一篇
       </span>
       <span id="i-top" class="info" style="display:none;">
-        返回顶部
+        回顶
       </span>
       <span id="i-share" class="info" style="display:none;">
-        分享文章
+        分享
       </span>
     </span>
     <br />
@@ -560,7 +570,7 @@ var _hmt = _hmt || [];
       
         <time datetime="2023-02-27T12:24:10.000Z" itemprop="datePublished">2023-02-27</time>
         
-        <!-- (Updated: <time datetime="2023-03-25T16:06:30.611Z" itemprop="dateModified">2023-03-26</time>) -->
+        <!-- (Updated: <time datetime="2026-07-25T13:30:59.789Z" itemprop="dateModified">2026-07-25</time>) -->
         
       
     </div>
@@ -569,7 +579,7 @@ var _hmt = _hmt || [];
       
     <div class="article-category">
         <i class="fas fa-archive"></i>
-        <a class="category-link" href="/categories/JWT/">JWT</a>
+        <a class="category-link" href="/categories/%E5%B0%81%E6%A1%A3/">封档</a>
     </div>
 
 
@@ -609,9 +619,9 @@ var _hmt = _hmt || [];
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-security<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p><strong>引入依赖后我们尝试去访问之前定义的接口会自动跳转到SpringSecurity的默认登录页面，默认用户名是user，密码会输出在控制台，必须进行登录之后才能对接口进行访问</strong></p>
-<p><img src="C:/Users/TAK/AppData/Roaming/Typora/typora-user-images/image-20230227101119024.png" alt="image-20230227101119024"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/t1kcode/image@master/%E5%B7%B2%E5%A4%B1%E6%95%88/2026/07/25/50d9734a39-%E5%B7%B2%E5%A4%B1%E6%95%88.png"></p>
 <p><img src="C:/Users/TAK/AppData/Roaming/Typora/typora-user-images/image-20230227101133806.png" alt="image-20230227101133806"></p>
-<h2 id="认证"><a href="#认证" class="headerlink" title="认证"></a>认证</h2><h3 id="本项目登录校验流程"><a href="#本项目登录校验流程" class="headerlink" title="本项目登录校验流程"></a>本项目登录校验流程</h3><p><img src="/SpringSecurity-image/%E7%99%BB%E5%BD%95%E6%A0%A1%E9%AA%8C%E6%B5%81%E7%A8%8B.png" alt="登录校验流程"></p>
+<h2 id="认证"><a href="#认证" class="headerlink" title="认证"></a>认证</h2><h3 id="本项目登录校验流程"><a href="#本项目登录校验流程" class="headerlink" title="本项目登录校验流程"></a>本项目登录校验流程</h3><p><img src="https://cdn.jsdmirror.com/gh/t1kcode/image@master/%E5%B7%B2%E5%A4%B1%E6%95%88/2026/07/25/50d9734a39-%E5%B7%B2%E5%A4%B1%E6%95%88.png"></p>
 <h3 id="原理初探"><a href="#原理初探" class="headerlink" title="原理初探"></a>原理初探</h3><h4 id="SpringSecurity完整流程"><a href="#SpringSecurity完整流程" class="headerlink" title="SpringSecurity完整流程"></a>SpringSecurity完整流程</h4><p><img src="/SpringSecurity-image/SpringSecurity%E8%BF%87%E6%BB%A4%E5%99%A8%E9%93%BE.png" alt="SpringSecurity过滤器链"></p>
 <p><strong>图中只展示了核心过滤器，其它的非核心过滤器并没有在图中展示</strong></p>
 <ul>
@@ -620,8 +630,8 @@ var _hmt = _hmt || [];
 <li><strong>FilterSecurityInterceptor：负责权限校验的过滤器</strong></li>
 </ul>
 <p><strong>我们可以通过Debug查看当前系统中SpringSecurity过滤器链中有哪些过滤器及它们的顺序</strong></p>
-<p><img src="C:/Users/TAK/AppData/Roaming/Typora/typora-user-images/image-20230227110057410.png" alt="image-20230227110057410"></p>
-<h4 id="认证流程详解"><a href="#认证流程详解" class="headerlink" title="认证流程详解"></a>认证流程详解</h4><p><img src="/SpringSecurity-image/%E5%85%A5%E9%97%A8%E6%A1%88%E4%BE%8B%E8%AE%A4%E8%AF%81%E6%B5%81%E7%A8%8B.png" alt="入门案例认证流程"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/t1kcode/image@master/%E5%B7%B2%E5%A4%B1%E6%95%88/2026/07/25/50d9734a39-%E5%B7%B2%E5%A4%B1%E6%95%88.png"></p>
+<h4 id="认证流程详解"><a href="#认证流程详解" class="headerlink" title="认证流程详解"></a>认证流程详解</h4><p><img src="https://cdn.jsdmirror.com/gh/t1kcode/image@master/%E5%B7%B2%E5%A4%B1%E6%95%88/2026/07/25/50d9734a39-%E5%B7%B2%E5%A4%B1%E6%95%88.png"></p>
 <p><strong>概念速查：</strong></p>
 <p><strong>Authentication接口：它的实现类封装了用户相关信息</strong></p>
 <p><strong>AuthenticationManager接口：定义了认证Authentication的方法</strong></p>
@@ -640,7 +650,6 @@ var _hmt = _hmt || [];
 </ol>
 </li>
 </ul>
-<p>		</p>
 <h5 id="校验"><a href="#校验" class="headerlink" title="校验"></a>校验</h5><ul>
 <li><strong>定义JWT认证过滤器</strong><ol>
 <li><strong>获取token</strong></li>
@@ -808,7 +817,7 @@ var _hmt = _hmt || [];
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SecurityConfig</span> <span class="keyword">extends</span> <span class="title class_">WebSecurityConfigurerAdapter</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> AuthenticationSuccessHandler successHandler;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> AuthenticationFailureHandler failureHandler;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> LogoutSuccessHandler logoutSuccessHandler;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">configure</span><span class="params">(HttpSecurity http)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        http.formLogin()</span><br><span class="line">				<span class="comment">// 配置认证成功处理器</span></span><br><span class="line">                .successHandler(successHandler)</span><br><span class="line">				<span class="comment">// 配置认证失败处理器</span></span><br><span class="line">                .failureHandler(failureHandler);</span><br><span class="line"></span><br><span class="line">        http.logout()</span><br><span class="line">                <span class="comment">//配置注销成功处理器</span></span><br><span class="line">                .logoutSuccessHandler(logoutSuccessHandler);</span><br><span class="line"></span><br><span class="line">        http.authorizeRequests().anyRequest().authenticated();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p><strong>实际上当配置JwtAuthenticationTokenFilter之后，SpringSecurity过滤链就不经过UsernamePassword过滤器了，所以这些自定义处理器在本方案不适用</strong></p>
-<p><img src="C:/Users/TAK/AppData/Roaming/Typora/typora-user-images/image-20230227202410979.png" alt="image-20230227202410979"></p>
+<p><img src="https://cdn.jsdmirror.com/gh/t1kcode/image@master/%E5%B7%B2%E5%A4%B1%E6%95%88/2026/07/25/50d9734a39-%E5%B7%B2%E5%A4%B1%E6%95%88.png"></p>
 
   </div>
 </article>
@@ -824,11 +833,13 @@ var _hmt = _hmt || [];
     <div id="nav-footer" class="Popup" style="display: none">
       <ul>
          
-          <li><a href="/blog/">首页</a></li>
+          <li><a href="/">首页</a></li>
          
           <li><a href="/categories/">分类</a></li>
          
           <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/tags/">tags</a></li>
          
           <li><a href="/">关于</a></li>
         
@@ -862,7 +873,7 @@ var _hmt = _hmt || [];
         <span id="menu" Popup="#nav-footer" class="icon"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</span>
         <span id="toc" Popup="#toc-footer" class="icon"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</span>
         <span id="share" Popup="#share-footer" class="icon"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</span>
-        <span id="top" Popup="" style="display:none" class="icon" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</span>
+        <span id="top" Popup="" style="display:none" class="icon" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 回顶</span>
     </div>
 
   </div>
@@ -886,11 +897,13 @@ var _hmt = _hmt || [];
     <nav>
       <ul>
          
-          <li><a href="/blog/">首页</a></li>
+          <li><a href="/">首页</a></li>
          
           <li><a href="/categories/">分类</a></li>
          
           <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/tags/">tags</a></li>
          
           <li><a href="/">关于</a></li>
         

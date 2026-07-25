@@ -131,7 +131,7 @@
   margin-top: 1rem;
   padding-right: 2rem;
   max-width: 20em;
-  max-height: calc(95vh - 7rem);
+  max-height: calc(100vh - 240px);
   text-align: right;
 }
 .hubzy_right #toc a {
